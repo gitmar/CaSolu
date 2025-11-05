@@ -1,0 +1,319 @@
+﻿@page "/orderflow"
+@using System
+@using System.Text
+@using System.ComponentModel.DataAnnotations
+@using System.Reflection
+@using Microsoft.AspNetCore.WebUtilities
+@using Microsoft.AspNetCore.Components.Forms
+@using CxShared.Models
+@using System.Text.Json
+@using CxClie.Services
+
+<h3>OrderFlow</h3>
+
+@inject IHttpClientFactory _httpFactorer
+@inject NavigationManager _navmanager
+@inject TblJsonRender _tableService
+@inject IJSRuntime _jsRun
+
+<PageTitle>Client Commande</PageTitle>
+
+<h2 class="mb-3 text-primary">Suivi de commande</h2>
+
+<div class="col-3">
+    <label id="oorga">Organisation : @_invModel.Raison</label>
+</div>
+<div class="row mb-2">
+    message :
+    <label style="font-weight: bold; color: red; background-color: yellow;">@Imessage</label>
+</div>
+
+<EditForm Model="@_invModel">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="container">
+        <div class="row mb-2">
+            <Grid TItem="Order"
+                  Data="@LsOrders"
+                  AllowRowClick="true"
+                  AllowPaging="true"
+                  Responsive="true">
+                <GridColumns>
+                    <GridColumn TItem="Order" HeaderText="Ref.">
+                        <ChildContent Context="item">
+                            <div @key="item.Id">@item.OIdstr</div>
+                        </ChildContent>
+                    </GridColumn>
+                    <GridColumn TItem="Order" HeaderText="C?">
+                        <ChildContent Context="item">
+                            @item.Step
+                        </ChildContent>
+                    </GridColumn>
+
+                </GridColumns>
+            </Grid>
+        </div>
+    </div>
+    <div class="mt-3">
+        <button class="btn btn-primary" @onclick="VaGenererLink">Imprimer</button>
+    </div>
+</EditForm>
+
+@code {
+    private bool isLoading = false, yaerrors = false;
+    private bool canSaveGener = false;
+    private string successmsg = "";
+    private List<string> errorList = new List<string>();
+
+    private string _password = "", _confirmPassword = "";
+    private string Imessage = "";
+    private bool PeutEnvoyerMail = false;
+
+    private HttpClient _apiClient;
+    private HttpClient _locClient;
+    private TableSet _myCatal = new();
+    private InviteModel _invModel = new();
+
+    private Customer _curCustomer = new();
+    private Order _curOrder = new();
+
+    private List<Customer> LsCustomers = new();
+    private List<Order> LsOrders = new();
+
+    private string? generatedLink;
+
+    protected override async Task OnInitializedAsync()
+    {
+        canSaveGener = false;
+        isLoading = true;
+        yaerrors = false; errorList.Clear(); successmsg = "";
+        //Batteries.Init();
+        _apiClient = _httpFactorer.CreateClient("wApiClient");
+        _locClient = _httpFactorer.CreateClient("simpleApiClient");
+        try
+        {
+            _myCatal = await _tableService.rendTables();
+        }
+        catch (Exception ex)
+        {
+            Imessage = "probleme des options";
+        }
+        Console.WriteLine($"nb. pays : {_myCatal.Countries.Count()}");
+        _invModel.Irole = 3;
+        _invModel.Srole = "Admin"; //queryParams["tqsrole"];
+        _invModel.Password = "Jesuis@99";
+        _invModel.ConfirmPassword = "Jesuis@99";
+        var lscusts = await _apiClient.GetFromJsonAsync<List<Customer>>("customers/rendall");
+        if (lscusts != null && lscusts.Any())
+        {
+            LsCustomers = lscusts;
+        }
+        Console.WriteLine($"nb Customers : {LsCustomers.Count}");
+        var lsordas = await _apiClient.GetFromJsonAsync<List<Order>>("orders/rendall");
+        if (lsordas != null && lsordas.Any())
+        {
+            LsOrders = lsordas;
+        }
+        Console.WriteLine($"nb Orders : {LsOrders.Count}");
+        yaerrors = false; isLoading = false;
+    }
+    //GENERATING
+
+    private async Task VaGenererLink()
+    {
+        canSaveGener = await VerifInputs();
+        if (!canSaveGener)
+        {
+            Imessage = "Echec Generation : des issues persistent..." + Imessage;
+            return;
+        }
+        canSaveGener = false;
+        // Use HttpClient's BaseAddress
+        var baseUrl = _navmanager.BaseUri;
+        //var baseUrl = _apiClient.BaseAddress?.AbsoluteUri ?? "https://fallback-url.com/";
+        var _LinkSerialiser = new LinkSerialiser(_jsRun);
+        generatedLink = _LinkSerialiser.GenerateLink(_invModel, baseUrl, "custregister");
+        canSaveGener = true;
+        StateHasChanged();
+    }
+
+    private async Task<bool> VerifInputs()
+    {
+        yaerrors = false; isLoading = true;
+        Imessage = "";
+        if (_invModel.Iwurl == 0)
+        {
+            yaerrors = true;
+            errorList.Add("website obligatoire.");
+        }
+        if (_invModel.Idoma == 0)
+        {
+            yaerrors = true;
+            errorList.Add("package obligatoire.");
+        }
+        if (_invModel.Iqmax == 0 || _invModel.Iqmax > 25)
+        {
+            yaerrors = true;
+            errorList.Add("Qte comprise entre 1 et 25.");
+        }
+        if (_invModel.Raison.Length < 7 || string.IsNullOrEmpty(_invModel.Raison))
+        {
+            yaerrors = true;
+            errorList.Add("Longueur de raison inferieure a 7.");
+        }
+        if (_invModel.Sigle.Length < 5 || string.IsNullOrEmpty(_invModel.Sigle))
+        {
+            yaerrors = true;
+            errorList.Add("Longueur de sigle inferieure a 5.");
+        }
+        //Username-PhoneNumber-Email-Password-ConfirmPassword (automatic)
+        if (_invModel.Nom.Length < 5 || string.IsNullOrEmpty(_invModel.Nom))
+        {
+            yaerrors = true;
+            errorList.Add("Longueur de Nom inferieure a 5.");
+        }
+        if (_invModel.Pnom.Length < 4 || string.IsNullOrEmpty(_invModel.Pnom))
+        {
+            yaerrors = true;
+            errorList.Add("Longueur de Pnom inferieure a 4.");
+        }
+        if (_invModel.Ipays == 0)
+        {
+            yaerrors = true;
+            errorList.Add("Pays obligatoire.");
+        }
+        if (_invModel.Ilang == 0)
+        {
+            yaerrors = true;
+            errorList.Add("Langue obligatoire.");
+        }
+        return !yaerrors;
+    }
+    private async Task CopyToClipboard() =>
+        await _jsRun.InvokeVoidAsync("navigator.clipboard.writeText", generatedLink);
+
+    private async Task DownloadQrCode() =>
+        await _jsRun.InvokeVoidAsync("downloadQrCanvas");
+
+    private async Task SaveToDatabase()
+    {
+        PeutEnvoyerMail = false;
+        isLoading = true;
+        int it1 = 0;
+        try
+        {
+            //customer
+            _curCustomer.Email = _invModel.Email;
+            _curCustomer.Nom = _invModel.Nom;
+            _curCustomer.Pnom = _invModel.Pnom;
+            it1 = 1;
+            _curCustomer.Idstr = await GenerateCustomerStrKey(); //generate str key
+            _curCustomer.Role = _invModel.Srole;
+            _curCustomer.Phonenumber = _invModel.Phonenumber;
+            _curCustomer.Phon2 = _invModel.Phon2;
+            _curCustomer.Ipays = _invModel.Ipays;
+            _curCustomer.Ilang = _invModel.Ilang;
+            //order
+            it1 = 2;
+            var myregios = _myCatal.Regions.Where(uc => uc.Elea == _invModel.Iwurl).FirstOrDefault();
+            if (myregios == null)
+            {
+                Imessage = "Region absente";
+                return;
+            }
+            it1 = 3;
+            _curCustomer.Weburl = myregios.Liba;
+            it1 = 4;
+            int rng = 0;
+            var inordas = LsOrders
+                .Where(cd => cd.Idclie == _curCustomer.Id);
+            if (inordas.Any())
+            {
+                rng = inordas.Max(o => o.Oolne);
+            }
+            rng = rng + 1;
+            _curOrder.Oolne = rng;
+            it1 = 5;
+            _curOrder.OIdstr = await GenerateOrderStrKey(rng); //generate str key
+            _curOrder.Doma = _invModel.Idoma;
+            _curOrder.Idorg = _invModel.Idorg;
+            _curOrder.Raison = _invModel.Raison;
+            _curOrder.Sigle = _invModel.Sigle;
+            _curOrder.Olang = _invModel.Olang;
+            _curOrder.Step = 1;
+            it1 = 6;
+            var cliesExist = LsCustomers.Where(uc => string.Compare(uc.UsernameOrEmail, _curCustomer.UsernameOrEmail) == 0
+              || string.Compare(uc.Phonenumber, _curCustomer.Phonenumber) == 0).ToList();
+            if (cliesExist.Any())
+            {
+                Imessage = "Client existe deja";
+                return;
+            }
+            it1 = 7;
+            // Await the async call to get the Custormer Id
+            var respcust = await _apiClient.PostAsJsonAsync("customers/crecustomer", _curCustomer);
+            // Then the Order
+            _curOrder.Idclie = _curCustomer.Id;
+            it1 = 8;
+            var respordo = await _apiClient.PostAsJsonAsync<Order>("orders/creorder", _curOrder);
+            Imessage = "Client et commandes enregistres";
+            it1 = 9;
+            PeutEnvoyerMail = true;
+            isLoading = false;
+        }
+        catch (Exception ex)
+        {
+            // Handle or log error
+            Imessage = $"Probleme sur enregistrement : {ex.Message} et {it1}";
+            PeutEnvoyerMail = false;
+        }
+    }
+    private async Task SendEmailAsync()
+    {
+        //var qrBase64 = await JS.InvokeAsync<string>("getQrBase64");
+        var emailReq = new InviteEmailRequest
+        {
+            To = _invModel.Email,
+            Subject = "Enregistrement sur le siteWeb",
+            //Message = $"Hello, vyou’ve been invited. Click below to register:\n\n{generatedLink}",
+            Message = $"Hello, cliquez sur le lien ci-dessous pour le faire:\n\n{generatedLink}",
+            InviteLink = generatedLink!,
+            //QrBase64 = qrBase64
+        };
+        var response = await _apiClient.PostAsJsonAsync("email/sendemail", emailReq);
+        if (response.IsSuccessStatusCode)
+            await _jsRun.InvokeVoidAsync("alert", "✅ Email sent successfully!");
+        else
+            await _jsRun.InvokeVoidAsync("alert", "❌ Failed to send email!");
+    }
+    private async Task<string> GenerateCustomerStrKey()
+    {
+        // Take the first 4 characters of the customer's name (pad with underscores if less)
+        string prefix = (_curCustomer.Pnom.Length >= 4)
+            ? _curCustomer.Pnom.Substring(0, 4)
+            : _curCustomer.Pnom.PadRight(4, '_');
+        var now = DateTime.Now;
+        int rang = 1001;
+        if (LsCustomers.Any())
+        {
+            var lastCustomer = LsCustomers
+                .OrderBy(c => c.Idstr)
+                .LastOrDefault();
+            // Format: prefix + yyyy1xxx1 (year, rang all zero-padded)
+            if (lastCustomer != null) rang = Convert.ToInt32("1000" + lastCustomer.Id + 1);
+        }
+        string result = $"{prefix}{now:yyyy}{rang}";
+        return result;
+    }
+    private async Task<string> GenerateOrderStrKey(int rng)
+    {
+        // Take the first 4 characters of the customer's name (pad with underscores if less)
+        string prefix = (_curCustomer.Pnom.Length >= 4)
+            ? _curCustomer.Pnom.Substring(0, 4)
+            : _curCustomer.Pnom.PadRight(4, '_');
+        var now = DateTime.Now;
+        // Format: prefix + yyyyMMddHHmm (year, month, day, hour, minute, all zero-padded)
+        string result = $"{prefix}{now:yyyyMMddHHmm}_{rng}";
+        return result;
+    }
+}

@@ -1,0 +1,89 @@
+is_global = true
+build_property.EnableAotAnalyzer = 
+build_property.EnableSingleFileAnalyzer = 
+build_property.EnableTrimAnalyzer = false
+build_property.IncludeAllContentForSelfExtract = 
+build_property.TargetFramework = net9.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = browser
+build_property.RootNamespace = CxClie
+build_property.RootNamespace = CxClie
+build_property.ProjectDir = C:\AACurDEV\CAWapi\CxClie\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = false
+build_property.RazorLangVersion = 9.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\AACurDEV\CAWapi\CxClie
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 9.0
+build_property.EnableCodeStyleSeverity = 
+
+[C:/AACurDEV/CAWapi/CxClie/Admin/AdInvite.razor]
+build_metadata.AdditionalFiles.TargetPath = QWRtaW5cQWRJbnZpdGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/AACurDEV/CAWapi/CxClie/Admin/OrderFlow.razor]
+build_metadata.AdditionalFiles.TargetPath = QWRtaW5cT3JkZXJGbG93LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/AACurDEV/CAWapi/CxClie/Admin/OrgForm.razor]
+build_metadata.AdditionalFiles.TargetPath = QWRtaW5cT3JnRm9ybS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/AACurDEV/CAWapi/CxClie/Admin/SOrgas.razor]
+build_metadata.AdditionalFiles.TargetPath = QWRtaW5cU09yZ2FzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/AACurDEV/CAWapi/CxClie/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/AACurDEV/CAWapi/CxClie/Customer/BackRegister.razor]
+build_metadata.AdditionalFiles.TargetPath = Q3VzdG9tZXJcQmFja1JlZ2lzdGVyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/AACurDEV/CAWapi/CxClie/Customer/BackSetup.razor]
+build_metadata.AdditionalFiles.TargetPath = Q3VzdG9tZXJcQmFja1NldHVwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/AACurDEV/CAWapi/CxClie/Customer/CustRegister.razor]
+build_metadata.AdditionalFiles.TargetPath = Q3VzdG9tZXJcQ3VzdFJlZ2lzdGVyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/AACurDEV/CAWapi/CxClie/Customer/OrgSetup.razor]
+build_metadata.AdditionalFiles.TargetPath = Q3VzdG9tZXJcT3JnU2V0dXAucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/AACurDEV/CAWapi/CxClie/Customer/RegFallBack.razor]
+build_metadata.AdditionalFiles.TargetPath = Q3VzdG9tZXJcUmVnRmFsbEJhY2sucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/AACurDEV/CAWapi/CxClie/Pages/Counter.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/AACurDEV/CAWapi/CxClie/Pages/Home.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG9tZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/AACurDEV/CAWapi/CxClie/Pages/Weather.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcV2VhdGhlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/AACurDEV/CAWapi/CxClie/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/AACurDEV/CAWapi/CxClie/Layout/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = TGF5b3V0XE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-tqskdrb769
+
+[C:/AACurDEV/CAWapi/CxClie/Layout/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = TGF5b3V0XE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-jkh1hawrj2

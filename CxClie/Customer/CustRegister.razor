@@ -1,0 +1,446 @@
+﻿@page "/custregister"
+@using System
+@using System.Text
+@using System.ComponentModel.DataAnnotations
+@using System.Reflection
+@using Microsoft.AspNetCore.WebUtilities
+@using Microsoft.AspNetCore.Components.Forms
+@using CxShared.Models
+@using System.Text.Json
+@using CxClie.Services
+@using SQLitePCL
+
+@inject IHttpClientFactory _httpFactorer
+@inject NavigationManager _navmanager
+@inject TblJsonRender _tableService
+@inject IJSRuntime _jsRun
+
+<PageTitle>ClientRegistring</PageTitle>
+
+<h2>Enregistrement Client</h2>
+
+@if (yaerrors)
+{
+    foreach (var error in errorList)
+    {
+        <div class="alert alert-danger">@error</div>
+    }
+}
+
+@* <AuthorizeView>
+    <Authorized>
+        <div class="alert alert-success">You're already logged in as @_invModel.Username</div>
+    </Authorized>
+    <NotAuthorized>
+ *@     
+ <EditForm Context="regform" Model="_invModel">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+    <div class="container">
+        <div class="row mb-2">
+            <label style="font-weight: bold; color: red; background-color: yellow;">@Imessage</label>
+        </div>
+        <div class="row mb-2">
+            <label><h3><b>@_invModel.Oidstr</b></h3></label>
+        </div>
+        <div class="row mb-2">
+            <div class="col-7">
+                <InputText id="raison" required @bind-Value="_invModel.Raison" class="form-control" />
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-2">
+                <label for="sigle">Sigle:</label>
+            </div>
+            <div class="col-3">
+                <InputText id="sigle" required @bind-Value="_invModel.Sigle" class="form-control" />
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-2">
+                <label for="toweb">website:</label>
+            </div>
+            <div class="col-6">
+                @if (_myCatal?.Sites?.Count > 0)
+                {
+                    <InputSelect id="ppays" @bind-Value="_invModel.Iwurl" class="form-InputSelect" disabled>
+                        @foreach (var utp in _myCatal.Sites)
+                        {
+                            <option value="@utp.Elea">@utp.Abg @utp.Liba</option>
+                        }
+                    </InputSelect>
+                }
+                else if (_myCatal == null)
+                {
+                    <p>Loading...</p>
+                }
+                else
+                {
+                    <p>pas de website</p>
+                }
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-2">
+                <label for="pdoma">domaine:</label>
+            </div>
+            <div class="col-2">
+                @if (_myCatal?.Domas?.Count > 0)
+                {
+                    <InputSelect id="pdoma" @bind-Value="_invModel.Idoma" class="form-InputSelect" disabled>
+                        @foreach (var utp in _myCatal.Domas)
+                        {
+                            <option value="@utp.Elea">@utp.Liba</option>
+                        }
+                    </InputSelect>
+                }
+                else if (_myCatal == null)
+                {
+                    <p>Loading...</p>
+                }
+                else
+                {
+                    <p>pas de domaine</p>
+                }
+            </div>
+        </div>
+        @if (_invModel != null)
+        {
+            <div class="row mb-2">
+                <div class="col-2">
+                    <label for="ouname">Pseudo :</label>
+                </div>
+                <div class="col-4">
+                    (6 to 15 characters)
+                    <InputText id="ouname" required @bind-Value="_invModel.UsernameOrEmail" class="form-control" />
+                    <ValidationMessage For="@(() => _invModel.UsernameOrEmail)" />
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-2">
+                    <label for="phone">No Phone:</label>
+                </div>
+                <div class="col-3">
+                    <InputText id="phone" required @bind-Value="_invModel.Phonenumber" placeholder="phonenumber" class="form-control" />
+                    <ValidationMessage For="@(() => _invModel.Phonenumber)" />
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-2">
+                    <label for="email">Email:</label>
+                </div>
+                <div class="col-3">
+                    <InputText id="omail" required @bind-Value="_invModel.Email" class="form-control" disabled />
+                    <ValidationMessage For="@(() => _invModel.Email)" />
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-2">
+                    <label for="onom">Nom:</label>
+                </div>
+                <div class="col-3">
+                    <InputText id="onom" required @bind-Value="_invModel.Nom" class="form-control" />
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-2">
+                    <label for="opnoms">Prenom(s):</label>
+                </div>
+                <div class="col-3">
+                    <InputText id="opnoms" required @bind-Value="_invModel.Pnom" class="form-control" />
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-2">
+                    <label for="Srole">Role:</label>
+                </div>
+                <div class="col-2">
+                    <label class="bg-danger bg-opacity-10" id="srole">@_invModel.Srole</label>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-2">
+                    <label for="ppays">Pays:</label>
+                </div>
+                <div class="col-2">
+                    @if (_myCatal?.Countries?.Count > 0)
+                    {
+                        <InputSelect id="ppays" @bind-Value="_invModel.Ipays" class="form-InputSelect" disabled>
+                            @foreach (var utp in _myCatal.Countries)
+                            {
+                                <option value="@utp.Elea">@utp.Liba</option>
+                            }
+                        </InputSelect>
+                    }
+                    else if (_myCatal == null)
+                    {
+                        <p>Loading...</p>
+                    }
+                    else
+                    {
+                        <p>pas de pays</p>
+                    }
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-2">
+                    <label for="plang">Langue:</label>
+                </div>
+                <div class="col-2">
+                    @if (_myCatal?.Langues?.Count > 0)
+                    {
+                        <InputSelect id="plang" @bind-Value="_invModel.Ilang" class="form-InputSelect">
+                            @foreach (var utp in _myCatal.Langues)
+                            {
+                                <option value="@utp.Elea">@utp.Liba</option>
+                            }
+                        </InputSelect>
+                    }
+                    else if (_myCatal == null)
+                    {
+                        <p>Loading...</p>
+                    }
+                    else
+                    {
+                        <p>pas de langue</p>
+                    }
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-2">
+                    <label for="password">Password:</label>
+                </div>
+                <div class="col-2">
+                    <InputText id="password" required @bind-Value="_invModel.Password" type="password" class="form-control" />
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-2">
+                    <label for="confirmpassword">Confirm Password:</label>
+                </div>
+                <div class="col-2">
+                    <InputText id="confirmpassword" required @bind-Value="_invModel.ConfirmPassword" type="password" class="form-control" />
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-12 text-left">
+                    @if (isLoading)
+                    {
+                        <p>Registering (PATIENCE!...)</p>
+                    }
+                    else
+                    {
+                        <div class="d-flex align-items-center gap-2 mb-2">
+                            <h6 class="mb-0 fw-bold">Enregistrez-vous pour -->@_invModel.Idorg</h6>
+                            <button class="btn btn-primary" type="submit" @onclick="DoRegisterAsync">Register</button>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-12 alert alert-success">@successmsg</div>
+            </div>
+        }
+    </div>
+</EditForm>
+        
+ @* </NotAuthorized>
+</AuthorizeView> *@
+@code {
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public string cdlink { get; set; }
+
+    private bool isLoading = false, yaerrors = false;
+    private string successmsg = "";
+    private List<string> errorList = new();
+    private string stRaison = "";
+
+    private string Imessage = "";
+    private HttpClient _apiClient;
+    private HttpClient _locClient;
+    private TableSet _myCatal = new();
+    private InviteModel _invModel = new();
+    private string _generatedLink = "";
+
+    private List<Customer> LsCustomers = new();
+    private List<Order> LsOrders = new();
+
+    //private bool isLinkGenerated = false;
+    //private bool _siAllManager = false;
+    //private bool _siProprio = false;
+    protected override async Task OnInitializedAsync()
+    {
+        isLoading = true;
+        yaerrors = false; errorList.Clear(); successmsg = "";
+        _apiClient = _httpFactorer.CreateClient("wApiClient");
+        _locClient = _httpFactorer.CreateClient("simpleApiClient");
+        await RendCatalog();
+        //TEST ?????
+        //cdlink = "aWQ9MCZpY29kYT0mZW1haWw9bGVuYXZpcmUlNDB5YWhvbyUyQ2ZyJnBob25lbnVtYmVyPSUyQjIyNjc4NDg5ODQmcGFzc3dvcmQ9SmVzdWlzJTQwOTkmY29uZmlybXBhc3N3b3JkPUplc3VpcyU0MDk5JnVzZXJuYW1lPWplc3Vpc2NoZXptb2kmdXNyaWQ9Jm5vbT1TYW5vbiZwbm9tPUFkcmllbiZpZG9yZz0mcmFpc29uPUNvbXBhZ25pZSUyMEFmcmljYWluZSUyMGRlJTIwUHJvZHVjdGlvbiUyMGRlJTIwUGxhc3RpcXVlcyZzaWdsZT1DQVBQMjM4JnBob24yPSZpcGF5cz0xNiZpbGFuZz0yJm9sYW5nPTAmaW1ldGhwPTAmaWRvbWE9MiZzZG9tYT0maXF2YWw9MSZpd3VybD0xJnN3dXJsPSZpcm9sZT0zJnNyb2xlPUFkbWluJnV0eXA9MCZkZXF1aT0wJnRvcXVpPTAmdm5kZW1haWw9JnZuZHBob25lPSZ2bmRub209JnZuZHBub209JmRhdG9wZT0xMCUyRjE0JTJGMjAyNSUyMDElM0EwMyUzQTE5JTIwUE0mdWlwPSZmYmFja3VybD0mZXRhPTAmdWFkcjE9JmluZm9wbHVzPSZvYnN2PQ";
+        //TEST ????
+        if (!string.IsNullOrEmpty(cdlink))
+        {
+            var _LinkSerialiser = new LinkSerialiser(_jsRun);
+            _invModel = _LinkSerialiser.DecodeAndDeserialize<InviteModel>(cdlink);
+            if (_invModel.Password == "Jesuis@99")
+            {
+                _invModel.Password = "";
+                _invModel.ConfirmPassword = "";
+            }
+            //tests
+            Console.WriteLine($"Idorg  : {_invModel.Idorg}");
+            Console.WriteLine($"Ordid  : {_invModel.Ordid}");
+            Console.WriteLine($"Oidstr  : {_invModel.Oidstr}");
+
+            var lscusts = await _apiClient.GetFromJsonAsync<List<Customer>>("customers/rendall");
+            if (lscusts != null && lscusts.Any())
+            {
+                LsCustomers = lscusts;
+            }
+            Console.WriteLine($"nb Customers : {LsCustomers.Count}");
+            var lsordas = await _apiClient.GetFromJsonAsync<List<Order>>("orders/rendall");
+            if (lsordas != null && lsordas.Any())
+            {
+                LsOrders = lsordas;
+            }
+            Console.WriteLine($"nb Orders : {LsOrders.Count}");
+            //_invModel.Srole = "Admin";
+            _locClient = _httpFactorer.CreateClient("localClient");
+            _apiClient = _httpFactorer.CreateClient("wApiClient");
+            //_myCatal = await _apiClient.GetFromJsonAsync<TableSet>("collects/tables");
+        }
+        //Console.WriteLine(jsdata);
+        //Console.Write("Zone table");
+        yaerrors = false; isLoading = false;
+    }
+    public async Task DoRegisterAsync()
+    {
+        yaerrors = false; isLoading = true;
+        //email required//owner-siset/free others
+        //if (_siAllManager)
+        //{
+        if (string.IsNullOrWhiteSpace(_invModel.Email))
+        {
+            yaerrors = true;
+            errorList.Add("Email is required.");
+        }
+        else
+        {
+            var normalizedEmail = _invModel.Email.ToUpperInvariant();
+            if (normalizedEmail == null)
+            {
+                yaerrors = true;
+                errorList.Add("Email contains inacceptable characters.");
+            }
+        }
+        //si par email ou phonenumber
+        if (string.IsNullOrWhiteSpace(_invModel.Password))
+        {
+            yaerrors = true;
+            errorList.Add("Password is required.");
+        }
+        if (string.IsNullOrWhiteSpace(_invModel.UsernameOrEmail))
+        {
+            yaerrors = true;
+            errorList.Add("Username is required.");
+        }
+        if (string.IsNullOrWhiteSpace(_invModel.ConfirmPassword))
+        {
+            yaerrors = true;
+            errorList.Add("Please confirm your password.");
+        }
+        if (_invModel.Password != _invModel.ConfirmPassword)
+        {
+            yaerrors = true;
+            errorList.Add("Passwords don't match.");
+        }
+        if (string.IsNullOrWhiteSpace(_invModel.Raison))
+        {
+            yaerrors = true;
+            errorList.Add("Raison est obligatoire.");
+        }
+        var usite = _myCatal.Sites.FirstOrDefault(wi => wi.Elea == _invModel.Iwurl);
+        if (usite == null)
+        {
+            yaerrors = true;
+            errorList.Add("Region est obligatoire.");
+        }
+        if (yaerrors)
+        {
+            isLoading = false;
+            return;
+        }
+        //Backend
+        string baseUrl = usite.Liba;
+        baseUrl = baseUrl.TrimEnd('/');
+        baseUrl = baseUrl + "/api/lgauth";
+        Console.WriteLine($"Backend Link : {baseUrl}");
+        //Frontend
+        string backUrl = _locClient.BaseAddress?.ToString().TrimEnd('/') + "/backregister";
+        _invModel.FbackUrl = backUrl;
+        _invModel.Siowner = true;
+        Console.WriteLine($"Frontend Link : {backUrl}");
+
+        var _LinkSerialiser = new LinkSerialiser(_jsRun);
+        _generatedLink = _LinkSerialiser.GenerateLink(_invModel, baseUrl,"admregister");
+        _navmanager.NavigateTo(_generatedLink);
+        isLoading = false;
+    }
+
+    // private T DecodeAndDeserialize<T>(string encoded)
+    //     where T : new()
+    // {
+    //     try
+    //     {
+    //         var bytes = WebEncoders.Base64UrlDecode(encoded);
+    //         var query = System.Text.Encoding.UTF8.GetString(bytes);
+
+    //         // Parse query string into a dictionary
+    //         var dict = Microsoft.AspNetCore.WebUtilities.QueryHelpers.ParseQuery(query);
+
+    //         var obj = new T();
+    //         var props = typeof(T).GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+    //         foreach (var prop in props)
+    //         {
+    //             var key = prop.Name.ToLower();
+    //             if (dict.TryGetValue(key, out var val) && !string.IsNullOrEmpty(val))
+    //             {
+    //                 prop.SetValue(obj, Convert.ChangeType(val.ToString(), prop.PropertyType));
+    //                 if (key == "ordid") Console.WriteLine($"ordid value : {val}");
+    //                 if (key == "oidstr") Console.WriteLine($"oidstr value : {val}");
+    //             } 
+    //         }
+    //         return obj;
+    //     }
+    //     catch
+    //     {
+    //         return default;
+    //     }
+    // }
+    private async Task RendCatalog()
+    {
+        try
+        {
+            _myCatal = await _tableService.rendTables();
+        }
+        catch (Exception ex)
+        {
+            Imessage = "probleme des options";
+        }
+        Console.WriteLine($"nb. pays : {_myCatal.Countries.Count()}");
+    }
+    //dqsrole
+    //tqirole
+    //tosrole;
+    //toqlang
+    //typtie
+    //straison
+    //ivorga
+    //tydoma
+    //stdoma
+    //verif
+}

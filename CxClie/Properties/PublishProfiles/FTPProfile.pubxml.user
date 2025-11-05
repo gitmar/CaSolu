@@ -1,0 +1,1438 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- https://go.microsoft.com/fwlink/?LinkID=208121. -->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAK1NTYgazF0CD87II9I9CnQAAAAACAAAAAAAQZgAAAAEAACAAAAAHfA+etcv7+tmQ4r0yFCMhCMCEnlerDsSA6BcLWZyR4wAAAAAOgAAAAAIAACAAAAAk+fXUpgI2pkoaq2Q0o1oN0rQMrWNw3WbYCkXRbjDfdyAAAABdPxtPyV9m8puvqFz7k8zLglhgsVydC+oc+eHulSM540AAAACt7JNRgBqQ+cKAO7RhvmHxtIfCEUUa5yseLSyL/LKmGYEDgzFp9BgiqnCAAilbKRYSd15O9M+gqel/oCkOlGpi</EncryptedPassword>
+    <_PublishTargetUrl>ftp://win8227.site4now.net/</_PublishTargetUrl>
+    <History>True|2025-11-05T08:10:04.1374381Z||;True|2025-11-05T03:07:49.5098154+00:00||;True|2025-11-05T02:54:14.2251171+00:00||;True|2025-11-04T20:54:04.8329384+00:00||;True|2025-11-04T20:25:17.3328150+00:00||;True|2025-11-04T19:34:59.9829229+00:00||;False|2025-11-04T19:29:10.3840162+00:00||;True|2025-11-03T17:42:01.8916882+00:00||;True|2025-11-03T11:41:25.6616417+00:00||;False|2025-11-03T10:58:57.6112915+00:00||;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="CxClie.staticwebassets.endpoints.json">
+      <publishTime>11/05/2025 08:08:44</publishTime>
+    </File>
+    <File Include="e_sqlite3.a">
+      <publishTime>09/02/2025 15:26:54</publishTime>
+    </File>
+    <File Include="GspClie.staticwebassets.endpoints.json">
+      <publishTime>11/03/2025 17:03:58</publishTime>
+    </File>
+    <File Include="web.config">
+      <publishTime>09/25/2025 19:14:16</publishTime>
+    </File>
+    <File Include="wwwroot/appsettings.Development.json">
+      <publishTime>11/03/2025 09:41:54</publishTime>
+    </File>
+    <File Include="wwwroot/appsettings.Development.json.br">
+      <publishTime>11/04/2025 17:50:36</publishTime>
+    </File>
+    <File Include="wwwroot/appsettings.Development.json.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/appsettings.json">
+      <publishTime>10/31/2025 23:58:29</publishTime>
+    </File>
+    <File Include="wwwroot/appsettings.json.br">
+      <publishTime>11/04/2025 17:50:36</publishTime>
+    </File>
+    <File Include="wwwroot/appsettings.json.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/appsettings.Production.json">
+      <publishTime>11/05/2025 03:03:30</publishTime>
+    </File>
+    <File Include="wwwroot/appsettings.Production.json.br">
+      <publishTime>11/05/2025 03:06:42</publishTime>
+    </File>
+    <File Include="wwwroot/appsettings.Production.json.gz">
+      <publishTime>11/05/2025 03:06:00</publishTime>
+    </File>
+    <File Include="wwwroot/css/app.css">
+      <publishTime>11/03/2025 08:49:01</publishTime>
+    </File>
+    <File Include="wwwroot/css/app.css.br">
+      <publishTime>11/04/2025 17:50:36</publishTime>
+    </File>
+    <File Include="wwwroot/css/app.css.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/CxClie.styles.css">
+      <publishTime>11/04/2025 17:49:26</publishTime>
+    </File>
+    <File Include="wwwroot/CxClie.styles.css.br">
+      <publishTime>11/04/2025 17:50:35</publishTime>
+    </File>
+    <File Include="wwwroot/CxClie.styles.css.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/favicon.png">
+      <publishTime>11/03/2025 08:49:02</publishTime>
+    </File>
+    <File Include="wwwroot/GspClie.styles.css">
+      <publishTime>11/03/2025 10:58:25</publishTime>
+    </File>
+    <File Include="wwwroot/GspClie.styles.css.br">
+      <publishTime>11/03/2025 11:01:09</publishTime>
+    </File>
+    <File Include="wwwroot/GspClie.styles.css.gz">
+      <publishTime>11/03/2025 10:58:26</publishTime>
+    </File>
+    <File Include="wwwroot/icon-192.png">
+      <publishTime>11/03/2025 08:49:02</publishTime>
+    </File>
+    <File Include="wwwroot/index.html">
+      <publishTime>11/04/2025 15:40:07</publishTime>
+    </File>
+    <File Include="wwwroot/index.html.br">
+      <publishTime>11/04/2025 17:50:36</publishTime>
+    </File>
+    <File Include="wwwroot/index.html.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css">
+      <publishTime>11/03/2025 08:49:02</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css.br">
+      <publishTime>11/04/2025 17:50:40</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css.map">
+      <publishTime>11/03/2025 08:49:02</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css.map.br">
+      <publishTime>11/04/2025 17:50:42</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css.map.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css">
+      <publishTime>11/03/2025 08:49:02</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css.br">
+      <publishTime>11/04/2025 17:50:42</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css.map">
+      <publishTime>11/03/2025 08:49:02</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css.map.br">
+      <publishTime>11/04/2025 17:50:43</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css.map.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css">
+      <publishTime>11/03/2025 08:49:02</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.br">
+      <publishTime>11/04/2025 17:50:43</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map">
+      <publishTime>11/03/2025 08:49:02</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map.br">
+      <publishTime>11/04/2025 17:50:44</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css">
+      <publishTime>11/03/2025 08:49:02</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.br">
+      <publishTime>11/04/2025 17:50:43</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map">
+      <publishTime>11/03/2025 08:49:02</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map.br">
+      <publishTime>11/04/2025 17:50:43</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css">
+      <publishTime>11/03/2025 08:49:02</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css.br">
+      <publishTime>11/04/2025 17:50:44</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css.map">
+      <publishTime>11/03/2025 08:49:02</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css.map.br">
+      <publishTime>11/04/2025 17:50:44</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css.map.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css">
+      <publishTime>11/03/2025 08:49:02</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css.br">
+      <publishTime>11/04/2025 17:50:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map">
+      <publishTime>11/03/2025 08:49:02</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map.br">
+      <publishTime>11/04/2025 17:50:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css">
+      <publishTime>11/03/2025 08:49:02</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.br">
+      <publishTime>11/04/2025 17:50:44</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map">
+      <publishTime>11/03/2025 08:49:02</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map.br">
+      <publishTime>11/04/2025 17:50:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css">
+      <publishTime>11/03/2025 08:49:02</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.br">
+      <publishTime>11/04/2025 17:50:35</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map">
+      <publishTime>11/03/2025 08:49:02</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map.br">
+      <publishTime>11/04/2025 17:50:35</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css">
+      <publishTime>11/03/2025 08:49:02</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css.br">
+      <publishTime>11/04/2025 17:50:36</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css.map">
+      <publishTime>11/03/2025 08:49:02</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css.map.br">
+      <publishTime>11/04/2025 17:50:38</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css.map.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css">
+      <publishTime>11/03/2025 08:49:02</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css.br">
+      <publishTime>11/04/2025 17:50:39</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map">
+      <publishTime>11/03/2025 08:49:01</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map.br">
+      <publishTime>11/04/2025 17:50:40</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css">
+      <publishTime>11/03/2025 08:49:01</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.br">
+      <publishTime>11/04/2025 17:50:41</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map">
+      <publishTime>11/03/2025 08:49:01</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map.br">
+      <publishTime>11/04/2025 17:50:43</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css">
+      <publishTime>11/03/2025 08:49:01</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.br">
+      <publishTime>11/04/2025 17:50:43</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map">
+      <publishTime>11/03/2025 08:49:01</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map.br">
+      <publishTime>11/04/2025 17:50:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap.css">
+      <publishTime>11/03/2025 08:49:01</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap.css.br">
+      <publishTime>11/04/2025 17:50:38</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap.css.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap.css.map">
+      <publishTime>11/03/2025 08:49:01</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap.css.map.br">
+      <publishTime>11/04/2025 17:50:43</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap.css.map.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap.min.css">
+      <publishTime>11/03/2025 08:49:01</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.br">
+      <publishTime>11/04/2025 17:50:45</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.gz">
+      <publishTime>11/03/2025 10:58:27</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map">
+      <publishTime>11/03/2025 08:49:01</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map.br">
+      <publishTime>11/04/2025 17:50:47</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css">
+      <publishTime>11/03/2025 08:49:01</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css.br">
+      <publishTime>11/04/2025 17:50:48</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css.map">
+      <publishTime>11/03/2025 08:49:01</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css.map.br">
+      <publishTime>11/04/2025 17:50:50</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css.map.gz">
+      <publishTime>11/03/2025 10:58:27</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css">
+      <publishTime>11/03/2025 08:49:01</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css.br">
+      <publishTime>11/04/2025 17:50:51</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map">
+      <publishTime>11/03/2025 08:49:01</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map.br">
+      <publishTime>11/04/2025 17:50:40</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map.gz">
+      <publishTime>11/03/2025 10:58:27</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js">
+      <publishTime>11/03/2025 08:49:01</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js.br">
+      <publishTime>11/04/2025 17:50:46</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js.gz">
+      <publishTime>11/03/2025 10:58:27</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js.map">
+      <publishTime>11/03/2025 08:49:01</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js.map.br">
+      <publishTime>11/04/2025 17:50:48</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js.map.gz">
+      <publishTime>11/03/2025 10:58:27</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js">
+      <publishTime>11/03/2025 08:49:01</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js.br">
+      <publishTime>11/04/2025 17:50:48</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map">
+      <publishTime>11/03/2025 08:49:01</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map.br">
+      <publishTime>11/04/2025 17:50:49</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js">
+      <publishTime>11/03/2025 08:49:01</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js.br">
+      <publishTime>11/04/2025 17:50:49</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js.map">
+      <publishTime>11/03/2025 08:49:01</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js.map.br">
+      <publishTime>11/04/2025 17:50:37</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js.map.gz">
+      <publishTime>11/03/2025 10:58:27</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js">
+      <publishTime>11/03/2025 08:49:01</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js.br">
+      <publishTime>11/04/2025 17:50:38</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js.gz">
+      <publishTime>11/03/2025 10:58:27</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js.map">
+      <publishTime>11/03/2025 08:49:01</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js.map.br">
+      <publishTime>11/04/2025 17:50:40</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js.map.gz">
+      <publishTime>11/03/2025 10:58:27</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.js">
+      <publishTime>11/03/2025 08:49:01</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.js.br">
+      <publishTime>11/04/2025 17:50:41</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.js.gz">
+      <publishTime>11/03/2025 10:58:27</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.js.map">
+      <publishTime>11/03/2025 08:49:01</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.js.map.br">
+      <publishTime>11/04/2025 17:50:43</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.js.map.gz">
+      <publishTime>11/03/2025 10:58:27</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.min.js">
+      <publishTime>11/03/2025 08:49:01</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.br">
+      <publishTime>11/04/2025 17:50:43</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map">
+      <publishTime>11/03/2025 08:49:01</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map.br">
+      <publishTime>11/04/2025 17:50:44</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/sample-data/weather.json">
+      <publishTime>11/03/2025 08:49:01</publishTime>
+    </File>
+    <File Include="wwwroot/sample-data/weather.json.br">
+      <publishTime>11/04/2025 17:50:44</publishTime>
+    </File>
+    <File Include="wwwroot/sample-data/weather.json.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/_content/Blazor.Bootstrap/Blazor.Bootstrap.7t9tbfaemk.bundle.scp.css">
+      <publishTime>11/02/2024 09:45:22</publishTime>
+    </File>
+    <File Include="wwwroot/_content/Blazor.Bootstrap/Blazor.Bootstrap.7t9tbfaemk.bundle.scp.css.br">
+      <publishTime>11/04/2025 17:50:44</publishTime>
+    </File>
+    <File Include="wwwroot/_content/Blazor.Bootstrap/Blazor.Bootstrap.7t9tbfaemk.bundle.scp.css.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/_content/Blazor.Bootstrap/blazor.bootstrap.css">
+      <publishTime>11/09/2024 14:43:36</publishTime>
+    </File>
+    <File Include="wwwroot/_content/Blazor.Bootstrap/blazor.bootstrap.css.br">
+      <publishTime>11/04/2025 17:50:45</publishTime>
+    </File>
+    <File Include="wwwroot/_content/Blazor.Bootstrap/blazor.bootstrap.css.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/_content/Blazor.Bootstrap/blazor.bootstrap.js">
+      <publishTime>01/30/2025 18:04:42</publishTime>
+    </File>
+    <File Include="wwwroot/_content/Blazor.Bootstrap/blazor.bootstrap.js.br">
+      <publishTime>11/04/2025 17:50:45</publishTime>
+    </File>
+    <File Include="wwwroot/_content/Blazor.Bootstrap/blazor.bootstrap.js.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/_content/Blazor.Bootstrap/blazor.bootstrap.pdf.js">
+      <publishTime>07/15/2024 07:36:20</publishTime>
+    </File>
+    <File Include="wwwroot/_content/Blazor.Bootstrap/blazor.bootstrap.pdf.js.br">
+      <publishTime>11/04/2025 17:50:45</publishTime>
+    </File>
+    <File Include="wwwroot/_content/Blazor.Bootstrap/blazor.bootstrap.pdf.js.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/_content/Blazor.Bootstrap/blazor.bootstrap.sortable-list.js">
+      <publishTime>04/15/2024 19:30:56</publishTime>
+    </File>
+    <File Include="wwwroot/_content/Blazor.Bootstrap/blazor.bootstrap.sortable-list.js.br">
+      <publishTime>11/04/2025 17:50:45</publishTime>
+    </File>
+    <File Include="wwwroot/_content/Blazor.Bootstrap/blazor.bootstrap.sortable-list.js.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/_content/Blazor.Bootstrap/blazor.bootstrap.theme-switcher.js">
+      <publishTime>11/20/2024 15:30:36</publishTime>
+    </File>
+    <File Include="wwwroot/_content/Blazor.Bootstrap/blazor.bootstrap.theme-switcher.js.br">
+      <publishTime>11/04/2025 17:50:45</publishTime>
+    </File>
+    <File Include="wwwroot/_content/Blazor.Bootstrap/blazor.bootstrap.theme-switcher.js.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/_content/Blazor.Bootstrap/icon/128X128.png">
+      <publishTime>04/19/2022 11:45:42</publishTime>
+    </File>
+    <File Include="wwwroot/_content/Blazor.Bootstrap/pdfjs-4.0.379.min.js">
+      <publishTime>07/15/2024 07:36:20</publishTime>
+    </File>
+    <File Include="wwwroot/_content/Blazor.Bootstrap/pdfjs-4.0.379.min.js.br">
+      <publishTime>11/04/2025 17:50:46</publishTime>
+    </File>
+    <File Include="wwwroot/_content/Blazor.Bootstrap/pdfjs-4.0.379.min.js.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/_content/Blazor.Bootstrap/pdfjs-4.0.379.worker.min.js">
+      <publishTime>07/15/2024 07:36:20</publishTime>
+    </File>
+    <File Include="wwwroot/_content/Blazor.Bootstrap/pdfjs-4.0.379.worker.min.js.br">
+      <publishTime>11/04/2025 17:50:42</publishTime>
+    </File>
+    <File Include="wwwroot/_content/Blazor.Bootstrap/pdfjs-4.0.379.worker.min.js.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/blazor.boot.json">
+      <publishTime>11/05/2025 08:08:42</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/blazor.boot.json.br">
+      <publishTime>11/05/2025 08:08:42</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/blazor.boot.json.gz">
+      <publishTime>11/05/2025 08:08:42</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/blazor.webassembly.js">
+      <publishTime>09/26/2025 03:00:38</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/blazor.webassembly.js.br">
+      <publishTime>11/04/2025 17:50:35</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/blazor.webassembly.js.gz">
+      <publishTime>11/04/2025 17:49:27</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/BlazorBootstrap.ym6tnrklwx.wasm">
+      <publishTime>11/04/2025 17:52:28</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/BlazorBootstrap.ym6tnrklwx.wasm.br">
+      <publishTime>11/04/2025 17:52:41</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/BlazorBootstrap.ym6tnrklwx.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Blazored.LocalStorage.12n6dz54qr.wasm">
+      <publishTime>11/04/2025 17:52:28</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Blazored.LocalStorage.12n6dz54qr.wasm.br">
+      <publishTime>11/04/2025 17:52:31</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Blazored.LocalStorage.12n6dz54qr.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/CxClie.elkvkx6869.wasm">
+      <publishTime>11/04/2025 17:52:28</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/CxClie.elkvkx6869.wasm.br">
+      <publishTime>11/04/2025 17:52:32</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/CxClie.elkvkx6869.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/CxClie.o5jpkphwl2.wasm">
+      <publishTime>11/05/2025 08:08:40</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/CxClie.o5jpkphwl2.wasm.br">
+      <publishTime>11/05/2025 08:08:43</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/CxClie.o5jpkphwl2.wasm.gz">
+      <publishTime>11/05/2025 08:08:42</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/CxShared.0np4749h7i.wasm">
+      <publishTime>11/04/2025 17:52:28</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/CxShared.0np4749h7i.wasm.br">
+      <publishTime>11/04/2025 17:52:33</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/CxShared.0np4749h7i.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/dotnet.js">
+      <publishTime>09/25/2025 19:44:16</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/dotnet.js.br">
+      <publishTime>11/04/2025 17:52:43</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/dotnet.js.gz">
+      <publishTime>11/04/2025 17:49:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/dotnet.native.0qp4898zip.js">
+      <publishTime>11/05/2025 02:50:47</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/dotnet.native.0qp4898zip.js.br">
+      <publishTime>11/05/2025 02:50:51</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/dotnet.native.0qp4898zip.js.gz">
+      <publishTime>11/05/2025 02:50:48</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/dotnet.native.b0a473ch26.wasm">
+      <publishTime>11/05/2025 02:50:46</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/dotnet.native.b0a473ch26.wasm.br">
+      <publishTime>11/05/2025 02:51:57</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/dotnet.native.b0a473ch26.wasm.gz">
+      <publishTime>11/05/2025 02:50:49</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/dotnet.native.d2w7colv7e.wasm">
+      <publishTime>09/25/2025 19:44:56</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/dotnet.native.d2w7colv7e.wasm.br">
+      <publishTime>11/03/2025 11:01:33</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/dotnet.native.d2w7colv7e.wasm.gz">
+      <publishTime>11/03/2025 10:58:27</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/dotnet.native.l4ptthxatg.js">
+      <publishTime>09/25/2025 19:44:54</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/dotnet.native.l4ptthxatg.js.br">
+      <publishTime>11/03/2025 11:01:33</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/dotnet.native.l4ptthxatg.js.gz">
+      <publishTime>11/03/2025 10:58:26</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/dotnet.native.o9j451d85y.js">
+      <publishTime>11/04/2025 17:52:25</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/dotnet.native.o9j451d85y.js.br">
+      <publishTime>11/04/2025 17:52:40</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/dotnet.native.o9j451d85y.js.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/dotnet.native.obpzfyfy1k.wasm">
+      <publishTime>11/04/2025 17:52:28</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/dotnet.native.obpzfyfy1k.wasm.br">
+      <publishTime>11/04/2025 17:53:08</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/dotnet.native.obpzfyfy1k.wasm.gz">
+      <publishTime>11/04/2025 17:52:30</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/dotnet.runtime.drv0pr9n5o.js">
+      <publishTime>09/25/2025 19:44:22</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/dotnet.runtime.drv0pr9n5o.js.br">
+      <publishTime>11/04/2025 17:52:44</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/dotnet.runtime.drv0pr9n5o.js.gz">
+      <publishTime>11/03/2025 10:58:27</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/GspClie.g7jk773zqz.wasm">
+      <publishTime>11/03/2025 11:00:51</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/GspClie.g7jk773zqz.wasm.br">
+      <publishTime>11/03/2025 11:01:32</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/GspClie.g7jk773zqz.wasm.gz">
+      <publishTime>11/03/2025 11:00:52</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/GspShared.tmeaa15w0l.wasm">
+      <publishTime>11/03/2025 11:00:51</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/GspShared.tmeaa15w0l.wasm.br">
+      <publishTime>11/03/2025 11:01:31</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/GspShared.tmeaa15w0l.wasm.gz">
+      <publishTime>11/03/2025 11:00:52</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/icudt_CJK.tjcz0u77k5.dat">
+      <publishTime>09/16/2024 14:45:12</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/icudt_CJK.tjcz0u77k5.dat.br">
+      <publishTime>11/04/2025 17:52:56</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/icudt_CJK.tjcz0u77k5.dat.gz">
+      <publishTime>11/04/2025 17:52:30</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/icudt_EFIGS.tptq2av103.dat">
+      <publishTime>09/16/2024 14:45:12</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/icudt_EFIGS.tptq2av103.dat.br">
+      <publishTime>11/04/2025 17:53:02</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/icudt_EFIGS.tptq2av103.dat.gz">
+      <publishTime>11/04/2025 17:52:30</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/icudt_no_CJK.lfu7j35m59.dat">
+      <publishTime>09/16/2024 14:45:12</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/icudt_no_CJK.lfu7j35m59.dat.br">
+      <publishTime>11/04/2025 17:52:56</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/icudt_no_CJK.lfu7j35m59.dat.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.AspNetCore.Components.Forms.4pi680o7gk.wasm">
+      <publishTime>11/04/2025 17:52:28</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.AspNetCore.Components.Forms.4pi680o7gk.wasm.br">
+      <publishTime>11/04/2025 17:52:33</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.AspNetCore.Components.Forms.4pi680o7gk.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.AspNetCore.Components.re5f02n275.wasm">
+      <publishTime>11/04/2025 17:52:28</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.AspNetCore.Components.re5f02n275.wasm.br">
+      <publishTime>11/04/2025 17:52:35</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.AspNetCore.Components.re5f02n275.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.AspNetCore.Components.Web.jnqr0cuu3i.wasm">
+      <publishTime>11/04/2025 17:52:28</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.AspNetCore.Components.Web.jnqr0cuu3i.wasm.br">
+      <publishTime>11/04/2025 17:52:36</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.AspNetCore.Components.Web.jnqr0cuu3i.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.AspNetCore.Components.WebAssembly.0djuixc3en.wasm">
+      <publishTime>11/04/2025 17:52:28</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.AspNetCore.Components.WebAssembly.0djuixc3en.wasm.br">
+      <publishTime>11/04/2025 17:52:37</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.AspNetCore.Components.WebAssembly.0djuixc3en.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.AspNetCore.WebUtilities.hch0f5puz0.wasm">
+      <publishTime>11/04/2025 17:52:28</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.AspNetCore.WebUtilities.hch0f5puz0.wasm.br">
+      <publishTime>11/04/2025 17:52:37</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.AspNetCore.WebUtilities.hch0f5puz0.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.CSharp.05m6qftx6z.wasm">
+      <publishTime>11/04/2025 17:52:28</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.CSharp.05m6qftx6z.wasm.br">
+      <publishTime>11/04/2025 17:52:40</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.CSharp.05m6qftx6z.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.Extensions.Configuration.15dz7nk1d8.wasm">
+      <publishTime>11/04/2025 17:52:28</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.Extensions.Configuration.15dz7nk1d8.wasm.br">
+      <publishTime>11/04/2025 17:52:40</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.Extensions.Configuration.15dz7nk1d8.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.Extensions.Configuration.Abstractions.r5enc109h2.wasm">
+      <publishTime>11/04/2025 17:52:28</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.Extensions.Configuration.Abstractions.r5enc109h2.wasm.br">
+      <publishTime>11/04/2025 17:52:40</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.Extensions.Configuration.Abstractions.r5enc109h2.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.Extensions.Configuration.Json.6ap0l7oqnx.wasm">
+      <publishTime>11/04/2025 17:52:28</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.Extensions.Configuration.Json.6ap0l7oqnx.wasm.br">
+      <publishTime>11/04/2025 17:52:40</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.Extensions.Configuration.Json.6ap0l7oqnx.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.Extensions.DependencyInjection.Abstractions.syvq4r4wwc.wasm">
+      <publishTime>11/04/2025 17:52:28</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.Extensions.DependencyInjection.Abstractions.syvq4r4wwc.wasm.br">
+      <publishTime>11/04/2025 17:52:40</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.Extensions.DependencyInjection.Abstractions.syvq4r4wwc.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.Extensions.DependencyInjection.t7f5r90yql.wasm">
+      <publishTime>11/04/2025 17:52:28</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.Extensions.DependencyInjection.t7f5r90yql.wasm.br">
+      <publishTime>11/04/2025 17:52:41</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.Extensions.DependencyInjection.t7f5r90yql.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.Extensions.Diagnostics.9wjofzsnko.wasm">
+      <publishTime>11/04/2025 17:52:28</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.Extensions.Diagnostics.9wjofzsnko.wasm.br">
+      <publishTime>11/04/2025 17:52:41</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.Extensions.Diagnostics.9wjofzsnko.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.Extensions.Diagnostics.Abstractions.lxk837v1en.wasm">
+      <publishTime>11/04/2025 17:52:28</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.Extensions.Diagnostics.Abstractions.lxk837v1en.wasm.br">
+      <publishTime>11/04/2025 17:52:41</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.Extensions.Diagnostics.Abstractions.lxk837v1en.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.Extensions.Http.82bt34pxsy.wasm">
+      <publishTime>11/04/2025 17:52:28</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.Extensions.Http.82bt34pxsy.wasm.br">
+      <publishTime>11/04/2025 17:52:42</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.Extensions.Http.82bt34pxsy.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.Extensions.Logging.Abstractions.hk1rcpd1en.wasm">
+      <publishTime>11/04/2025 17:52:28</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.Extensions.Logging.Abstractions.hk1rcpd1en.wasm.br">
+      <publishTime>11/04/2025 17:52:42</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.Extensions.Logging.Abstractions.hk1rcpd1en.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.Extensions.Logging.m1i5tu56sa.wasm">
+      <publishTime>11/04/2025 17:52:28</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.Extensions.Logging.m1i5tu56sa.wasm.br">
+      <publishTime>11/04/2025 17:52:42</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.Extensions.Logging.m1i5tu56sa.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.Extensions.Options.eot1j4rgw8.wasm">
+      <publishTime>11/04/2025 17:52:28</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.Extensions.Options.eot1j4rgw8.wasm.br">
+      <publishTime>11/04/2025 17:52:43</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.Extensions.Options.eot1j4rgw8.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.Extensions.Primitives.01dmyn3a9o.wasm">
+      <publishTime>11/04/2025 17:52:28</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.Extensions.Primitives.01dmyn3a9o.wasm.br">
+      <publishTime>11/04/2025 17:52:31</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.Extensions.Primitives.01dmyn3a9o.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.JSInterop.eyaxz6adjz.wasm">
+      <publishTime>11/04/2025 17:52:28</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.JSInterop.eyaxz6adjz.wasm.br">
+      <publishTime>11/04/2025 17:52:31</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.JSInterop.eyaxz6adjz.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.JSInterop.WebAssembly.9tiedlnvko.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.JSInterop.WebAssembly.9tiedlnvko.wasm.br">
+      <publishTime>11/04/2025 17:52:31</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Microsoft.JSInterop.WebAssembly.9tiedlnvko.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/netstandard.rtz267540s.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/netstandard.rtz267540s.wasm.br">
+      <publishTime>11/04/2025 17:52:31</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/netstandard.rtz267540s.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Newtonsoft.Json.qkbufwhni2.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Newtonsoft.Json.qkbufwhni2.wasm.br">
+      <publishTime>11/04/2025 17:52:39</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/Newtonsoft.Json.qkbufwhni2.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/SQLitePCLRaw.batteries_v2.sdspdo4vix.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/SQLitePCLRaw.batteries_v2.sdspdo4vix.wasm.br">
+      <publishTime>11/04/2025 17:52:39</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/SQLitePCLRaw.batteries_v2.sdspdo4vix.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/SQLitePCLRaw.core.uubjf3tta1.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/SQLitePCLRaw.core.uubjf3tta1.wasm.br">
+      <publishTime>11/04/2025 17:52:39</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/SQLitePCLRaw.core.uubjf3tta1.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/SQLitePCLRaw.provider.e_sqlite3.fi94k82bq2.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/SQLitePCLRaw.provider.e_sqlite3.fi94k82bq2.wasm.br">
+      <publishTime>11/04/2025 17:52:39</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/SQLitePCLRaw.provider.e_sqlite3.fi94k82bq2.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.8rv0tdtrxz.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.8rv0tdtrxz.wasm.br">
+      <publishTime>11/04/2025 17:52:39</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.8rv0tdtrxz.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Collections.8ela8zkwvn.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Collections.8ela8zkwvn.wasm.br">
+      <publishTime>11/04/2025 17:52:41</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Collections.8ela8zkwvn.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Collections.Concurrent.a7fo2fwfo2.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Collections.Concurrent.a7fo2fwfo2.wasm.br">
+      <publishTime>11/04/2025 17:52:40</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Collections.Concurrent.a7fo2fwfo2.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Collections.Immutable.e9sygaaebn.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Collections.Immutable.e9sygaaebn.wasm.br">
+      <publishTime>11/04/2025 17:52:40</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Collections.Immutable.e9sygaaebn.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Collections.NonGeneric.qgxhxr3g9k.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Collections.NonGeneric.qgxhxr3g9k.wasm.br">
+      <publishTime>11/04/2025 17:52:41</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Collections.NonGeneric.qgxhxr3g9k.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Collections.Specialized.rnmds7ygnh.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Collections.Specialized.rnmds7ygnh.wasm.br">
+      <publishTime>11/04/2025 17:52:41</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Collections.Specialized.rnmds7ygnh.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.ComponentModel.Annotations.22zxm6nlc7.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.ComponentModel.Annotations.22zxm6nlc7.wasm.br">
+      <publishTime>11/04/2025 17:52:41</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.ComponentModel.Annotations.22zxm6nlc7.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.ComponentModel.Primitives.dof4znztm7.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.ComponentModel.Primitives.dof4znztm7.wasm.br">
+      <publishTime>11/04/2025 17:52:41</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.ComponentModel.Primitives.dof4znztm7.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.ComponentModel.TypeConverter.3tptfd05lo.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.ComponentModel.TypeConverter.3tptfd05lo.wasm.br">
+      <publishTime>11/04/2025 17:52:42</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.ComponentModel.TypeConverter.3tptfd05lo.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.ComponentModel.uppnhu1mea.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.ComponentModel.uppnhu1mea.wasm.br">
+      <publishTime>11/04/2025 17:52:43</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.ComponentModel.uppnhu1mea.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Console.wt6nqobwj2.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Console.wt6nqobwj2.wasm.br">
+      <publishTime>11/04/2025 17:52:42</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Console.wt6nqobwj2.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Data.Common.meu4x66n48.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Data.Common.meu4x66n48.wasm.br">
+      <publishTime>11/04/2025 17:52:46</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Data.Common.meu4x66n48.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Diagnostics.DiagnosticSource.17jndutla7.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Diagnostics.DiagnosticSource.17jndutla7.wasm.br">
+      <publishTime>11/04/2025 17:52:46</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Diagnostics.DiagnosticSource.17jndutla7.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Diagnostics.DiagnosticSource.1dd7j9myok.wasm">
+      <publishTime>11/03/2025 11:00:50</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Diagnostics.DiagnosticSource.1dd7j9myok.wasm.br">
+      <publishTime>11/03/2025 11:01:16</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Diagnostics.DiagnosticSource.1dd7j9myok.wasm.gz">
+      <publishTime>11/03/2025 11:00:51</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Diagnostics.TraceSource.ydx494s3qq.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Diagnostics.TraceSource.ydx494s3qq.wasm.br">
+      <publishTime>11/04/2025 17:52:46</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Diagnostics.TraceSource.ydx494s3qq.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Drawing.Primitives.289m6owyu1.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Drawing.Primitives.289m6owyu1.wasm.br">
+      <publishTime>11/04/2025 17:52:31</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Drawing.Primitives.289m6owyu1.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Drawing.wgem9d1jb2.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Drawing.wgem9d1jb2.wasm.br">
+      <publishTime>11/04/2025 17:52:31</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Drawing.wgem9d1jb2.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.IO.Pipelines.ncn30wamcg.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.IO.Pipelines.ncn30wamcg.wasm.br">
+      <publishTime>11/04/2025 17:52:31</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.IO.Pipelines.ncn30wamcg.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Linq.5rs4wysy1m.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Linq.5rs4wysy1m.wasm.br">
+      <publishTime>11/04/2025 17:52:36</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Linq.5rs4wysy1m.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Linq.Expressions.5tiwgfvq7j.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Linq.Expressions.5tiwgfvq7j.wasm.br">
+      <publishTime>11/04/2025 17:52:35</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Linq.Expressions.5tiwgfvq7j.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Memory.qlde0jn0iq.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Memory.qlde0jn0iq.wasm.br">
+      <publishTime>11/04/2025 17:52:36</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Memory.qlde0jn0iq.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Net.Http.cw0xg670ho.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Net.Http.cw0xg670ho.wasm.br">
+      <publishTime>11/04/2025 17:52:38</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Net.Http.cw0xg670ho.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Net.Http.Json.ugkc8qj2tz.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Net.Http.Json.ugkc8qj2tz.wasm.br">
+      <publishTime>11/04/2025 17:52:36</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Net.Http.Json.ugkc8qj2tz.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Net.Http.lm9nrztivu.wasm">
+      <publishTime>11/03/2025 11:00:50</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Net.Http.lm9nrztivu.wasm.br">
+      <publishTime>11/03/2025 11:01:18</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Net.Http.lm9nrztivu.wasm.gz">
+      <publishTime>11/03/2025 11:00:51</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Net.Http.rsitksvhs6.wasm">
+      <publishTime>11/05/2025 08:08:41</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Net.Http.rsitksvhs6.wasm.br">
+      <publishTime>11/05/2025 08:08:43</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Net.Http.rsitksvhs6.wasm.gz">
+      <publishTime>11/05/2025 08:08:42</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Net.Primitives.e24bsgwgy3.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Net.Primitives.e24bsgwgy3.wasm.br">
+      <publishTime>11/04/2025 17:52:38</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Net.Primitives.e24bsgwgy3.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.ObjectModel.zdynnv896m.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.ObjectModel.zdynnv896m.wasm.br">
+      <publishTime>11/04/2025 17:52:38</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.ObjectModel.zdynnv896m.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Private.CoreLib.lqsis0bdo7.wasm">
+      <publishTime>11/03/2025 11:00:51</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Private.CoreLib.lqsis0bdo7.wasm.br">
+      <publishTime>11/03/2025 11:01:31</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Private.CoreLib.lqsis0bdo7.wasm.gz">
+      <publishTime>11/03/2025 11:00:52</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Private.CoreLib.o9uznn074p.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Private.CoreLib.o9uznn074p.wasm.br">
+      <publishTime>11/04/2025 17:52:59</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Private.CoreLib.o9uznn074p.wasm.gz">
+      <publishTime>11/04/2025 17:52:30</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Private.Uri.5v6adgsgkn.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Private.Uri.5v6adgsgkn.wasm.br">
+      <publishTime>11/04/2025 17:52:59</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Private.Uri.5v6adgsgkn.wasm.gz">
+      <publishTime>11/04/2025 17:52:30</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Private.Xml.Linq.0y5cb1e798.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Private.Xml.Linq.0y5cb1e798.wasm.br">
+      <publishTime>11/04/2025 17:52:59</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Private.Xml.Linq.0y5cb1e798.wasm.gz">
+      <publishTime>11/04/2025 17:52:30</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Private.Xml.otzakxycvw.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Private.Xml.otzakxycvw.wasm.br">
+      <publishTime>11/04/2025 17:53:06</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Private.Xml.otzakxycvw.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Reflection.Emit.ILGeneration.81uomoqhr0.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Reflection.Emit.ILGeneration.81uomoqhr0.wasm.br">
+      <publishTime>11/04/2025 17:53:06</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Reflection.Emit.ILGeneration.81uomoqhr0.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Reflection.Emit.Lightweight.83sei7lwgb.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Reflection.Emit.Lightweight.83sei7lwgb.wasm.br">
+      <publishTime>11/04/2025 17:52:43</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Reflection.Emit.Lightweight.83sei7lwgb.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Reflection.Primitives.kvhyhemwil.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Reflection.Primitives.kvhyhemwil.wasm.br">
+      <publishTime>11/04/2025 17:52:43</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Reflection.Primitives.kvhyhemwil.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Runtime.apmaila8ou.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Runtime.apmaila8ou.wasm.br">
+      <publishTime>11/04/2025 17:52:31</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Runtime.apmaila8ou.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Runtime.InteropServices.jak4vcuvab.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Runtime.InteropServices.jak4vcuvab.wasm.br">
+      <publishTime>11/04/2025 17:52:43</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Runtime.InteropServices.jak4vcuvab.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Runtime.InteropServices.JavaScript.it9v611w20.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Runtime.InteropServices.JavaScript.it9v611w20.wasm.br">
+      <publishTime>11/04/2025 17:52:43</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Runtime.InteropServices.JavaScript.it9v611w20.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Runtime.Numerics.27r0osoeod.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Runtime.Numerics.27r0osoeod.wasm.br">
+      <publishTime>11/04/2025 17:52:44</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Runtime.Numerics.27r0osoeod.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Runtime.Serialization.Formatters.drjzdg67ki.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Runtime.Serialization.Formatters.drjzdg67ki.wasm.br">
+      <publishTime>11/04/2025 17:52:44</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Runtime.Serialization.Formatters.drjzdg67ki.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Runtime.Serialization.Primitives.nh506uwomz.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Runtime.Serialization.Primitives.nh506uwomz.wasm.br">
+      <publishTime>11/04/2025 17:52:30</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Runtime.Serialization.Primitives.nh506uwomz.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Security.Cryptography.sigmtitftg.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Security.Cryptography.sigmtitftg.wasm.br">
+      <publishTime>11/04/2025 17:52:31</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Security.Cryptography.sigmtitftg.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Text.Encoding.Extensions.75uivmr71p.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Text.Encoding.Extensions.75uivmr71p.wasm.br">
+      <publishTime>11/04/2025 17:52:31</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Text.Encoding.Extensions.75uivmr71p.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Text.Encodings.Web.hq94nfnuw2.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Text.Encodings.Web.hq94nfnuw2.wasm.br">
+      <publishTime>11/04/2025 17:52:31</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Text.Encodings.Web.hq94nfnuw2.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Text.Json.rm4uu14n7n.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Text.Json.rm4uu14n7n.wasm.br">
+      <publishTime>11/04/2025 17:52:35</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Text.Json.rm4uu14n7n.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Text.RegularExpressions.y5bffd7i9y.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Text.RegularExpressions.y5bffd7i9y.wasm.br">
+      <publishTime>11/04/2025 17:52:38</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Text.RegularExpressions.y5bffd7i9y.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Threading.k290n83y9v.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Threading.k290n83y9v.wasm.br">
+      <publishTime>11/04/2025 17:52:39</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Threading.k290n83y9v.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Web.HttpUtility.ed9o3z7c7y.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Web.HttpUtility.ed9o3z7c7y.wasm.br">
+      <publishTime>11/04/2025 17:52:39</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Web.HttpUtility.ed9o3z7c7y.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Xml.Linq.fnt4rzi185.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Xml.Linq.fnt4rzi185.wasm.br">
+      <publishTime>11/04/2025 17:52:39</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Xml.Linq.fnt4rzi185.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Xml.ReaderWriter.1otkvd7d8u.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Xml.ReaderWriter.1otkvd7d8u.wasm.br">
+      <publishTime>11/04/2025 17:52:39</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Xml.ReaderWriter.1otkvd7d8u.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Xml.XDocument.ocxzop4g63.wasm">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Xml.XDocument.ocxzop4g63.wasm.br">
+      <publishTime>11/04/2025 17:52:39</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/System.Xml.XDocument.ocxzop4g63.wasm.gz">
+      <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+  </ItemGroup>
+</Project>
