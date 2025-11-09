@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "CxClie",
   "resources": {
-    "hash": "sha256-CUz2TmM/clBPAwBCmodbHFBMqDa6t93awTI+Wh3bib0=",
+    "hash": "sha256-fnGoPjj/QiCJw5Rs/yJJtz2Q0lFlFBw8Efh695JXnug=",
     "fingerprinting": {
       "BlazorBootstrap.ym6tnrklwx.wasm": "BlazorBootstrap.wasm",
       "Blazored.LocalStorage.12n6dz54qr.wasm": "Blazored.LocalStorage.wasm",
@@ -211,12 +211,12 @@
       "icudt_CJK.tjcz0u77k5.dat": "icudt_CJK.dat",
       "icudt_EFIGS.tptq2av103.dat": "icudt_EFIGS.dat",
       "icudt_no_CJK.lfu7j35m59.dat": "icudt_no_CJK.dat",
-      "CxShared.ws073e9h6n.wasm": "CxShared.wasm",
-      "CxShared.0jjrh8fugv.pdb": "CxShared.pdb",
-      "dotnet.native.kka6xddl0g.wasm": "dotnet.native.wasm",
+      "CxShared.qly1rv44jz.wasm": "CxShared.wasm",
+      "CxShared.34ujqyml78.pdb": "CxShared.pdb",
+      "dotnet.native.z0j9jayazg.wasm": "dotnet.native.wasm",
       "dotnet.native.mcqcyknle0.js": "dotnet.native.js",
-      "CxClie.8xwtpff8ue.wasm": "CxClie.wasm",
-      "CxClie.39x1nhdvy8.pdb": "CxClie.pdb"
+      "CxClie.l6nxzw5em7.wasm": "CxClie.wasm",
+      "CxClie.noxs0bah5s.pdb": "CxClie.pdb"
     },
     "jsModuleNative": {
       "dotnet.native.mcqcyknle0.js": "sha256-ZvII4r4bQ/Uia/w9S0jtDTRE6X7beu8HY+XYYjhqqN8="
@@ -225,7 +225,7 @@
       "dotnet.runtime.drv0pr9n5o.js": "sha256-yfXUv1l/B489E8p12JxUvxly0JvHL9CCsoZUDlfGH9c="
     },
     "wasmNative": {
-      "dotnet.native.kka6xddl0g.wasm": "sha256-/F8k1BXLl+X/LZBKP1OuXZEh5o7OYBSlwgyNud5RKXc="
+      "dotnet.native.z0j9jayazg.wasm": "sha256-k8PJiu7C874fOM/B9vweTyn7Y7VE+rGvKrOqfzmBaRY="
     },
     "icu": {
       "icudt_CJK.tjcz0u77k5.dat": "sha256-SZLtQnRc0JkwqHab0VUVP7T3uBPSeYzxzDnpxPpUnHk=",
@@ -438,12 +438,12 @@
       "WindowsBase.ahs9krftg4.wasm": "sha256-bgi2FHdT0ABsUP1yKQQ2AP8qfo1V/bS/4cJFE4OUHX8=",
       "mscorlib.k5iaovx9v7.wasm": "sha256-mEFLDERlY1HMNQHzh68xOPawXvI48O1fHW9PbfXugb4=",
       "netstandard.6sr1qvn64m.wasm": "sha256-Gpf+qEqCYaCB6zqI5sNPIurnfpwRtfcWksgf3CW6mHE=",
-      "CxShared.ws073e9h6n.wasm": "sha256-0KoStnCWxMcJTLII4/fT4LpziGXGxoRSQfjQ4GOF+Lw=",
-      "CxClie.8xwtpff8ue.wasm": "sha256-7JBfjuaK9QkaIlkf29ktUlof7LNwy2t5+OitlzSc9G8="
+      "CxShared.qly1rv44jz.wasm": "sha256-koM82o1YFMv/FSjeGyk/ftyCYRW2iwZtxb3SoyiPygY=",
+      "CxClie.l6nxzw5em7.wasm": "sha256-Y7l9kVC6plm9wHm6zW/EZ5o5bXIyLZHbdAj/8dQq5Gc="
     },
     "pdb": {
-      "CxShared.0jjrh8fugv.pdb": "sha256-ZCMK/Ta16Ayo/IA97+ITTTJXa0VSd2bR0u90kH/YHro=",
-      "CxClie.39x1nhdvy8.pdb": "sha256-abbcJSz8wXCGrMI6p9dgdq+hBGpXRNe/vZMpImgo+Gc="
+      "CxShared.34ujqyml78.pdb": "sha256-M+Hv7ePlOtNi9txK4FysnIutRz+SqhaQUtpykJz1LCc=",
+      "CxClie.noxs0bah5s.pdb": "sha256-eXoIX8nOxhPB+2a1MWRV/z+w0EDnH5RWvJ/3aAD6lkA="
     }
   },
   "cacheBootResources": true,

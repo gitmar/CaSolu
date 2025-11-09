@@ -10,3 +10,15 @@ C:\AACurDEV\CxShared\obj\Release\net9.0\CxShared.dll
 C:\AACurDEV\CxShared\obj\Release\net9.0\refint\CxShared.dll
 C:\AACurDEV\CxShared\obj\Release\net9.0\CxShared.pdb
 C:\AACurDEV\CxShared\obj\Release\net9.0\ref\CxShared.dll
+C:\AACurDEV\CaSolu\CxShared\bin\Release\net9.0\CxShared.deps.json
+C:\AACurDEV\CaSolu\CxShared\bin\Release\net9.0\CxShared.dll
+C:\AACurDEV\CaSolu\CxShared\bin\Release\net9.0\CxShared.pdb
+C:\AACurDEV\CaSolu\CxShared\obj\Release\net9.0\CxShared.GeneratedMSBuildEditorConfig.editorconfig
+C:\AACurDEV\CaSolu\CxShared\obj\Release\net9.0\CxShared.AssemblyInfoInputs.cache
+C:\AACurDEV\CaSolu\CxShared\obj\Release\net9.0\CxShared.AssemblyInfo.cs
+C:\AACurDEV\CaSolu\CxShared\obj\Release\net9.0\CxShared.csproj.CoreCompileInputs.cache
+C:\AACurDEV\CaSolu\CxShared\obj\Release\net9.0\CxShared.sourcelink.json
+C:\AACurDEV\CaSolu\CxShared\obj\Release\net9.0\CxShared.dll
+C:\AACurDEV\CaSolu\CxShared\obj\Release\net9.0\refint\CxShared.dll
+C:\AACurDEV\CaSolu\CxShared\obj\Release\net9.0\CxShared.pdb
+C:\AACurDEV\CaSolu\CxShared\obj\Release\net9.0\ref\CxShared.dll

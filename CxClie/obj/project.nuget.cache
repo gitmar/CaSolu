@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7s9QZPMEm50=",
+  "dgSpecHash": "IIpWQ5cjs1M=",
   "success": true,
-  "projectFilePath": "C:\\AACurDEV\\CAWapi\\CxClie\\CxClie.csproj",
+  "projectFilePath": "C:\\AACurDEV\\CaSolu\\CxClie\\CxClie.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Lenovo USER\\.nuget\\packages\\blazor.bootstrap\\3.4.0\\blazor.bootstrap.3.4.0.nupkg.sha512",
     "C:\\Users\\Lenovo USER\\.nuget\\packages\\blazored.localstorage\\4.5.0\\blazored.localstorage.4.5.0.nupkg.sha512",

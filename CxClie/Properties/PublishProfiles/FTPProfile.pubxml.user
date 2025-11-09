@@ -5,12 +5,12 @@
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAK1NTYgazF0CD87II9I9CnQAAAAACAAAAAAAQZgAAAAEAACAAAAAHfA+etcv7+tmQ4r0yFCMhCMCEnlerDsSA6BcLWZyR4wAAAAAOgAAAAAIAACAAAAAk+fXUpgI2pkoaq2Q0o1oN0rQMrWNw3WbYCkXRbjDfdyAAAABdPxtPyV9m8puvqFz7k8zLglhgsVydC+oc+eHulSM540AAAACt7JNRgBqQ+cKAO7RhvmHxtIfCEUUa5yseLSyL/LKmGYEDgzFp9BgiqnCAAilbKRYSd15O9M+gqel/oCkOlGpi</EncryptedPassword>
     <_PublishTargetUrl>ftp://win8227.site4now.net/</_PublishTargetUrl>
-    <History>True|2025-11-05T08:10:04.1374381Z||;True|2025-11-05T03:07:49.5098154+00:00||;True|2025-11-05T02:54:14.2251171+00:00||;True|2025-11-04T20:54:04.8329384+00:00||;True|2025-11-04T20:25:17.3328150+00:00||;True|2025-11-04T19:34:59.9829229+00:00||;False|2025-11-04T19:29:10.3840162+00:00||;True|2025-11-03T17:42:01.8916882+00:00||;True|2025-11-03T11:41:25.6616417+00:00||;False|2025-11-03T10:58:57.6112915+00:00||;</History>
+    <History>True|2025-11-05T18:14:59.6353874Z||;True|2025-11-05T08:10:04.1374381+00:00||;True|2025-11-05T03:07:49.5098154+00:00||;True|2025-11-05T02:54:14.2251171+00:00||;True|2025-11-04T20:54:04.8329384+00:00||;True|2025-11-04T20:25:17.3328150+00:00||;True|2025-11-04T19:34:59.9829229+00:00||;False|2025-11-04T19:29:10.3840162+00:00||;True|2025-11-03T17:42:01.8916882+00:00||;True|2025-11-03T11:41:25.6616417+00:00||;False|2025-11-03T10:58:57.6112915+00:00||;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
     <File Include="CxClie.staticwebassets.endpoints.json">
-      <publishTime>11/05/2025 08:08:44</publishTime>
+      <publishTime>11/05/2025 18:11:55</publishTime>
     </File>
     <File Include="e_sqlite3.a">
       <publishTime>09/02/2025 15:26:54</publishTime>
@@ -571,13 +571,13 @@
       <publishTime>11/04/2025 17:49:27</publishTime>
     </File>
     <File Include="wwwroot/_framework/blazor.boot.json">
-      <publishTime>11/05/2025 08:08:42</publishTime>
+      <publishTime>11/05/2025 18:10:48</publishTime>
     </File>
     <File Include="wwwroot/_framework/blazor.boot.json.br">
-      <publishTime>11/05/2025 08:08:42</publishTime>
+      <publishTime>11/05/2025 18:10:50</publishTime>
     </File>
     <File Include="wwwroot/_framework/blazor.boot.json.gz">
-      <publishTime>11/05/2025 08:08:42</publishTime>
+      <publishTime>11/05/2025 18:10:48</publishTime>
     </File>
     <File Include="wwwroot/_framework/blazor.webassembly.js">
       <publishTime>09/26/2025 03:00:38</publishTime>
@@ -615,6 +615,15 @@
     <File Include="wwwroot/_framework/CxClie.elkvkx6869.wasm.gz">
       <publishTime>11/04/2025 17:52:29</publishTime>
     </File>
+    <File Include="wwwroot/_framework/CxClie.fugvn85c6s.wasm">
+      <publishTime>11/05/2025 18:10:47</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/CxClie.fugvn85c6s.wasm.br">
+      <publishTime>11/05/2025 18:10:50</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/CxClie.fugvn85c6s.wasm.gz">
+      <publishTime>11/05/2025 18:10:48</publishTime>
+    </File>
     <File Include="wwwroot/_framework/CxClie.o5jpkphwl2.wasm">
       <publishTime>11/05/2025 08:08:40</publishTime>
     </File>
@@ -632,6 +641,15 @@
     </File>
     <File Include="wwwroot/_framework/CxShared.0np4749h7i.wasm.gz">
       <publishTime>11/04/2025 17:52:29</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/CxShared.3j44bdmztp.wasm">
+      <publishTime>11/05/2025 18:10:47</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/CxShared.3j44bdmztp.wasm.br">
+      <publishTime>11/05/2025 18:10:50</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/CxShared.3j44bdmztp.wasm.gz">
+      <publishTime>11/05/2025 18:10:48</publishTime>
     </File>
     <File Include="wwwroot/_framework/dotnet.js">
       <publishTime>09/25/2025 19:44:16</publishTime>
@@ -695,6 +713,15 @@
     </File>
     <File Include="wwwroot/_framework/dotnet.native.obpzfyfy1k.wasm.gz">
       <publishTime>11/04/2025 17:52:30</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/dotnet.native.whxowjk2th.wasm">
+      <publishTime>11/05/2025 18:10:45</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/dotnet.native.whxowjk2th.wasm.br">
+      <publishTime>11/05/2025 18:11:53</publishTime>
+    </File>
+    <File Include="wwwroot/_framework/dotnet.native.whxowjk2th.wasm.gz">
+      <publishTime>11/05/2025 18:10:49</publishTime>
     </File>
     <File Include="wwwroot/_framework/dotnet.runtime.drv0pr9n5o.js">
       <publishTime>09/25/2025 19:44:22</publishTime>

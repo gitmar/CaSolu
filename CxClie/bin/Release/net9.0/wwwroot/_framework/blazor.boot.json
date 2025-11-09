@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "CxClie",
   "resources": {
-    "hash": "sha256-K2woxDlfHeU4JCgPjxUQe2ef0FwztEdveokNM4Ym8BA=",
+    "hash": "sha256-OniwizCYeEuBl/DIKCo4ijzFSIBfVg7wfViKlGYbSE8=",
     "fingerprinting": {
       "BlazorBootstrap.ym6tnrklwx.wasm": "BlazorBootstrap.wasm",
       "Blazored.LocalStorage.12n6dz54qr.wasm": "Blazored.LocalStorage.wasm",
@@ -213,10 +213,10 @@
       "icudt_CJK.tjcz0u77k5.dat": "icudt_CJK.dat",
       "icudt_EFIGS.tptq2av103.dat": "icudt_EFIGS.dat",
       "icudt_no_CJK.lfu7j35m59.dat": "icudt_no_CJK.dat",
-      "CxShared.0np4749h7i.wasm": "CxShared.wasm",
-      "CxShared.0cam5cx4ku.pdb": "CxShared.pdb",
-      "CxClie.o5jpkphwl2.wasm": "CxClie.wasm",
-      "CxClie.6ta6vbk7v4.pdb": "CxClie.pdb"
+      "CxShared.3j44bdmztp.wasm": "CxShared.wasm",
+      "CxShared.aznhkwzire.pdb": "CxShared.pdb",
+      "CxClie.fugvn85c6s.wasm": "CxClie.wasm",
+      "CxClie.9g1d5chdgy.pdb": "CxClie.pdb"
     },
     "jsModuleNative": {
       "dotnet.native.l4ptthxatg.js": "sha256-ddUN4+taa/Qv7Mr8mLpunJO+0Xw3ViOqBvedhe57/hA="
@@ -438,12 +438,12 @@
       "WindowsBase.ahs9krftg4.wasm": "sha256-bgi2FHdT0ABsUP1yKQQ2AP8qfo1V/bS/4cJFE4OUHX8=",
       "mscorlib.k5iaovx9v7.wasm": "sha256-mEFLDERlY1HMNQHzh68xOPawXvI48O1fHW9PbfXugb4=",
       "netstandard.6sr1qvn64m.wasm": "sha256-Gpf+qEqCYaCB6zqI5sNPIurnfpwRtfcWksgf3CW6mHE=",
-      "CxShared.0np4749h7i.wasm": "sha256-NN7VGHw9o4f5wNvSGsKFjC5CiLk6rMDU5ky0up+JWLo=",
-      "CxClie.o5jpkphwl2.wasm": "sha256-PNUBkei7dNlBXPudOBchN7pLaCl4tMfZYYPCzaMVFhg="
+      "CxShared.3j44bdmztp.wasm": "sha256-705WKCJ4dyxTl00ywYZpmoT17pO8Xn0b73a9HzmHJCc=",
+      "CxClie.fugvn85c6s.wasm": "sha256-+bH6ORvcpfevXXVdk+c+HubEz0jOMKx739+BmyifO5E="
     },
     "pdb": {
-      "CxShared.0cam5cx4ku.pdb": "sha256-MD2asYdnyZ/uaIC7FfNFSUFNM4JWJm45dV8mmOnvsmI=",
-      "CxClie.6ta6vbk7v4.pdb": "sha256-Ogdk9Du/fdEqxZvIkEkDG6v0hYvLtioMfcGMbzJ+l8w="
+      "CxShared.aznhkwzire.pdb": "sha256-Wqjr/Nk5/5++a+9bw9dIxFxDzEj+8rkU7xQ15vO7YNE=",
+      "CxClie.9g1d5chdgy.pdb": "sha256-mW1q92WVQ5RFAyCSQVtbM47A2C5jNf82lV69WGy5/Cc="
     }
   },
   "cacheBootResources": true,
