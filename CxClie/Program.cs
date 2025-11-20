@@ -41,6 +41,6 @@ builder.Services.AddHttpClient("localClient", client =>
     client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
 });
 builder.Services.AddScoped<TblJsonRender>();
-//builder.Services.AddScoped<LinkSerialiser>();
+builder.Services.AddScoped<LinkSerialiser>();
 
 await builder.Build().RunAsync();

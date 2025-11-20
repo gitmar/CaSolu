@@ -7,156 +7,23 @@ using System.Threading.Tasks;
 
 namespace CxShared.Models
 {
-    using System.ComponentModel.DataAnnotations;
     using System.Collections.Generic;
-    using System.Text.RegularExpressions;
+    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Runtime.InteropServices;
+    using System.Text.Json.Serialization;
+    using System.Text.RegularExpressions;
+
     //IValidatableObject
-    //public class CustomerDto
-    //{
-    //    [Key]
-    //    public int Id { get; set; }
-    //    public int Cdeid {  get; set; } = 0; //replique le Id
-    //    public string Idstr { get; set; } = string.Empty;
-    //    public int Iqmax { get; set; } = 0;
-    //    public int Gdom { get; set; } = 0;
-    //    public string Nom { get; set; } = string.Empty;
-    //    public string Pnom { get; set; } = string.Empty;
-    //    public string Email { get; set; } = string.Empty;
-    //    public string Username { get; set; } = string.Empty;
-    //    public string UsernameOrEmail { get; set; } = string.Empty;
-    //    public string Password { get; set; } = string.Empty;
-    //    public string Phonenumber { get; set; } = string.Empty;
-    //    public string Phon2 { get; set; } = string.Empty;
-    //    public string Whatsapp { get; set; } = string.Empty;
-    //    public string Role { get; set; } = string.Empty;
-    //    public int Iwurl { get; set; } = 0;
-    //    public string? Weburl { get; set; }
-    //    public int Ishare { get; set; } = 0;
-    //    public int Ipays { get; set; } = 0;
-    //    public int Ilang { get; set; } = 0;
-    //    public int Eta { get; set; } = 1;
-    //    public int Et2 { get; set; } = 0;
-    //    public List<OrderDto> Orders { get; set; } = new();
-    //    public string? Obsv { get; set; }
-    //    //for UI use only
-    //    [NotMapped]
-    //    public bool EnableEmailValidation { get; set; } = false;
-    //    [NotMapped]
-    //    public bool EnablePseudoValidation { get; set; } = false;
-    //    [NotMapped]
-    //    public bool EnablePhoneValidation { get; set; } = false;
-    //    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-    //    {
-    //        if (EnableEmailValidation)
-    //        {
-    //            if (string.IsNullOrWhiteSpace(Email))
-    //            {
-    //                yield return new ValidationResult("Email is required.", new[] { nameof(Email) });
-    //            }
-    //            else if (!new EmailAddressAttribute().IsValid(Email))
-    //            {
-    //                yield return new ValidationResult("Invalid email address.", new[] { nameof(Email) });
-    //            }
-    //        }
-    //        if (EnablePseudoValidation)
-    //        {
-    //            // Username validation: Letters A-Z (either case) and digits 1-9, 7 to 15 chars, no spaces
-    //            if (!string.IsNullOrEmpty(Username))
-    //            {
-    //                var usernamePattern = @"^[A-Za-z1-9]{7,15}$";
-    //                if (!Regex.IsMatch(Username, usernamePattern))
-    //                {
-    //                    yield return new ValidationResult("Username must be 7-15 characters long and contain only letters A-Z and digits 1-9 without spaces.", new[] { nameof(Username) });
-    //                }
-    //            }
-    //        }
-    //        if (EnablePhoneValidation)
-    //        {
-    //            // Example phone number validation - customize as needed
-    //            if (!string.IsNullOrEmpty(Phonenumber))
-    //            {
-    //                var phonePattern = @"^\+?\d{7,15}$"; // allows optional + and 7-15 digits
-    //                if (!Regex.IsMatch(Phonenumber, phonePattern))
-    //                {
-    //                    yield return new ValidationResult("Phonenumber must be between 7 and 15 digits and may start with a '+'.", new[] { nameof(Phonenumber) });
-    //                }
-    //            }
-    //        }
-    //    }
-    //}
-    //public class OrderDto
-    //{
-    //    [Key]
-    //    public int Id { get; set; }  // Primary key
-    //    public int Ordid { get; set; } = 0; //replique le Id
-    //    [ForeignKey("Customer")]
-    //    public int Idclie { get; set; } = 0; // Foreign key
-    //    public string OIdstr { get; set; } = string.Empty;
-    //    public DateTime Cdate { get; set; } = DateTime.Now;
-    //    public DateTime Endate { get; set; } = new DateTime();
-    //    public string Datstr { get; set; } = string.Empty;
-    //    public int Doma { get; set; } = 0;
-    //    public int Country { get; set; } = 0;
-    //    public int Pack { get; set; } = 0;
-    //    public int Pmeth { get; set; } = 0;
-    //    public string? Raison { get; set; }
-    //    public string? Sigle { get; set; }
-    //    public int Oolne { get; set; } = 0;
-    //    //public int Wcountry { get; set; } = 0;
-    //    //public string? Weburl { get; set; }
-    //    public string? Codinvit { get; set; }
-    //    public int Step { get; set; } = 0;
-    //    public int Idorg { get; set; } = 0;
-    //    public int Olang { get; set; } = 0;
-    //    public int Stp2 { get; set; } = 0;
-    //    public DateTime Odate { get; set; } = DateTime.Now;
-    //    // Navigation back to Customer
-    //    public CustomerDto? Customer { get; set; }
-    //    public string Obsv { get; set; } = string.Empty;
-    //    //for UI use only
-    //    [NotMapped]
-    //    public string StrDate => Cdate.ToString("yyyyMMddHH");
-    //    [NotMapped]
-    //    public bool IsReg => Step >= (int)OrderStep.Registered;
-    //    [NotMapped]
-    //    public bool IsSet => Step >= (int)OrderStep.Set;
-    //    [NotMapped]
-    //    public bool IsArc => Step >= (int)OrderStep.Archived;
-    //}
-    ////UI set collections
-    //public class CatgpDto
-    //{
-    //    public int Id { get; set; } = 0;
-    //    public string Gplabel { get; set; } = string.Empty; // e.g., "Langues", "Sites", etc.
-    //    public string Abg {  get; set; } = string.Empty;
-    //    // A collection navigation property
-    //    public ICollection<CatitemDto> Catitems { get; set; } = new List<CatitemDto>();
-    //}
-
-    //public class CatitemDto
-    //{
-    //    [Key]
-    //    public int Id { get; set; } = 0;
-    //    [ForeignKey("Catgp")]
-    //    public int Idgp { get; set; } = 0;
-    //    public int Elea { get; set; } = 0;
-    //    public string Liba { get; set; } = string.Empty;
-    //    public string Abg { get; set; } = string.Empty;
-    //    // A reference navigation property
-    //    public CatgpDto Catgp { get; set; } = new();
-    //}
-
     
     public class Customer
     {
         [Key]
         public int Id { get; set; }
-
         public int Cdeid { get; set; } = 0;
         public string Idstr { get; set; } = string.Empty;
         public int Iqmax { get; set; } = 0;
+        public int Idorg { get; set; } = 0;
         public int Gdom { get; set; } = 0;
         public string Nom { get; set; } = string.Empty;
         public string Pnom { get; set; } = string.Empty;
@@ -171,16 +38,35 @@ namespace CxShared.Models
         public int Iwurl { get; set; } = 0;
         public string? Weburl { get; set; }
         public int Ishare { get; set; } = 0;
+        public int Doma { get; set; } = 0;
+        public int Country { get; set; } = 0;
+        public int Pack { get; set; } = 0;
+        public int Pmeth { get; set; } = 0;
+        public string? Raison { get; set; }
+        public string? Sigle { get; set; }
         public int Ipays { get; set; } = 0;
         public int Ilang { get; set; } = 0;
         public int Eta { get; set; } = 1;
         public int Et2 { get; set; } = 0;
+        //public string? Codinvit { get; set; }
+        public string? HlpEmail { get; set; } //support email
+        public string? HlpWurl { get; set; }  //support siteweb
+        public string? HlpPhone { get; set; } //support phone
+        public string? HlpPhon2 { get; set; } //support phon2
+        public string? HlpSrole { get; set; } //support Srole
+        public string? HlpUname { get; set; } //support username
         public string? Obsv { get; set; }
 
-        // Navigation
-        public List<Order> Orders { get; set; } = new();
+        //// Navigation
+        //public List<Order> Orders { get; set; } = new();
 
         // UI flags
+        [NotMapped] public bool IsDraft => Eta >= (int)CustState.Draft;
+        [NotMapped] public bool IsReg => Eta >= (int)CustState.Registered;
+        [NotMapped] public bool IsSet => Eta >= (int)CustState.Set;
+        [NotMapped] public bool IsNotif => Eta >= (int)CustState.Notified;
+        [NotMapped] public bool IsArc => Eta >= (int)CustState.Archived;
+        [NotMapped] public bool IsDel => Eta >= (int)CustState.Deleted;
         [NotMapped] public bool EnableEmailValidation { get; set; } = false;
         [NotMapped] public bool EnablePseudoValidation { get; set; } = false;
         [NotMapped] public bool EnablePhoneValidation { get; set; } = false;
@@ -215,37 +101,37 @@ namespace CxShared.Models
     {
         [Key]
         public int Id { get; set; }
-
         public int Ordid { get; set; } = 0;
         public int Idclie { get; set; } = 0;
-
         [ForeignKey(nameof(Idclie))]
         public Customer? Customer { get; set; }
-
+        public int Orang { get; set; } = 0;
         public string OIdstr { get; set; } = string.Empty;
         public DateTime Cdate { get; set; } = DateTime.Now;
         public DateTime Endate { get; set; } = new DateTime();
         public string Datstr { get; set; } = string.Empty;
-        public int Doma { get; set; } = 0;
-        public int Country { get; set; } = 0;
-        public int Pack { get; set; } = 0;
-        public int Pmeth { get; set; } = 0;
-        public string? Raison { get; set; }
-        public string? Sigle { get; set; }
-        public int Oolne { get; set; } = 0;
-        public string? Codinvit { get; set; }
+        public int Opack { get; set; } = 0;
+        public int Opmeth { get; set; } = 0;
         public int Step { get; set; } = 0;
-        public int Idorg { get; set; } = 0;
+        public int Oidorg { get; set; } = 0;
         public int Olang { get; set; } = 0;
         public int Stp2 { get; set; } = 0;
+        public string? OCdinvit { get; set; }
         public DateTime Odate { get; set; } = DateTime.Now;
         public string Obsv { get; set; } = string.Empty;
 
         // UI flags
+        [NotMapped]
+        public string FullName => $"{Customer?.Nom} - {Customer?.Pnom}";
+        [NotMapped]
+        public string Weburl => $"{Customer?.Weburl}";
         [NotMapped] public string StrDate => Cdate.ToString("yyyyMMddHH");
-        [NotMapped] public bool IsReg => Step >= (int)OrderStep.Registered;
-        [NotMapped] public bool IsSet => Step >= (int)OrderStep.Set;
-        [NotMapped] public bool IsArc => Step >= (int)OrderStep.Archived;
+        [NotMapped] public bool IsDraft => Step >= (int)OrderState.Draft;
+        [NotMapped] public bool IsReg => Step >= (int)OrderState.Registered;
+        [NotMapped] public bool IsSet => Step >= (int)OrderState.Set;
+        [NotMapped] public bool IsNotif => Step >= (int)OrderState.Notified;
+        [NotMapped] public bool IsArc => Step >= (int)OrderState.Archived;
+        [NotMapped] public bool IsDel => Step >= (int)OrderState.Deleted;
     }
     public class CatgpDto
     {
@@ -265,16 +151,27 @@ namespace CxShared.Models
 
         [ForeignKey(nameof(Idgp))]
         public CatgpDto Catgp { get; set; } = new();
-
         public int Elea { get; set; } = 0;
         public string Liba { get; set; } = string.Empty;
         public string Abg { get; set; } = string.Empty;
     }
-    public enum OrderStep
-    {
+    
+    public enum OrderState
+    { //Step
         Draft = 0,
         Registered = 2,
-        Set = 5,
-        Archived = 9
+        Set = 3,
+        Notified = 5,
+        Archived = 7,
+        Deleted = 9
+    }
+    public enum CustState
+    { //Step
+        Draft = 0,
+        Registered = 2,
+        Set = 3,
+        Notified = 5,
+        Archived = 7,
+        Deleted = 9
     }
 }

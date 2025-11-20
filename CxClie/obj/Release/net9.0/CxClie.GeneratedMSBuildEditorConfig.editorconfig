@@ -24,44 +24,40 @@ build_property._RazorSourceGeneratorDebug =
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/AACurDEV/CaSolu/CxClie/Admin/AdInvite.razor]
-build_metadata.AdditionalFiles.TargetPath = QWRtaW5cQWRJbnZpdGUucmF6b3I=
+[C:/AACurDEV/CaSolu/CxClie/Admin/HelpRegister.razor]
+build_metadata.AdditionalFiles.TargetPath = QWRtaW5cSGVscFJlZ2lzdGVyLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/AACurDEV/CaSolu/CxClie/Admin/OrderFlow.razor]
-build_metadata.AdditionalFiles.TargetPath = QWRtaW5cT3JkZXJGbG93LnJhem9y
+[C:/AACurDEV/CaSolu/CxClie/Admin/HomeSetup.razor]
+build_metadata.AdditionalFiles.TargetPath = QWRtaW5cSG9tZVNldHVwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/AACurDEV/CaSolu/CxClie/Admin/OrgForm.razor]
-build_metadata.AdditionalFiles.TargetPath = QWRtaW5cT3JnRm9ybS5yYXpvcg==
+[C:/AACurDEV/CaSolu/CxClie/Admin/HomForm.razor]
+build_metadata.AdditionalFiles.TargetPath = QWRtaW5cSG9tRm9ybS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/AACurDEV/CaSolu/CxClie/Admin/SOrgas.razor]
-build_metadata.AdditionalFiles.TargetPath = QWRtaW5cU09yZ2FzLnJhem9y
+[C:/AACurDEV/CaSolu/CxClie/Admin/SitesFlow.razor]
+build_metadata.AdditionalFiles.TargetPath = QWRtaW5cU2l0ZXNGbG93LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/AACurDEV/CaSolu/CxClie/App.razor]
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/AACurDEV/CaSolu/CxClie/Customer/BackRegister.razor]
-build_metadata.AdditionalFiles.TargetPath = Q3VzdG9tZXJcQmFja1JlZ2lzdGVyLnJhem9y
+[C:/AACurDEV/CaSolu/CxClie/Client/OrgaCreate.razor]
+build_metadata.AdditionalFiles.TargetPath = Q2xpZW50XE9yZ2FDcmVhdGUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/AACurDEV/CaSolu/CxClie/Customer/BackSetup.razor]
-build_metadata.AdditionalFiles.TargetPath = Q3VzdG9tZXJcQmFja1NldHVwLnJhem9y
+[C:/AACurDEV/CaSolu/CxClie/Client/OrgaEdit.razor]
+build_metadata.AdditionalFiles.TargetPath = Q2xpZW50XE9yZ2FFZGl0LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/AACurDEV/CaSolu/CxClie/Customer/CustRegister.razor]
-build_metadata.AdditionalFiles.TargetPath = Q3VzdG9tZXJcQ3VzdFJlZ2lzdGVyLnJhem9y
+[C:/AACurDEV/CaSolu/CxClie/Client/RegFallBack.razor]
+build_metadata.AdditionalFiles.TargetPath = Q2xpZW50XFJlZ0ZhbGxCYWNrLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/AACurDEV/CaSolu/CxClie/Customer/OrgSetup.razor]
-build_metadata.AdditionalFiles.TargetPath = Q3VzdG9tZXJcT3JnU2V0dXAucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/AACurDEV/CaSolu/CxClie/Customer/RegFallBack.razor]
-build_metadata.AdditionalFiles.TargetPath = Q3VzdG9tZXJcUmVnRmFsbEJhY2sucmF6b3I=
+[C:/AACurDEV/CaSolu/CxClie/Order/OrderCreate.razor]
+build_metadata.AdditionalFiles.TargetPath = T3JkZXJcT3JkZXJDcmVhdGUucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/AACurDEV/CaSolu/CxClie/Pages/Counter.razor]

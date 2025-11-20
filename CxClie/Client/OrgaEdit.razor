@@ -1,0 +1,492 @@
+﻿@page "/orgaedit"
+
+@using System
+@using System.ComponentModel.DataAnnotations
+@using System.Reflection
+@using System.Text
+@using System.Text.Json
+@using CxClie.Services
+@using CxShared.Models
+@using CxShared.Helpers
+@using CxShared.Others
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.WebUtilities
+@using SQLitePCL
+
+@inject IHttpClientFactory _httpFactorer
+@inject NavigationManager _navmanager
+@inject TblJsonRender _tableService
+@inject IJSRuntime _jsRun
+
+<PageTitle>OrgaEdit</PageTitle>
+
+@if (yaerrors)
+{
+    foreach (var error in errorList)
+    {
+        <div class="alert alert-danger">@error</div>
+    }
+}
+@if (isLoading)
+{
+    <Progress class="progress mb-3">
+        <ProgressBar Width="30" Label="Creation Institution Loading..." Type="ProgressType.StripedAndAnimated" Color="ProgressColor.Primary" />
+    </Progress>
+}
+@if (ordEdContext == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <EditForm EditContext="@ordEdContext">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <div class="row mb-2">
+            <div class="col-2">
+                @if (!inOrdEditing)
+                {
+                    <button class="btn btn-primary btn-sm" @onclick="() => OpenEditOrder()">
+                        ➕ Update
+                    </button>
+                }
+                @if (inOrdEditing)
+                {
+                    <button class="btn btn-secondary btn-sm" @onclick="() => CancelEditOrder()">
+                        ❎ Annuler
+                    </button>
+                }
+            </div>
+            @if (_inOrder != null)
+            {
+                <div class="col-2">
+                    <span style="font-weight: bold;">@_inOrder.OIdstr</span>
+                </div>
+            }
+        </div>
+        <div class="container container-fluid">
+            <div class="row mb-2">
+                <div class="col-2">
+                    <label for="ienvi">Environnemt:</label>
+                </div>
+                <div class="col-3">
+                    <span class="@(inOrdEditing ? "" : "formedt-disabled")">
+                        @if (_myCatal.Enviros.Any())
+                        {
+                            <InputSelect id="ienvi" @bind-Value="_inOrder.Customer.Ishare" class="form-select">
+                                @foreach (var utp in _myCatal.Enviros)
+                                {
+                                    <option value="@utp.Elea">@utp.Liba</option>
+                                }
+                            </InputSelect>
+                        }
+                        else
+                        {
+                            <p>loading...</p>
+                        }
+                    </span>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <span class="@(inOrdEditing ? "" : "formedt-disabled")">
+                    @if (_inOrder.Customer.Ishare == 1)
+                    {  //online
+                       <div class="row mb-2">
+                           <div class="col-2">
+                               <label for="toweb">website:</label>
+                           </div>
+                           <div class="col-5 text-left">
+                                @if (_myCatal.Sites.Any())
+                                {
+                                    <InputSelect id="ppays" @bind-Value="_inOrder.Customer.Iwurl" class="form-select">
+                                        @foreach (var utp in _myCatal.Sites)
+                                        {
+                                            <option value="@utp.Elea">@utp.Abg @utp.Liba</option>
+                                        }
+                                    </InputSelect>
+                                }
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="row mb-2">
+                            <div class="col-2">
+                                <label for="idweb">website:</label>
+                            </div>
+                            <div class="col-5">
+                                <InputText id="idweb" required @bind-Value="_inOrder.Customer.Weburl" class="form-control" />
+                            </div>
+                        </div>
+                    }
+                </span>
+            </div>
+            <div class="row mb-2">
+                <div class="col-2">
+                    <label for="todom">domaine:</label>
+                </div>
+                <div class="col-3 text-left">
+                    @if (_myCatal.Domas.Any())
+                    {
+                        <InputSelect id="ppays" @bind-Value="_inOrder.Customer.Doma" class="form-select">
+                            @foreach (var utp in _myCatal.Domas)
+                            {
+                                <option value="@utp.Elea" @onclick="() => GetSliba(utp.Elea)">@utp.Liba</option>
+                            }
+                        </InputSelect>
+                        <label class="bg-info bg-opacity-10" id="Tosliba">@Scible</label>
+                    }
+                    else
+                    {
+                        <p>loading...</p>
+                    }
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-2">
+                    <label for="gdo">avec:</label>
+                </div>
+                <div class="col-3">
+                    <InputSelect id="gdo" @bind-Value="_inOrder.Customer.Gdom" class="form-select">
+                        @foreach (var utp in _myCatal.Gdoms)
+                        {
+                            <option value="@utp.Elea">@utp.Liba</option>
+                        }
+                    </InputSelect>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2"></div>
+                <div class="col-5">
+                    <label>(Qte maximale de sites)</label>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-2">
+                    <label for="iqte">Qte:</label>
+                </div>
+                <div class="col-2">
+                    <InputNumber id="iqte" required @bind-Value="_inOrder.Customer.Iqmax" class="form-control" />
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-2">
+                    <label for="raison">Raison:</label>
+                </div>
+                <div class="col-5">
+                    <InputText id="raison" required @bind-Value="_inOrder.Customer.Raison" class="form-control" />
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-2">
+                    <label for="sigle">Sigle:</label>
+                </div>
+                <div class="col-3">
+                    <InputText id="sigle" required @bind-Value="_inOrder.Customer.Sigle" class="form-control" />
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-2">
+                    <label for="email">Email:</label>
+                </div>
+                <div class="col-4">
+                    <InputText id="omail" required @bind-Value="_inOrder.Customer.Email" class="form-control" />
+                    <ValidationMessage For="@(() => _inOrder.Customer.Email)" />
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-2">
+                    <label for="Phone">No Phone:</label>
+                </div>
+                <div class="col-3">
+                    <InputText id="phone" required @bind-Value="_inOrder.Customer.Phonenumber" placeholder="phonenumber" class="form-control" />
+                    <ValidationMessage For="@(() => _inOrder.Customer.Phonenumber)" />
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-2">
+                    <label for="Srole">Role:</label>
+                </div>
+                <div class="col-3">
+                    <label class="bg-danger bg-opacity-10" id="Toqsrole">@_inOrder.Customer.Role</label>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-2">
+                    <label for="onom">Nom:</label>
+                </div>
+                <div class="col-3">
+                    <InputText id="onom" required @bind-Value="_inOrder.Customer.Nom" class="form-control" />
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-2">
+                    <label for="opnoms">Prenom(s):</label>
+                </div>
+                <div class="col-3">
+                    <InputText id="opnoms" required @bind-Value="_inOrder.Customer.Pnom" class="form-control" />
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-2">
+                    <label for="ppays">Pays:</label>
+                </div>
+                <div class="col-3">
+                    @if (_myCatal.Countries.Any())
+                    {
+                        <InputSelect id="ppays" @bind-Value="_inOrder.Customer.Ipays" class="form-select">
+                            @foreach (var utp in _myCatal.Countries)
+                            {
+                                <option value="@utp.Elea">@utp.Liba</option>
+                            }
+                        </InputSelect>
+                    }
+                    else
+                    {
+                        <p>loading...</p>
+                    }
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-2">
+                    <label for="plang">Langue:</label>
+                </div>
+                <div class="col-2">
+                    @if (_myCatal.Langues.Any())
+                    {
+                        <InputSelect id="plang" @bind-Value="_inOrder.Customer.Ilang" class="form-select">
+                            @foreach (var utp in _myCatal.Langues)
+                            {
+                                <option value="@utp.Elea">@utp.Liba</option>
+                            }
+                        </InputSelect>
+                    }
+                    else
+                    {
+                        <p>loading...</p>
+                    }
+                </div>
+            </div>
+        </div>
+        @if (inOrdEditing)
+        {
+            <div class="btn btn-group mt-3">
+                <button class="btn btn-success" @onclick="() => SaveToDatabase()">SaveModif</button>
+            </div>
+        }
+    </EditForm>
+}
+
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+    [Parameter]
+    public Customer _inCustomer { get; set; }
+    [Parameter]
+    public Order _inOrder { get; set; }
+    [Parameter]
+    public Gxdom _inGxdom { get; set; }
+    [Parameter]
+    public TableSet _inCatal { get; set; }
+
+    private bool isLoading = false, yaerrors = false;
+    private string successmsg = "", Imessage = "", Scible = "";
+    private List<string> errorList = new();
+
+    private Customer _curCustomer = new();
+    private Order _curOrder = new();
+    
+    private EditContext ordEdContext;
+  
+    private HttpClient _apiClient;
+    private HttpClient _locClient;
+    private TableSet? _myCatal = new();
+
+    private bool inOrdEditing = false;
+    private bool isSaved = false;
+    private bool isFormValid = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        isLoading = true;
+        yaerrors = false; errorList.Clear(); successmsg = "";
+        _apiClient = _httpFactorer.CreateClient("wApiClient");
+        _locClient = _httpFactorer.CreateClient("simpleApiClient");
+        try
+        {
+            _myCatal = await _tableService.rendTables();
+        }
+        catch (Exception ex)
+        {
+            Imessage = "probleme des options";
+        }
+        Console.WriteLine($"nb. pays : {_myCatal.Countries.Count()}");
+    }
+    protected override async Task OnParametersSetAsync()
+    {
+        ordEdContext = new EditContext(_inOrder);
+        ordEdContext.OnFieldChanged += HandleFieldChanged;
+        yaerrors = false; isLoading = false;
+        Console.WriteLine("EST PASSE");
+    }   
+
+    //CRUD Customer
+    private async Task OpenEditOrder()
+    {
+        //NextOrgId = NextOrgId + 1; //ajoute forcement un order et qte max
+        //_invModel.Idorg = NextOrgId;
+        Imessage = "";
+        inOrdEditing = true;
+    }
+    private async Task CancelEditOrder()
+    {
+        //NextOrgId = NextOrgId + 1; //ajoute forcement un order et qte max
+        //_invModel.Idorg = NextOrgId;
+        Imessage = "";
+        inOrdEditing = true;
+    }
+    private async Task SaveToDatabase()
+    {
+        isSaved = false;
+        isLoading = true;
+        int it1 = 0;
+        try
+        {
+            bool yaError = false;
+            string strmess = "";
+            bool IsVerified = false;
+            IsVerified = await VerifInputs(); //reverification
+            if (!IsVerified)
+            {
+                Imessage = Imessage + "Echec Generation : des issues persistent..." + Imessage;
+                Console.WriteLine($"message : {Imessage}");
+                StateHasChanged();
+                return;
+            }
+            var myregios = _myCatal.Sites.Where(uc => uc.Elea == _inOrder.Customer.Iwurl).FirstOrDefault();
+            if (myregios == null)
+            {
+                strmess = "Region absente";
+                yaError = true;
+            }
+            if (yaError)
+            {
+                if (!string.IsNullOrEmpty(strmess)) Imessage = strmess;
+                isLoading = false;
+                return;
+            }
+            //customer
+            // Await the async call to get the Custormer Id
+            var respcust = await _apiClient.PostAsJsonAsync<Customer>("customers/crecustomer", _curCustomer);
+            var savedCustomer = await respcust.Content.ReadFromJsonAsync<Customer>();
+            //Maj de la liste customers pour UI
+            //order
+            // Now safe to post order
+        
+            //await VaGenererLink();
+            //savedOrder.OCdinvit = generatedLink;
+            //Console.WriteLine($"Link : {savedOrder.OCdinvit}");
+            var response = await _apiClient.PutAsJsonAsync($"orders/{_inOrder.Id}", _inOrder);
+            if (response.IsSuccessStatusCode)
+            {
+                Console.WriteLine("✅ Order updated successfully!");
+            }
+            else
+            {
+                var error = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"❌ Update failed ({response.StatusCode}): {error}");
+            }
+            //await ChargeInitiales();
+        }
+        catch (Exception ex)
+        {
+            // Handle or log error
+            Imessage = $"Probleme sur enregistrement : {ex.Message} et {it1}";
+        }
+        isLoading = false;
+    }
+    private void HandleFieldChanged(object sender, FieldChangedEventArgs e)
+    {
+        if (!inOrdEditing) inOrdEditing = true;
+        Console.WriteLine($"Field edited: {e.FieldIdentifier.FieldName}");
+        // Place your logic here when a field is edited
+    }
+    private async Task<bool> VerifInputs()
+    {
+        Imessage = "";
+        isFormValid = false;
+        yaerrors = false; isLoading = true;
+        errorList.Clear();
+        if (_inOrder.Customer.Iwurl == 0)
+        {
+            yaerrors = true;
+            errorList.Add("website obligatoire.");
+        }
+        if (_inOrder.Customer.Doma == 0)
+        {
+            yaerrors = true;
+            errorList.Add("package obligatoire.");
+        }
+        if (_inOrder.Customer.Iqmax == 0 || _inOrder.Customer.Iqmax > 25)
+        {
+            yaerrors = true;
+            errorList.Add("Qte comprise entre 1 et 25.");
+        }
+        if (_inOrder.Customer.Raison.Length < 7 || string.IsNullOrEmpty(_inOrder.Customer.Raison))
+        {
+            yaerrors = true;
+            errorList.Add("Longueur de raison inferieure a 7.");
+        }
+        if (_inOrder.Customer.Sigle.Length < 5 || string.IsNullOrEmpty(_inOrder.Customer.Sigle))
+        {
+            yaerrors = true;
+            errorList.Add("Longueur de sigle inferieure a 5.");
+        }
+        //Username-PhoneNumber-Email-Password-ConfirmPassword (automatic)
+        if (string.IsNullOrEmpty(_inOrder.Customer.Phonenumber))
+        {
+            yaerrors = true;
+            errorList.Add("Phonenumber > 3");
+        }
+        if (_inOrder.Customer.Nom.Length < 5 || string.IsNullOrEmpty(_inOrder.Customer.Nom))
+        {
+            yaerrors = true;
+            errorList.Add("Longueur de Nom inferieure a 5.");
+        }
+        if (_inOrder.Customer.Pnom.Length < 4 || string.IsNullOrEmpty(_inOrder.Customer.Pnom))
+        {
+            yaerrors = true;
+            errorList.Add("Longueur de Pnom inferieure a 4.");
+        }
+        if (_inOrder.Customer.Ipays == 0)
+        {
+            yaerrors = true;
+            errorList.Add("Pays obligatoire.");
+        }
+        if (_inOrder.Customer.Ilang == 0)
+        {
+            yaerrors = true;
+            errorList.Add("Langue obligatoire.");
+        }
+        if (!yaerrors) isFormValid = true;
+        foreach (var era in errorList)
+        {
+            Imessage = Imessage + era;
+        }
+        return isFormValid;
+    }
+    private void GetSliba(int idoma)
+    {
+        var mydoma = _myCatal.Domas.FirstOrDefault(dm => dm.Elea == idoma);
+        if (mydoma != null)
+        {
+            Scible = mydoma.Sliba;
+        }
+        else
+        {
+            Scible = "";
+        }
+    }
+}

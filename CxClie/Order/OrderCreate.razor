@@ -1,0 +1,1396 @@
+﻿@page "/ordercreate"
+@using System.ComponentModel.DataAnnotations
+@using System.Dynamic
+@using System.Text
+@using System.Text.RegularExpressions;
+@using BlazorBootstrap
+@using CxClie.Admin
+@using CxClie.Client
+@using CxClie.Services
+@using CxShared.Models
+@using CxShared.Others
+@using CxShared.Helpers
+@using Microsoft.AspNetCore.WebUtilities
+@using Newtonsoft.Json
+@using SQLitePCL
+
+@inject IHttpClientFactory _httpFactorer
+@inject NavigationManager _navmanager
+@inject TblJsonRender _tableService
+@inject IJSRuntime _jsRun
+
+<PageTitle>OrderCreate</PageTitle>
+
+<h2 class="mb-3 text-primary">SUPPORT : Saisie Commande</h2>
+
+@if (yaerrors)
+{
+    <div>yaerrors</div>
+    @foreach (var error in errorList)
+    {
+        <div class="alert alert-danger">@error</div>
+    }
+}
+<div class="row mb-2">
+    <label style="font-weight: bold; color: red; background-color: yellow;"> @Imessage</label>
+ </div>
+<Tabs Id="tab-contenu">
+    <Tab Title="Commandes">
+        <Content>
+                @if (invEdContext == null)
+                {
+                    <p>Loading...</p>
+                }
+                else
+                {
+                    <EditForm EditContext="@invEdContext">
+                        <DataAnnotationsValidator />
+                        <ValidationSummary />
+                    <div class="row mb-2">
+                        <div class="col-2">
+                        @if (!inCustAding)
+                        {
+                            <button class="btn btn-primary btn-sm" @onclick="() => OpenAddCust()">
+                                ➕ Add
+                            </button>
+                        }
+                        @if (inCustAding)
+                        {
+                            <button class="btn btn-secondary btn-sm" @onclick="() => CancelAddCust()">
+                                ❎ Annuler
+                            </button>
+                        }
+                        </div>
+                        @if (_curOrder != null)
+                        {
+                            <div class="col-2">
+                                <span style="font-weight: bold;">@_curOrder.OIdstr</span>
+                            </div>
+                        }
+                    </div>
+                    <div class="container container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-2">
+                                <label for="ienvi">Environnemt:</label>
+                            </div>
+                            <div class="col-3">
+                                <span class="@(inCustAding ? "" : "formedt-disabled")">
+                                @if (_myCatal.Enviros.Any())
+                                {
+                                    <InputSelect id="ienvi" @bind-Value="_invModel.Ishare" class="form-select">
+                                        @foreach (var utp in _myCatal.Enviros)
+                                        {
+                                            <option value="@utp.Elea">@utp.Liba</option>
+                                        }
+                                    </InputSelect>
+                                }
+                                else
+                                {
+                                    <p>loading...</p>
+                                }
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <span class="@(inCustAding ? "" : "formedt-disabled")">
+                                @if (_invModel.Ishare == 1)
+                                {  //online
+                                   <div class="row mb-2">
+                                       <div class="col-2">
+                                           <label for="toweb">website:</label>
+                                       </div>
+                                       <div class="col-5 text-left">
+                                            @if (_myCatal.Sites.Any())
+                                            {
+                                                <InputSelect id="ppays" @bind-Value="_invModel.Iwurl" class="form-select">
+                                                    @foreach (var utp in _myCatal.Sites)
+                                                    {
+                                                        <option value="@utp.Elea">@utp.Abg @utp.Liba</option>
+                                                    }
+                                                </InputSelect>
+                                            }
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="row mb-2">
+                                        <div class="col-2">
+                                            <label for="idweb">website:</label>
+                                        </div>
+                                        <div class="col-5">
+                                            <InputText id="idweb" required @bind-Value="_invModel.Weburl" class="form-control" />
+                                        </div>
+                                    </div>
+                                }
+                            </span>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-2">
+                                <label for="todom">domaine:</label>
+                            </div>
+                            <div class="col-3 text-left">
+                                @if (_myCatal.Domas.Any())
+                                {
+                                    <InputSelect id="ppays" @bind-Value="_invModel.Idoma" class="form-select">
+                                        @foreach (var utp in _myCatal.Domas)
+                                        {
+                                            <option value="@utp.Elea" @onclick="() => GetSliba(utp.Elea)">@utp.Liba</option>
+                                        }
+                                    </InputSelect>
+                                    <label class="bg-info bg-opacity-10" id="Tosliba">@Scible</label>
+                                }
+                                else
+                                {
+                                    <p>loading...</p>
+                                }
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-2">
+                                <label for="gdo">avec:</label>
+                            </div>
+                            <div class="col-3">
+                                <InputSelect id="gdo" @bind-Value="_invModel.Gdom" class="form-select">
+                                    @foreach (var utp in _myCatal.Gdoms)
+                                    {
+                                        <option value="@utp.Elea">@utp.Liba</option>
+                                    }
+                                </InputSelect>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2"></div>
+                            <div class="col-5">
+                                <label>(Qte maximale de sites)</label>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-2">
+                                <label for="iqte">Qte:</label>
+                            </div>
+                            <div class="col-2">
+                                <InputNumber id="iqte" required @bind-Value="_invModel.Iqmax" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-2">
+                                <label for="raison">Raison:</label>
+                            </div>
+                            <div class="col-5">
+                                <InputText id="raison" required @bind-Value="_invModel.Raison" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-2">
+                                <label for="sigle">Sigle:</label>
+                            </div>
+                            <div class="col-3">
+                                <InputText id="sigle" required @bind-Value="_invModel.Sigle" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-2">
+                                <label for="email">Email:</label>
+                            </div>
+                            <div class="col-4">
+                                <InputText id="omail" required @bind-Value="_invModel.Email" class="form-control" />
+                                <ValidationMessage For="@(() => _invModel.Email)" />
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-2">
+                                <label for="Phone">No Phone:</label>
+                            </div>
+                            <div class="col-3">
+                                <InputText id="phone" required @bind-Value="_invModel.Phonenumber" placeholder="phonenumber" class="form-control" />
+                                <ValidationMessage For="@(() => _invModel.Phonenumber)" />
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-2">
+                                <label for="Srole">Role:</label>
+                            </div>
+                            <div class="col-3">
+                                <label class="bg-danger bg-opacity-10" id="Toqsrole">@_invModel.Srole</label>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-2">
+                                <label for="onom">Nom:</label>
+                            </div>
+                            <div class="col-3">
+                                <InputText id="onom" required @bind-Value="_invModel.Nom" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-2">
+                                <label for="opnoms">Prenom(s):</label>
+                            </div>
+                            <div class="col-3">
+                                <InputText id="opnoms" required @bind-Value="_invModel.Pnom" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-2">
+                                <label for="ppays">Pays:</label>
+                            </div>
+                            <div class="col-3">
+                                @if (_myCatal.Countries.Any())
+                                {
+                                    <InputSelect id="ppays" @bind-Value="_invModel.Ipays" class="form-select">
+                                        @foreach (var utp in _myCatal.Countries)
+                                        {
+                                            <option value="@utp.Elea">@utp.Liba</option>
+                                        }
+                                    </InputSelect>
+                                }
+                                else
+                                {
+                                    <p>loading...</p>
+                                }
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col-2">
+                                <label for="plang">Langue:</label>
+                            </div>
+                            <div class="col-2">
+                                @if (_myCatal.Langues.Any())
+                                {
+                                    <InputSelect id="plang" @bind-Value="_invModel.Ilang" class="form-select">
+                                        @foreach (var utp in _myCatal.Langues)
+                                        {
+                                            <option value="@utp.Elea">@utp.Liba</option>
+                                        }
+                                    </InputSelect>
+                                }
+                                else
+                                {
+                                    <p>loading...</p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                        @if (IsInvEditing)
+                    {
+                        @if (!IsGenerated)
+                        {
+                            <div class="btn btn-group mt-3">
+                                <button class="btn btn-success" @onclick="SaveAllToDatabase">SaveToDatabase</button>
+                            </div>
+                        }
+                        @* @if (isSaved && !IsGenerated)
+                        {
+                            <button class="btn btn-primary btn-sms" @onclick="VaGenererLink">
+                                Generate Invite Link
+                            </button>
+                        } *@
+                    }
+                        @if (IsGenerated && isSaved)
+                    {
+                        <div class="mt-3">
+                            <button class="btn btn-outline-secondary ms-2" type="button" @onclick="CopyToClipboard" disabled="@string.IsNullOrWhiteSpace(generatedLink)">
+                                Copy
+                            </button>
+                            @* <button class="btn btn-success ms-2" type="button" @onclick="() => CmdCustSendEmail(_curCustomer)" disabled="@string.IsNullOrWhiteSpace(generatedLink)">
+                                Send Email
+                            </button> *@
+                            @* <button class="btn btn-outline-dark" @onclick="DownloadQrCode">
+                                Download QR Code
+                            </button> *@
+                        </div>
+                    }
+                    </EditForm>
+                }
+                @if (IsGenerated)
+                {
+                <div class="form-group">
+                    <div class="alert alert-success mt-3">
+                        <strong>Generated Link:</strong>
+                        <div class="text-break">@generatedLink</div>
+                    </div>
+                    
+                </div>
+                }
+        </Content>
+    </Tab>
+    <Tab Title="Suivi">
+        <Content>
+             <Grid TItem="Order"
+                    Data="LsOrders.Where(ud => ud.Step < 7).ToList()"
+                    AllowPaging="true"
+                    AllowDetailView="true"
+                    AllowRowClick="true"
+                    OnRowClick="@OnOrdRowClick"
+                    Responsive="true">
+                    <GridColumns>
+                        <GridColumn TItem="Order" HeaderText="Ref.">
+                            <ChildContent Context="item">
+                                <div @key="item.Id">@item.OIdstr</div>
+                            </ChildContent>
+                        </GridColumn>
+                    <GridColumn TItem="Order" HeaderText="Nom-Pnom(s)">
+                        <ChildContent Context="item">
+                            <label>@item?.FullName</label>
+                        </ChildContent>
+                    </GridColumn>
+                    <GridColumn TItem="Order" HeaderText="Siteweb">
+                        <ChildContent Context="item">
+                            <label>@item?.Weburl</label>
+                        </ChildContent>
+                    </GridColumn>
+                    <GridColumn TItem="Order" HeaderText="Eta">
+                        <ChildContent Context="item">
+                            <label>@item?.Step</label>
+                        </ChildContent>
+                    </GridColumn>
+                    <GridColumn TItem="Order" HeaderText="actions">
+                        <ChildContent Context="ito">
+                            <button class="btn btn-sm btn-secondary" @onclick="() => ShowEdtOrga(ito)">
+                                ✏️ Edit
+                            </button>
+                            @* <button class="btn btn-sm btn-secondary" @onclick="() => DeleteOrder(ito, 2)">
+                                🗑️ Suppr.
+                            </button> *@
+                        </ChildContent>
+                    </GridColumn>
+                </GridColumns>
+                <GridDetailView TItem="Order" Context="parent">
+                    <Grid TItem="Order" 
+                        Data="@LsOrders"
+                        Responsive="true">
+                        <GridColumns>
+                            <GridColumn TItem="Order" HeaderText="register">
+                                <ChildContent Context="ito">
+                                    <button class="btn btn-sm btn-secondary" @onclick="() => ShowSetSupport(ito)">
+                                        ✏️ Register
+                                        @if (ito.IsReg)
+                                        {
+                                            <span>(x)</span>
+                                        }
+                                    </button>
+                                </ChildContent>
+                            </GridColumn>
+                            <GridColumn TItem="Order" HeaderText="install">
+                                <ChildContent Context="ito">
+                                    <button class="btn btn-sm btn-secondary" @onclick="() => ShowSetOrga(ito)">
+                                        💾 Installer
+                                        @if (ito.IsSet)
+                                        {
+                                            <span>(x)</span>
+                                        }
+                                    </button>
+                                </ChildContent>
+                            </GridColumn>
+                            <GridColumn TItem="Order" HeaderText="notifier">
+                                <ChildContent Context="ito">
+                                    <button class="btn btn-sm btn-primary" @onclick="() => CmdCustSendEmail(ito)">
+                                        📤 Notifier
+                                        @if (ito.IsNotif)
+                                        {
+                                            <span>(x)</span>
+                                        }
+                                    </button>
+                                </ChildContent>
+                            </GridColumn>
+                            <GridColumn TItem="Order" HeaderText="archiver">
+                                <ChildContent Context="ito">
+                                    <button class="btn btn-sm btn-success" @onclick="()=> ArcArchCust(ito)">
+                                        💾 Archiver
+                                        @if (ito.IsArc)
+                                        {
+                                            <span>(x)</span>
+                                        }
+                                    </button>
+                                </ChildContent>
+                            </GridColumn>
+                        </GridColumns>    
+                    </Grid>
+                </GridDetailView>
+            </Grid>
+        </Content>
+    </Tab>
+    <Tab Title="Archives">
+        <Content>
+            <Grid TItem="Customer"
+                  Data="LsCustomers.Where(uc =>uc.Eta > 6).ToList()"
+                  AllowRowClick="true"
+                  OnRowClick="OnArcRowClick"
+                  AllowPaging="true"
+                  Responsive="true">
+                <GridColumns>
+                    <GridColumn TItem="Customer" HeaderText="Ref.">
+                        <ChildContent Context="item">
+                            <div @key="item.Id">@item.Idstr</div>
+                        </ChildContent>
+                    </GridColumn>
+                    <GridColumn TItem="Customer" HeaderText="Nom">
+                        <ChildContent Context="item">
+                            @item.Nom
+                        </ChildContent>
+                    </GridColumn>
+                    <GridColumn TItem="Customer" HeaderText="Pnom">
+                        <ChildContent Context="item">
+                            @item.Pnom
+                        </ChildContent>
+                    </GridColumn>
+                    <GridColumn TItem="Customer" HeaderText="Phone">
+                        <ChildContent Context="item">
+                            @item.Phonenumber
+                        </ChildContent>
+                    </GridColumn>
+                    <GridColumn TItem="Customer" HeaderText="actions">
+                        <ChildContent Context="item">
+                            <button class="btn btn-sm btn-secondary" @onclick="() => ArcReprisCust(item)">
+                                ✏️ De-archiv
+                            </button>
+                            <button class="btn btn-sm btn-secondary" @onclick="() => ArcDeleteCust(item)">
+                                🗑️ Suppr.
+                            </button>
+                        </ChildContent>
+                    </GridColumn>
+                </GridColumns>
+            </Grid>
+        </Content>
+    </Tab>
+</Tabs>
+<!-- Modal OrderCreate -->
+<Modal @ref="OsetModal" class="modal-wide" Title="" ShowCloseButton="true">
+    <BodyTemplate>
+        <div class="row">
+            @if (!String.IsNullOrEmpty(Imessage))
+            {
+                <span class="bg-info bg-opacity-10" style="font-style:italic;color:red">&nbsp;--> @Imessage</span>
+            }
+        </div>
+        @if (IsOrgaCreating)
+        {
+            <OrgaCreate @ref="mycorg"
+                _inCustomer="_curCustomer"
+                _inOrder = "_curOrder"
+                _inCatal="_myCatal"
+                _inGxdom="_curGxdom">
+                <ChildContent>
+                    <h2>CREATION INSTITUTION</h2>
+                </ChildContent>
+            </OrgaCreate>
+        }
+    </BodyTemplate>
+    <FooterTemplate>
+        @* <Button class="btn btn-secondary" @onclick="AnuOsetModal">Annuler</Button>
+        <Button class="btn btn-success" @onclick="ConfOsetModal">Confirmer</Button> *@
+    </FooterTemplate>
+</Modal>
+<!-- Modal SupportRegister -->
+<Modal @ref="SuptModal" class="modal-wide" Title="" ShowCloseButton="true">
+    <BodyTemplate>
+        <div class="row">
+            @if (!String.IsNullOrEmpty(Imessage))
+            {
+                <span class="bg-info bg-opacity-10" style="font-style:italic;color:red">&nbsp;--> @Imessage</span>
+            }
+        </div>
+        @if (IsSuptRegistring)
+        {
+            <HelpRegister @ref="myrhelp"
+                        _inCustomer="_curCustomer"
+                        _inOrder="_curOrder"
+                        _inCatal="_myCatal"
+                        _inGxdom="_curGxdom">
+                <ChildContent>
+                    <h2>ENREGISTREMENT SUPPORT</h2>
+                </ChildContent>
+            </HelpRegister>
+        }
+    </BodyTemplate>
+    <FooterTemplate>
+        @* <Button class="btn btn-secondary" @onclick="AnuOsetModal">Annuler</Button>
+        <Button class="btn btn-success" @onclick="ConfOsetModal">Confirmer</Button> *@
+    </FooterTemplate>
+</Modal>
+<!-- Modal OrderEdit -->
+<Modal @ref="OedtModal" class="modal-wide" Title="" ShowCloseButton="true">
+    <BodyTemplate>
+        <div class="row">
+            @if (!String.IsNullOrEmpty(Imessage))
+            {
+                <span class="bg-info bg-opacity-10" style="font-style:italic;color:red">&nbsp;--> @Imessage</span>
+            }
+        </div>
+        @if (IsOrgaEditing)
+        {
+            <OrgaEdit @ref="myeorg"
+                          _inCustomer="_curCustomer"
+                          _inOrder="_curOrder"
+                          _inCatal="_myCatal"
+                          _inGxdom="_curGxdom">
+                <ChildContent>
+                    <h2>EDITION INSTITUTION</h2>
+                </ChildContent>
+            </OrgaEdit>
+        }
+    </BodyTemplate>
+    <FooterTemplate>
+        @* <Button class="btn btn-secondary" @onclick="AnuOsetModal">Annuler</Button>
+        <Button class="btn btn-success" @onclick="ConfOsetModal">Confirmer</Button> *@
+    </FooterTemplate>
+</Modal>
+<style>
+.grid-container {
+        display: grid;
+        grid-template-columns: max-content minmax(max-content, auto);
+        gap: 8px 16px;
+    }
+
+    .grid-row {
+        display: contents; /* makes children participate directly in the grid */
+    }
+
+    .grid-container label {
+        grid-column: 1;
+        font-weight: bold;
+        white-space: nowrap;  /* prevent label wrap */
+    }
+
+    .grid-container > div {
+        grid-column: 2;
+    }
+
+    .formedt-disabled {
+        pointer-events: none;
+        /* Visual feedback that the element is disabled */
+        opacity: 0.6;
+        cursor: default;
+    }
+    </style>
+@code {
+    private bool isLoading = false, yaerrors = false; 
+    //private bool canSaveGener = false;
+    private string successmsg = "", Scible = "";
+    private List<string> errorList = new List<string>();
+
+    private string _password = "", _confirmPassword="";
+    private string Imessage = "";
+    private bool isFormValid = false;
+
+    private int NextOrgId = 0;
+
+    private OrgaCreate mycorg;
+    private HelpRegister myrhelp;
+    private OrgaEdit myeorg;
+
+    // Inside your component's @code block
+    private EditContext invEdContext;
+
+    private bool IsOrgaCreating = false;
+    private bool IsSuptRegistring = false;
+    private bool IsOrgaEditing = false;
+
+    private bool IsInvEditing = false;
+    private bool inCustAding = false;
+    private bool inCustDeling = false, inCustEding = false;
+    private bool inOrdDeling = false, inOrdEding = false;
+    private bool inCustDEhide => inCustDeling || inCustEding;
+    private bool inOrdDEhide => inOrdDeling || inOrdEding;
+
+    private HttpClient _apiClient;
+    private HttpClient _locClient;
+    private TableSet? _myCatal = new();
+    private UsrOgSetModel _invModel = new();
+    private string _generatedLink = "";
+
+    private Customer _curCustomer = new();
+    private Customer _curArcCustomer = new();
+    private Order _curOrder = new();
+    private Gxdom _curGxdom = new();
+
+    private List<Customer> LsCustomers = new();
+    private List<Order> LsOrders = new();
+    private List<Order> selectedCustomerOrders = new();
+
+    private string? generatedLink;
+
+    private List<Order> GetFilteredOrders(Customer parent) =>
+    LsOrders.Where(o => o.Idclie == parent.Id && !o.IsArc).ToList();
+
+    private bool IsGenerated = false, IsVerified = false, isSaved = false;
+    private bool CanCopyDownload => _curOrder != null && IsGenerated; 
+
+    private Modal OsetModal, SuptModal, OedtModal;
+    private string OsetTitle = "Creation Institution";
+
+    protected override async Task OnInitializedAsync()
+    {
+        isLoading = true;
+        yaerrors = false; errorList.Clear(); successmsg = "";
+        _apiClient = _httpFactorer.CreateClient("wApiClient");
+        _locClient = _httpFactorer.CreateClient("simpleApiClient");
+        try
+        {
+            _myCatal = await _tableService.rendTables();
+        }
+        catch (Exception ex)
+        {
+            Imessage = "probleme des options";
+        }
+        Console.WriteLine($"nb. pays : {_myCatal.Countries.Count()}");
+        //support
+        _invModel.Irole = 1;
+        _invModel.Utyp = 1; 
+        _invModel.Srole = "Admin"; //queryParams["tqsrole"];
+        _invModel.HlpSrole = "Support";
+    }
+    protected override async Task OnParametersSetAsync()
+    {
+        LsOrders = await _apiClient.GetFromJsonAsync<List<Order>>("orders/rendall");
+        _curCustomer = new();
+        _curOrder = new();
+        if (LsOrders.Any())
+        {
+            _curOrder = LsOrders.FirstOrDefault(uo => uo.Oidorg == _invModel.Idorg);
+            if (_curOrder != null)
+            {
+                _curCustomer = _curOrder.Customer;
+            }
+            Console.WriteLine($"nb Orders : {LsOrders.Count}");
+        }
+        invEdContext = new EditContext(_invModel);
+        invEdContext.OnFieldChanged += HandleFieldChanged;
+        await GetNextOrgId();
+        await Task.Delay(1);
+        _invModel.Idorg = NextOrgId;
+        _invModel.HlpEmail = _curGxdom.HlpEmail;
+        _invModel.HlpWurl = _curGxdom.HlpWurl;
+        _invModel.HlpPhone = _curGxdom.HlpPhone;
+        _invModel.HlpPhon2 = _curGxdom.HlpPhon2;
+        _invModel.ConfirmPassword = "Jesuis@99";
+        _invModel.Username = "support@a24soft.com";
+        Console.WriteLine($"RECU {_curGxdom.HlpWurl} et {_invModel.HlpWurl}");
+        Console.WriteLine($"RECU {_curGxdom.HlpEmail} et {_invModel.HlpEmail}");
+        yaerrors = false; isLoading = false;
+        //invEdContext = new EditContext(_invModel);
+        //invEdContext.OnFieldChanged += HandleFieldChanged;
+        LsCustomers = await _apiClient.GetFromJsonAsync<List<Customer>>("customers/rendall");
+        Console.WriteLine("EST PASSE");
+    }
+    //GENERATING
+
+    private void HandleFieldChanged(object sender, FieldChangedEventArgs e)
+    {
+        if (!IsInvEditing) IsInvEditing = true;
+        Console.WriteLine($"Field edited: {e.FieldIdentifier.FieldName}");
+        // Place your logic here when a field is edited
+    }
+    private async Task CopyToClipboard() =>
+        await _jsRun.InvokeVoidAsync("navigator.clipboard.writeText", generatedLink);
+    //private async Task Copy2ToClipboard(Order item) =>
+    //    await _jsRun.InvokeVoidAsync("navigator.clipboard.writeText", item.Codinvit);
+    //private async Task DownloadQrCode() =>
+    //    await _jsRun.InvokeVoidAsync("downloadQrCanvas");
+    private async Task<string> GenerateCustomerStrKey(int idog)
+    {
+        // Take the first 4 characters of the customer's name (pad with underscores if less)
+        string prefix = (_curCustomer.Pnom.Length >= 4)
+            ? _curCustomer.Pnom.Substring(0, 4)
+            : _curCustomer.Pnom.PadRight(4, '_');
+        var now = DateTime.Now;
+
+        string result = $"{prefix}{now:yyyy}{idog}";
+        return result;
+    }
+    private async Task<string> GenerateOrderStrKey(int idog, int rng)
+    {
+        var now = DateTime.Now;
+        // Format: prefix + yyyyMMddHHmm (year, month, day, hour, all zero-padded)
+        string result = $"{idog}_{now:yyyyMMddHH}_{rng}";
+        return result;
+    }
+    //Last OrgID
+    private async Task GetNextOrgId()
+    {
+        int idog = 10001;
+        var respidogs = await _apiClient.GetFromJsonAsync<List<Gxdom>>("gxdoms/rendall");
+        _curGxdom = new();
+        //var respidog = await _apiClient.GetAsync("gxdoms/cregxdom");
+        if (respidogs != null && respidogs.Any())
+        {
+            _curGxdom = respidogs.FirstOrDefault();
+            NextOrgId = _curGxdom.LastIdorg;
+            //     .OrderBy(c => c.Idorg)
+            //     .LastOrDefault();
+            // idog = lastCustomer.Idorg + 1;
+        }else
+        {
+            Imessage = "Organisation absente ou compromise";
+            return;
+        }
+        Console.WriteLine($"AVANT");
+    }
+    private async Task VaGenererLink()
+    {
+        IsGenerated = false;
+        bool IsVerified = false;
+        IsVerified = await VerifInputs(); //reverification
+        if (!IsVerified)
+        {
+            Imessage = "Echec Generation : des issues persistent..." + Imessage;
+            Console.WriteLine($"message : {Imessage}");
+            return;
+        }
+        //donnees de base a ajouter a _invModel saisi
+        _invModel.Ordid = _curOrder.Id;
+        _invModel.Oidstr = _curOrder.OIdstr;
+        //Console.WriteLine($"Cur Order : {_curOrder.Id} et {_curOrder.OIdstr}");
+        if (_invModel.Ishare == 1)
+        { //online
+            var csite = _myCatal.Sites.FirstOrDefault(uw => uw.Elea == _invModel.Iwurl);
+            if (csite != null)
+            {
+                _invModel.Weburl = csite.Liba;
+            }
+            else
+            {
+                Imessage = "le site web est obligatoire";
+                return;
+            }
+        } else
+        {
+            if (!string.IsNullOrEmpty(_invModel.Weburl))
+            {
+                _invModel.Weburl = _invModel.Weburl;
+            }
+            else
+            {
+                Imessage = "le site web est obligatoire";
+                return;
+            }
+        }
+        //backend client website
+        var baseUrl = _invModel.Weburl + "/api/usercontext";  //api/controller
+        Console.WriteLine($"Base Url : {baseUrl}");
+        //Frontend
+        string backUrl = _locClient.BaseAddress?.ToString().TrimEnd('/') + "/sitesflow";
+        _invModel.FbackUrl = backUrl;
+        _invModel.SiSupport = true;
+        var _LinkSerialiser = new LinkSerialiser(_jsRun);
+        generatedLink = _LinkSerialiser.GenerateLink(_invModel, baseUrl, "startorga"); //endpoint
+        Console.WriteLine($"Final Generated Link: {generatedLink}");
+        _invModel.CodInvit = generatedLink;
+        IsGenerated = true;
+        inCustAding = false;
+        StateHasChanged();
+    }
+
+    void CreateOnlyCustomer()
+    {
+    }
+    void CreateOnlyOrder(Customer mycust)
+    {
+    }
+
+    void OnCustRowClick(GridRowEventArgs<Customer> args)
+    {
+        Console.WriteLine($"OnCustRowClick Triggered : {args.Item.Id}");
+        _curCustomer = args.Item; //get gRubsMap
+        Console.WriteLine($"X1seq {_curCustomer.Id}");
+        if (_curCustomer == null || _curCustomer.Id == 0)
+        {
+            return;
+        }
+        // Fetch related orders from all orders or via API:
+        selectedCustomerOrders = LsOrders
+            .Where(o => o.Idclie == _curCustomer.Id) // && !o.IsArc)
+            .ToList();
+        Console.WriteLine($"Selected Orders nb : {LsOrders} et cust no: {_curCustomer.Id}");
+        foreach(var od in LsOrders)
+        {
+            Console.WriteLine($"cur Ord idclie : {od.Idclie} ");
+        }
+        StateHasChanged();
+    }
+    void OnArcRowClick(GridRowEventArgs<Customer> args)
+    {
+        Console.WriteLine($"OnArcRowClick Triggered : {args.Item.Id}");
+        _curArcCustomer = args.Item; //get gRubsMap
+        Console.WriteLine($"X1seq {_curArcCustomer.Id}");
+        if (_curArcCustomer == null || _curArcCustomer.Id == 0)
+        {
+            return;
+        }
+        StateHasChanged();
+    }
+    void OnOrdRowClick(GridRowEventArgs<Order> args)
+    {
+        Console.WriteLine($"OnOrdRowClick Triggered : {args.Item.Id}");
+        _curOrder = args.Item; //get gRubsMap
+        Console.WriteLine($"X1seq {_curOrder.Id}");
+        if (_curOrder == null || _curOrder.Id == 0)
+        {
+            return;
+        }
+        _generatedLink = _curOrder.OCdinvit;
+        _curCustomer = _curOrder.Customer;
+        Console.WriteLine($"AVANT / {_curCustomer.Nom} et {_curCustomer.Pnom}");
+        Console.WriteLine($"AVANT2 / {_curCustomer.Weburl} et {_curCustomer.HlpWurl}");
+        Console.WriteLine($"AVANT / {_curGxdom.HlpEmail} et {_curGxdom.HlpPhone} et {_curGxdom.HlpWurl}");
+    }
+
+    //CRUD Customer
+    private async Task OpenAddCust()
+    {
+        NextOrgId = NextOrgId + 1; //ajoute forcement un order et qte max
+        _invModel.Idorg = NextOrgId;
+        Imessage = "";
+        inCustAding = true;
+    }
+    private async Task SaveAllToDatabase()
+    {
+        isSaved = false;
+        isLoading = true;
+        int it1 = 0;
+        try
+        {
+            bool yaError = false;
+            string strmess = "";
+            bool IsVerified = false;
+            IsVerified = await VerifInputs(); //reverification
+            if (!IsVerified)
+            {
+                Imessage = Imessage + "Echec Generation : des issues persistent..." + Imessage;
+                Console.WriteLine($"message : {Imessage}");
+                StateHasChanged();
+                return;
+            }
+            var myregios = _myCatal.Sites.Where(uc => uc.Elea == _invModel.Iwurl).FirstOrDefault();
+            if (myregios == null)
+            {
+                strmess = "Region absente";
+                yaError = true;
+            }
+            if (NextOrgId < 1001)
+            {
+                strmess = strmess + " /No Institution Absent, Annuler et re-prenew ➕Add";
+                yaError = true;
+            }
+            var clientsExist = LsCustomers.Where(uc => string.Compare(uc.UsernameOrEmail, _invModel.UsernameOrEmail) == 0
+              || string.Compare(uc.Phonenumber, _invModel.Phonenumber) == 0).ToList();
+            if (clientsExist.Any())
+            {
+                strmess = strmess + " /Client existe deja";
+                yaError = true;
+            }
+            if (yaError)
+            {
+                if (!string.IsNullOrEmpty(strmess)) Imessage = strmess;
+                inCustAding = true; //permet de resaisir
+                isLoading = false;
+                return;
+            }
+            //customer
+            _curCustomer = new();
+            _curCustomer.Idorg = NextOrgId;
+            _curCustomer.HlpEmail = _invModel.HlpEmail;
+            _curCustomer.HlpWurl = _invModel.HlpWurl;
+            _curCustomer.UsernameOrEmail = _invModel.UsernameOrEmail;
+            _curCustomer.Email = _invModel.Email;
+            _curCustomer.Nom = _invModel.Nom;
+            _curCustomer.Pnom = _invModel.Pnom;
+            _curCustomer.Password = _invModel.Password;
+            _curCustomer.Idstr = await GenerateCustomerStrKey(NextOrgId); //generate str key
+            _curCustomer.Role = _invModel.Srole;
+            _curCustomer.Phonenumber = _invModel.Phonenumber;
+            _curCustomer.Phon2 = _invModel.Phon2;
+            _curCustomer.Ipays = _invModel.Ipays;
+            _curCustomer.Ilang = _invModel.Ilang;
+            _curCustomer.Doma = _invModel.Idoma;
+            _curCustomer.Raison = _invModel.Raison;
+            _curCustomer.Sigle = _invModel.Sigle;
+            _curCustomer.Ilang = _invModel.Olang;
+            //_curCustomer.Codinvit = generatedLink;
+            //_curCustomer.Iqmax = _invModel.Iqmax;
+            _curCustomer.Gdom = _invModel.Gdom;
+            //prise de Weburl 
+            _curCustomer.Iwurl = 0;
+            if (_invModel.Ishare == 1)
+            { //Online
+                var custSite = _myCatal.Sites.FirstOrDefault(uc => uc.Elea == _invModel.Iwurl);
+                _curCustomer.Weburl = "";
+                if (custSite != null)
+                {
+                    _curCustomer.Weburl = custSite.Liba;
+                    Console.WriteLine($"AVANT SAUVEGARDE {_curCustomer.Weburl}");
+                    _curCustomer.Iwurl = _invModel.Iwurl;
+                }
+            } else
+            {
+                _curCustomer.Weburl = _invModel.Weburl;
+            }
+            // Await the async call to get the Custormer Id
+            var respcust = await _apiClient.PostAsJsonAsync<Customer>("customers/crecustomer", _curCustomer);
+            var savedCustomer = await respcust.Content.ReadFromJsonAsync<Customer>();
+            //Maj de la liste customers pour UI
+            List<Customer> _wCusts = LsCustomers;
+            _wCusts.Add(savedCustomer);
+            LsCustomers = _wCusts;
+            //order
+            _curOrder = new();
+            it1 = 4;
+            int rng = 0;
+            var inordas = LsOrders
+                .Where(cd => cd.Idclie == savedCustomer.Id);
+            if (inordas.Any())
+            {
+                rng = inordas.Max(o => o.Orang);
+            }
+            rng = rng + 1;
+            _curOrder.Orang = rng;
+            it1 = 5;
+            _curOrder.Idclie = savedCustomer.Id;
+            _curOrder.OIdstr = await GenerateOrderStrKey(NextOrgId, rng); //generate str key
+            _curOrder.Oidorg = NextOrgId;
+            //_curOrder.Doma = _invModel.Idoma;
+            //_curOrder.Raison = _invModel.Raison;
+            //_curOrder.Sigle = _invModel.Sigle;
+            _curOrder.Olang = _invModel.Olang;
+            _curOrder.OCdinvit = generatedLink;
+            _curOrder.Step = 1;
+            it1 = 8;
+            // Now safe to post order
+            var ordersExist = LsOrders.Where(uc => string.Compare(uc.OIdstr, _curOrder.OIdstr) == 0
+              || uc.Orang == _curOrder.Orang).ToList();
+            if (ordersExist.Any())
+            {
+                Imessage = "Order existe deja";
+                return;
+            }
+            var respordo = await _apiClient.PostAsJsonAsync<Order>("orders/creorder", _curOrder);
+            var savedOrder = await respordo.Content.ReadFromJsonAsync<Order>();
+            //Generation du lien avec no order.
+            _invModel.Ordid = savedOrder.Id;
+            _invModel.Oidstr = savedOrder.OIdstr;
+
+            await VaGenererLink();
+            savedOrder.OCdinvit = generatedLink;
+            Console.WriteLine($"Link : {savedOrder.OCdinvit}");
+            var response = await _apiClient.PutAsJsonAsync($"orders/{savedOrder.Id}", savedOrder);
+            if (response.IsSuccessStatusCode)
+            {
+                Console.WriteLine("✅ Order updated successfully!");
+            }
+            else
+            {
+                var error = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"❌ Update failed ({response.StatusCode}): {error}");
+            }
+            //var _wlsOrders = LsOrders;
+            //_wlsOrders.Add(savedOrder);
+            //LsOrders = _wlsOrders;
+            //selectedCustomerOrders = _wOrdas;
+            //_curOrder = savedOrder;
+            //renouveler _curOrder
+            LsOrders = await _apiClient.GetFromJsonAsync<List<Order>>("orders/rendall");
+            _curCustomer = new();
+            _curOrder = new();
+            if (LsOrders.Any())
+            {
+                _curOrder = LsOrders.FirstOrDefault(uo => uo.Oidorg == _invModel.Idorg);
+                if (_curOrder != null)
+                {
+                    _curCustomer = _curOrder.Customer;
+                }
+                Console.WriteLine($"nb Orders : {LsOrders.Count}");
+            }
+            if (savedOrder.Id != 0)
+            {
+                //maj NextOrgId
+                _curGxdom.LastIdorg = NextOrgId + 1;
+                var respidog = await _apiClient.PutAsJsonAsync($"gxdoms/{_curGxdom.Id}", _curGxdom);
+                if (respidog.IsSuccessStatusCode)
+                {
+                    Console.WriteLine("✅ Gxdom updated successfully!");
+                }
+                else
+                {
+                    var error = await respidog.Content.ReadAsStringAsync();
+                    Console.WriteLine($"❌ Update failed ({respidog.StatusCode}): {error}");
+                }
+                NextOrgId = NextOrgId + 1;
+                Imessage = "Client et commandes enregistres";
+                it1 = 9;
+                IsGenerated = true;
+                IsInvEditing = false;
+                isSaved = true;
+            }
+            else
+            {
+                Imessage = "ECHEC Enregistrement";
+                it1 = 9;
+                isSaved = false;
+            }
+            //await ChargeInitiales();
+        }
+        catch (Exception ex)
+        {
+            // Handle or log error
+            Imessage = $"Probleme sur enregistrement : {ex.Message} et {it1}";
+        }
+        isLoading = false;
+    }
+    private async Task CancelAddCust()
+    {
+        NextOrgId = NextOrgId - 1;
+        _invModel.Idorg = NextOrgId;
+
+        inCustAding = false;
+    }
+    // CRUD Order
+    private async Task OpenEditOrd(Order myOrd, int orig)
+    {
+        inOrdDeling = false; inOrdEding = false;
+        if (orig == 1)
+        {
+
+
+            inOrdDeling = true;
+        } else if (orig == 2)
+        {
+
+            inOrdEding = true;
+        }
+    }
+    private async Task CmdCancelOrd()
+    {
+        if (inOrdDeling)
+        {
+
+
+            inOrdDeling = false;
+        } else if (inOrdEding)
+        {
+            //restituez draft
+
+
+            inOrdEding = false;
+        }
+    }
+    private async Task CmdConfirmOrd(Order myOrd, int orig)
+    { //re-send mail to register
+        if (inOrdDeling)
+        { //avec les ordres
+
+            inOrdDeling = false;
+        }
+        else if (inOrdEding)
+        {
+
+            //restiuez le drafCust
+            inOrdEding = false;
+        }
+    }
+    private async Task DeleteOrder(Order myord, int orig)
+    {
+        Imessage = "";
+        Customer mycust = myord.Customer;
+        var response = await _apiClient.DeleteAsync($"orders/{myord.Id}");
+        if (!response.IsSuccessStatusCode)
+        {
+            Imessage = $"Failed to delete order {myord.Id}";
+            return;
+        }
+        Task.Delay(2);
+        LsOrders.Remove(myord);
+        var custOrders = LsOrders.Where(uc => uc.Idclie == mycust.Id).ToList();
+        if (!custOrders.Any())
+        {
+            var resp2 = await _apiClient.DeleteAsync($"customers/{mycust.Id}");
+            if (!resp2.IsSuccessStatusCode)
+            {
+                Imessage = $"Failed to delete order {myord.Id}";
+                return;
+            }
+        }
+        Imessage = Imessage + $"and Order {myord.Id}/{myord.OIdstr} has been deleted";
+    }
+    private async Task AddOrder(Customer mycust, int orig)
+    {
+        //order ????
+        _curOrder = new();
+        var myregios = _myCatal.Sites.Where(uc => uc.Elea == _invModel.Iwurl).FirstOrDefault();
+        if (myregios == null)
+        {            
+            Imessage = "Region absente";
+            return;
+        }
+        _curCustomer.Weburl = myregios.Liba;
+        int rng = 0;
+        var inordas = LsOrders
+            .Where(cd => cd.Idclie == mycust.Id);
+        if (inordas.Any())
+        {
+            rng = inordas.Max(o => o.Orang);
+        }
+        rng = rng + 1;
+        _curOrder.Orang = rng;
+        _curOrder.Idclie = mycust.Id;
+        _curOrder.OIdstr = await GenerateOrderStrKey(NextOrgId, rng); //generate str key
+        _curOrder.Oidorg = NextOrgId;
+        //gemerer
+        //_curOrder.Doma = mycust.Idoma;
+        //a generer
+        //_curOrder.Raison = _invModel.Raison;
+        //_curOrder.Sigle = _invModel.Sigle;
+        //_curOrder.Olang = _invModel.Olang;
+        //_curOrder.Codinvit = generatedLink;
+        _curOrder.Step = 1;
+        // Now safe to post order
+        var ordersExist = LsOrders.Where(uc => string.Compare(uc.OIdstr, _curOrder.OIdstr) == 0
+          || uc.Orang == _curOrder.Orang).ToList();
+        if (ordersExist.Any())
+        {
+            Imessage = "Order existe deja";
+            return;
+        }
+        var respordo = await _apiClient.PostAsJsonAsync<Order>("orders/creorder", _curOrder);
+        var savedOrder = await respordo.Content.ReadFromJsonAsync<Order>();
+        //Maj de la liste orders pour UI
+        var _wlsOrders = LsOrders;
+        _wlsOrders.Add(savedOrder);
+        LsOrders = _wlsOrders;
+        //selectedCustomerOrders = _wOrdas;
+        _curOrder = savedOrder;
+        //maj NextOrgId
+        _curGxdom.LastIdorg = NextOrgId + 1;
+        if (savedOrder.Id != 0)
+        {
+            var respidog = await _apiClient.PostAsJsonAsync<Gxdom>("gxdoms/updgxdom/" + _curGxdom.Id, _curGxdom);
+            NextOrgId = NextOrgId + 1;
+            Imessage = "Client et commandes enregistres";
+            //await ChargeInitiales();
+            isSaved = true;
+        }
+        else
+        {
+            Imessage = "ECHEC Enregistrement";
+            isSaved = false;
+        }
+    }
+    //Archivage
+    private async Task ArcArchCust(Order myOrd)
+    {
+        Customer myCust = myOrd.Customer;
+        myCust.Et2 = myCust.Eta; //avt arch
+        myCust.Eta = 7; //archived
+        var response = await _apiClient.PutAsJsonAsync(
+                $"customers/updarc/{myCust.Id}", myCust);
+        if (response.IsSuccessStatusCode)
+        {
+            Imessage = "Customer Archived Successfully";
+            Console.WriteLine("✅ Customer re-entered successfully!");
+        }
+        else
+        {
+            Imessage = $"Customer Archived failed ({response.StatusCode})";
+            var error = await response.Content.ReadAsStringAsync();
+            Console.WriteLine($"❌ Update failed ({response.StatusCode}): {error}");
+        }
+    }
+    private async Task ArcReprisCust(Customer myCust)
+    {
+        myCust.Eta = myCust.Et2; //reset avant archived
+        myCust.Et2 = 7; //was archived
+        var response = await _apiClient.PutAsJsonAsync(
+                $"customers/updarc/{myCust.Id}", myCust);
+        if (response.IsSuccessStatusCode)
+        {
+            Imessage = "Customer Re-entered successfully";
+            Console.WriteLine("✅ Customer re-entered successfully!");
+        }
+        else
+        {
+            Imessage = $"Customer Re-enter failed ({response.StatusCode})";
+            var error = await response.Content.ReadAsStringAsync();
+            Console.WriteLine($"❌ Update failed ({response.StatusCode}): {error}");
+        }
+    }
+    private async Task ArcDeleteCust(Customer myCust)
+    {
+        Imessage = "";
+        var response = await _apiClient.DeleteAsync($"customers/{myCust.Id}");
+        if (response.IsSuccessStatusCode)
+        {
+            Imessage = $"Deleted customer and its orders {myCust.Id}";
+            return;
+        }
+    }
+    private async Task CmdCustSendEmail(Order myord)
+    {
+        if (_curOrder == null)
+        {
+            Imessage = "Order null, obligatoire";
+            return;
+        }
+        if (_curOrder.Customer == null)
+        {
+            Imessage = "Order sans client, obligatoire";
+            return;
+        }
+        var _LinkSerialiser = new LinkSerialiser(_jsRun);
+        var inpUrl = _curOrder.Customer.Weburl;
+        if (!inpUrl.StartsWith("http"))
+            inpUrl = "https://" + inpUrl;
+        inpUrl = inpUrl.TrimEnd('/');
+        // Replace with gxadm subdomain
+        var gxadmUrl = UrlParser.ReplaceWithSubdomain(inpUrl, "gxadm"); // → https://gxadm.a24soft.com
+        var cdlink = _LinkSerialiser.EncodeAndSerialize(new UsrOgSetModel
+        { 
+            Id = 1,
+            Idorg = _curOrder.Oidorg,
+            Email = _curOrder.Customer.Email,
+            Phonenumber = _curOrder.Customer.Phonenumber,
+            Orig = 1, //from support
+            HlpWurl = _curGxdom.HlpWurl,
+            Sdoma = _invModel.Sdoma,
+            Srole = "Admin",
+            Utyp = 3,
+            Weburl = gxadmUrl,
+            Ipays = _curOrder.Customer.Country,
+            Ilang = _curOrder.Customer.Ilang,
+            Raison = _curOrder.Customer.Raison,
+            Sigle = _curOrder.Customer.Sigle,
+            Nom =_curOrder.Customer.Nom,
+            Pnom = _curOrder.Customer.Pnom
+        }); // or GenerateLink if it returns just the payload
+        // var ogqryplus = _LinkSerialiser.EncodeAndSerialize(new RegisterDto 
+        //     { ... 
+
+        //     });
+        // Build final URL with query string
+        //var fullUrl = $"{gxadmUrl}/register?cdlink={Uri.EscapeDataString(cdlink)}";
+        var fullUrl = $"{gxadmUrl}/register?cdlink={Uri.EscapeDataString(cdlink)}"; //&ogqryplus={Uri.EscapeDataString(ogqryplus)}";
+        //lien a envoyer par CxApi mailer
+        InviteEmailRequest mailReq = new();
+        mailReq.InviteLink = fullUrl;
+        mailReq.SenderEmail = _curGxdom.HlpEmail;
+        mailReq.Email = _curOrder.Customer.Email;
+        mailReq.UserName = _curOrder.Customer.Username;
+        mailReq.Message = "Veuillez cliquer le lien pour joindre le webSite de votre logiciel";
+        mailReq.Subject = "Invite webSite";
+        mailReq.To = _curOrder.Customer.Email;
+        var response = await _apiClient.PostAsJsonAsync<InviteEmailRequest>("email/sendinvite", mailReq);
+        if (response.IsSuccessStatusCode)
+        {
+            Imessage = "Customer Email sent successfully";
+            Console.WriteLine("✅ Customer Email sent successfully!");
+        }
+        else
+        {
+            Imessage = $"Customer Email fail to sent ({response.StatusCode})";
+            var error = await response.Content.ReadAsStringAsync();
+            Console.WriteLine($"❌ Customer Email fail to sent ({response.StatusCode}): {error}");
+        }
+        //var mailUrl = $"{inpUrl}/api/usercontext?{cdlink}";  //api/controller
+        //_navmanager.NavigateTo(inpUrl, forceLoad: true);
+    }
+    //Show Modals (setOrga,setSupport,edtOrga)
+    private void ShowSetOrga(Order myOrd)
+    {
+        Console.WriteLine($"Avant Creation : {_curCustomer.Nom} et {_curOrder.Idclie}");
+        IsOrgaCreating = true;
+        Console.WriteLine($"_linkgenerer : {_curOrder.OCdinvit}");
+        OsetModal.ShowAsync();
+    }
+    private void ShowSetSupport(Order myOrd)
+    {
+        Console.WriteLine($"Avant Creation : {_curCustomer?.Nom} et {_curOrder?.Idclie}");
+        IsSuptRegistring = true;
+        Console.WriteLine($"_linkgenerer : {_curOrder?.OCdinvit}");
+        SuptModal.ShowAsync();
+    }
+    private void ShowEdtOrga(Order myOrd)
+    {
+        Console.WriteLine($"Avant Creation : {_curCustomer?.Nom} et {_curOrder?.Idclie}");
+        IsOrgaEditing = true;
+        Console.WriteLine($"_linkgenerer : {_curOrder?.OCdinvit}");
+        OedtModal.ShowAsync();
+    }
+    private async Task<bool> VerifInputs()
+    {
+        Imessage = "";
+        isFormValid = false;
+        yaerrors = false; isLoading = true;
+        errorList.Clear();
+        if (_invModel.Iwurl == 0)
+        {
+            yaerrors = true;
+            errorList.Add("website obligatoire.");
+        }
+        if (_invModel.Idoma == 0)
+        {
+            yaerrors = true;
+            errorList.Add("package obligatoire.");
+        }
+        if (_invModel.Iqmax == 0 || _invModel.Iqmax > 25)
+        {
+            yaerrors = true;
+            errorList.Add("Qte comprise entre 1 et 25.");
+        }
+        if (_invModel.Raison.Length < 7 || string.IsNullOrEmpty(_invModel.Raison))
+        {
+            yaerrors = true;
+            errorList.Add("Longueur de raison inferieure a 7.");
+        }
+        if (_invModel.Sigle.Length < 5 || string.IsNullOrEmpty(_invModel.Sigle))
+        {
+            yaerrors = true;
+            errorList.Add("Longueur de sigle inferieure a 5.");
+        }
+        //Username-PhoneNumber-Email-Password-ConfirmPassword (automatic)
+        if (string.IsNullOrEmpty(_invModel.Phonenumber))
+        {
+            yaerrors = true;
+            errorList.Add("Phonenumber > 3");
+        }
+        if (_invModel.Nom.Length < 5 || string.IsNullOrEmpty(_invModel.Nom))
+        {
+            yaerrors = true;
+            errorList.Add("Longueur de Nom inferieure a 5.");
+        }
+        if (_invModel.Pnom.Length < 4 || string.IsNullOrEmpty(_invModel.Pnom))
+        {
+            yaerrors = true;
+            errorList.Add("Longueur de Pnom inferieure a 4.");
+        }
+        if (_invModel.Ipays == 0)
+        {
+            yaerrors = true;
+            errorList.Add("Pays obligatoire.");
+        }
+        if (_invModel.Ilang == 0)
+        {
+            yaerrors = true;
+            errorList.Add("Langue obligatoire.");
+        }
+        if (!yaerrors) isFormValid = true;
+        foreach (var era in errorList)
+        {
+            Imessage = Imessage + era;
+        }
+        return isFormValid;
+    }
+    private void GetSliba(int idoma)
+    {
+        var mydoma = _myCatal.Domas.FirstOrDefault(dm => dm.Elea == idoma);
+        if (mydoma != null)
+        {
+            Scible = mydoma.Sliba;
+        }
+        else
+        {
+            Scible = "";
+        }
+    }
+}
+

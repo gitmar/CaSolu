@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net.Http.Json;
 
-using CxShared.Models;
+using CxShared.Others;
 
 using static System.Net.WebRequestMethods;
 

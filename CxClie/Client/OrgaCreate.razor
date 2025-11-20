@@ -1,0 +1,259 @@
+﻿@page "/orgacreate"
+
+@using System
+@using System.ComponentModel.DataAnnotations
+@using System.Reflection
+@using System.Text
+@using System.Text.Json
+@using CxClie.Services
+@using CxShared.Models
+@using CxShared.Helpers
+@using CxShared.Others
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.WebUtilities
+@using SQLitePCL
+
+@inject IHttpClientFactory _httpFactorer
+@inject NavigationManager _navmanager
+@inject TblJsonRender _tableService
+@inject IJSRuntime _jsRun
+
+<PageTitle>OrgCreate</PageTitle>
+
+@if (yaerrors)
+{
+    foreach (var error in errorList)
+    {
+        <div class="alert alert-danger">@error</div>
+    }
+}
+
+ @if (isLoading)
+{
+    <Progress class="progress mb-3">
+        <ProgressBar Width="30" Label="Creation Institution Loading..." Type="ProgressType.StripedAndAnimated" Color="ProgressColor.Primary" />
+    </Progress>
+}
+<div class="d-flex flex-column">
+    @if (_inOrder != null)
+    {
+        <div class="my-container">
+            @ChildContent
+        </div>
+    }
+</div>
+<EditForm Context="regform" Model="_invModel">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="container container-fluid">
+        <div class="row mb-2">
+            message :
+            <label style="font-weight: bold; color: red; background-color: yellow;">@Imessage</label>
+        </div>
+        <div class="row mb-2">
+            <div class="col-2">
+                <label><h3><b>@_invModel.Idorg</b></h3></label>
+            </div>
+            <div class="col-8">
+                <label class="fw-bold">@_invModel.Raison</label>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-2">
+                <label for="sigle">Sigle:</label>
+            </div>
+            <div class="col-4">
+                <label class="fw-bold">@_invModel.Sigle</label>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-2">
+                <label for="toweb">website:</label>
+            </div>
+            <div class="col-8">
+                <label class="fw-bold">@_invModel.Weburl</label>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-2">
+                <label for="toweb">domaine:</label>
+            </div>
+            <div class="col-3">
+                <label class="fw-bold">@stDoma</label>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-2">
+                <label for="phone">Phone:</label>
+            </div>
+            <div class="col-4">
+                <label class="fw-bold">@_invModel.Phonenumber</label>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-2">
+                <label for="email">Email:</label>
+            </div>
+            <div class="col-7">
+                <label class="fw-bold">@_invModel.Email</label>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-2">
+                <label for="onom">Nom:</label>
+            </div>
+            <div class="col-7">
+                <label class="fw-bold">@_invModel.Nom</label>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-2">
+                <label for="opnoms">Prenom(s):</label>
+            </div>
+            <div class="col-7">
+                <label class="fw-bold">@_invModel.Pnom</label>
+            </div>
+        </div>
+        @if (isInstallable)
+        {
+            <div class="row mb-2">
+                <div class="col-8">
+                    <label class="fw-bold">IDENTITY SUPPORT :</label>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-4">
+                    <label for="ouname">Pseudo/Email:</label>
+                </div>
+                <div class="col-7">
+                    (6 to 15 characters)
+                    <InputText id="ouname" required @bind-Value="UsernameOrEmail" class="form-control" />
+                    <ValidationMessage For="@(() => UsernameOrEmail)" />
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-4">
+                    <label for="password">Password:</label>
+                </div>
+                <div class="col-7">
+                    <InputText id="password" required @bind-Value="Password" type="password" class="form-control" />
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-8">
+                    <button class="btn btn-primary btn-sm" @onclick="() => CreateCustOrga()">
+                        ➕ Installer INSTITUTION
+                    </button>
+                </div>
+            </div>
+        }
+        else
+        {
+            <label style="font-weight: bold; color: red; background-color: yellow;">Donnees insuffisantes pour installer votre Organisation</label>
+        }
+    </div>
+</EditForm>
+
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+    [Parameter]
+    public Customer _inCustomer { get; set; }
+    [Parameter]
+    public Order _inOrder { get; set; }
+    [Parameter]
+    public Gxdom _inGxdom { get; set; }
+    [Parameter]
+    public TableSet _inCatal { get; set; }
+
+    private bool isLoading = false, yaerrors = false;
+    private string successmsg = "";
+    private List<string> errorList = new();
+    private string stDoma = "", UsernameOrEmail = "", Password = "";
+    //recu de Qry
+    private int iorig = 0, noerror = 0;
+    private string errmess = "";
+
+    private string Imessage = "";
+    private HttpClient _apiClient;
+    private HttpClient _locClient;
+    //private TableSet _myCatal = new();
+    //private BackModel _retModel = new();
+    private UsrOgSetModel _invModel = new();
+    //private string _generatedLink = "";
+
+    private bool isInstallable => _inCustomer.Email != null && _inCustomer.Doma != 0;
+
+    private List<Customer> LsCustomers = new();
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        isLoading = true;
+        yaerrors = false; errorList.Clear(); successmsg = "";
+        _apiClient = _httpFactorer.CreateClient("wApiClient");
+        _locClient = _httpFactorer.CreateClient("simpleApiClient");
+    }
+    protected override async Task OnParametersSetAsync()
+    {
+        _invModel = new();
+        _invModel.HlpEmail = _inGxdom.HlpEmail;
+        _invModel.HlpWurl = _inGxdom.HlpWurl;
+        _invModel.HlpPhone = _inGxdom.HlpPhone;
+        _invModel.HlpPhon2 = _inGxdom.HlpPhon2;
+        _invModel.HlpSrole = "Support";
+        //pre-filled
+        ModelHelper.CopyMatchingProperties(_inCustomer, _invModel);
+        ModelHelper.CopyMatchingProperties(_inOrder, _invModel);
+        Console.WriteLine($"test : {_inCustomer.Nom} et {_invModel.Nom}");
+        int Idoma = _inCustomer.Doma;
+        var odDoma = _inCatal.Domas.Where(ud => ud.Elea == Idoma).FirstOrDefault();
+        if (odDoma != null)
+        {
+            stDoma = odDoma.Liba;
+        }
+        //Console.WriteLine($"nb Orders : {LsOrders.Count}");
+        //Console.WriteLine(jsdata);
+        //Console.Write("Zone table");
+        yaerrors = false; isLoading = false;
+        Console.WriteLine($"DANS ORGA / {_inCustomer.Nom} et {_inCustomer.Pnom}");
+        Console.WriteLine($"DANS ORGA / {_inCustomer.Weburl} et {_inCustomer.HlpWurl}");
+        Console.WriteLine($"DANS ORGA / {_inGxdom.HlpEmail} et {_inGxdom.HlpPhone} et {_inGxdom.HlpWurl}");
+        StateHasChanged();
+    }
+    private void CreateCustOrga()
+    {
+        if (string.IsNullOrEmpty(UsernameOrEmail))
+        {
+            Imessage = "Pseudo ou Email obligatoire";
+            return;
+        }
+        if (string.IsNullOrEmpty(Password) || Password.Length < 6)
+        {
+            Imessage = "Mot de passe obligatoire et plus de 6 caracteres";
+            return;
+        }
+
+        Imessage = "Installation en cours...";
+        Console.WriteLine($"combined Model : {Password}");        
+        
+        //backUrl
+        string backUrl = _locClient.BaseAddress?.ToString().TrimEnd('/') + "/sitesflow";
+        
+        var credsDto = new UsrCredsModel
+        {
+            Idorg = _inOrder.Oidorg,
+            Ordid = _inOrder.Id,
+            UsernameOrEmail = UsernameOrEmail,
+            Password = Password,
+            FbackUrl = backUrl
+        };
+        var _linkSerialiser = new LinkSerialiser(_jsRun);
+        var ogqryplusEncoded = _linkSerialiser.EncodeAndSerialize<UsrCredsModel>(credsDto);
+        // Append with '&' since cdlink is already present
+        var finalLink = $"{_inOrder.OCdinvit}&ogqryplus={ogqryplusEncoded}";
+        _navmanager.NavigateTo(finalLink);
+    }
+}
+
+

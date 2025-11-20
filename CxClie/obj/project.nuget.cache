@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "IIpWQ5cjs1M=",
+  "dgSpecHash": "5rTkwCwyrZk=",
   "success": true,
   "projectFilePath": "C:\\AACurDEV\\CaSolu\\CxClie\\CxClie.csproj",
   "expectedPackageFiles": [
@@ -36,8 +36,8 @@
     "C:\\Users\\Lenovo USER\\.nuget\\packages\\microsoft.jsinterop\\9.0.10\\microsoft.jsinterop.9.0.10.nupkg.sha512",
     "C:\\Users\\Lenovo USER\\.nuget\\packages\\microsoft.jsinterop.webassembly\\9.0.10\\microsoft.jsinterop.webassembly.9.0.10.nupkg.sha512",
     "C:\\Users\\Lenovo USER\\.nuget\\packages\\microsoft.net.http.headers\\9.0.0\\microsoft.net.http.headers.9.0.0.nupkg.sha512",
-    "C:\\Users\\Lenovo USER\\.nuget\\packages\\microsoft.net.illink.tasks\\9.0.10\\microsoft.net.illink.tasks.9.0.10.nupkg.sha512",
-    "C:\\Users\\Lenovo USER\\.nuget\\packages\\microsoft.net.sdk.webassembly.pack\\9.0.10\\microsoft.net.sdk.webassembly.pack.9.0.10.nupkg.sha512",
+    "C:\\Users\\Lenovo USER\\.nuget\\packages\\microsoft.net.illink.tasks\\9.0.11\\microsoft.net.illink.tasks.9.0.11.nupkg.sha512",
+    "C:\\Users\\Lenovo USER\\.nuget\\packages\\microsoft.net.sdk.webassembly.pack\\9.0.11\\microsoft.net.sdk.webassembly.pack.9.0.11.nupkg.sha512",
     "C:\\Users\\Lenovo USER\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\Lenovo USER\\.nuget\\packages\\sourcegear.sqlite3\\3.50.4.2\\sourcegear.sqlite3.3.50.4.2.nupkg.sha512",
     "C:\\Users\\Lenovo USER\\.nuget\\packages\\sqlitepclraw.bundle_e_sqlite3\\3.0.2\\sqlitepclraw.bundle_e_sqlite3.3.0.2.nupkg.sha512",

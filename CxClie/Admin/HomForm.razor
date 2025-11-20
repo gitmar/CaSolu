@@ -1,0 +1,134 @@
+﻿@using CxShared.Models
+@using CxShared.Others
+
+<div class="my-container">
+    @if (_myOrga != null)
+    {
+        @ChildContent
+    }
+</div>
+<div class="@(inOgAding || inOgEding ? "" : "formedt-disabled")">
+    <EditForm Model="@_myOrga">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <div class="row mb-2">
+            <div class="col-2">
+                <label for="raison">Raison:</label>
+            </div>
+            <div class="col-3">
+                <InputText id="raison" @bind-Value="_myOrga.GxRaison" class="form-control" />
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-2">
+                <label for="isigl">Sigle:</label>
+            </div>
+            <div class="col-2">
+                <InputText id="isigl" @bind-Value="_myOrga.GxSigle" class="form-control" />
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-2">
+                <label for="ppays">Pays:</label>
+            </div>
+            @if (_myCatal.Countries != null && _myCatal.Countries.Count > 0)
+            {
+                <div class="col-7">
+                    <InputSelect id="ppays" @bind-Value="_myOrga.Ipays">
+                        @foreach (var utp in _myCatal.Countries)
+                        {
+                            <option value="@utp.Elea">@utp.Liba</option>
+                        }
+                    </InputSelect>
+                </div>
+            }
+            else
+            {
+                <p>pas de pays</p>
+            }
+        </div>
+        <div class="row mb-2">
+            <div class="col-2">
+                <label for="ismail">Support mail:</label>
+            </div>
+            <div class="col-4">
+                <InputText id="ismail" @bind-Value="_myOrga.HlpEmail" class="form-control" />
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-2">
+                <label for="isphon">Support website:</label>
+            </div>
+            <div class="col-4">
+                <InputText id="isphon" @bind-Value="_myOrga.HlpWurl" class="form-control" />
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-2">
+                <label for="isphon">Support phone:</label>
+            </div>
+            <div class="col-4">
+                <InputText id="isphon" @bind-Value="_myOrga.HlpPhone" class="form-control" />
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-2">
+                <label for="isphon">Support phon2:</label>
+            </div>
+            <div class="col-4">
+                <InputText id="isphon" @bind-Value="_myOrga.HlpPhon2" class="form-control" />
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-2">
+                <label for="lstiog">Last Idorg:</label>
+            </div>
+            <div class="col-2">
+                <InputNumber id="lstiog" @bind-Value="_myOrga.LastIdorg" class="form-control" />
+            </div>
+            <div class="col-4">
+                <label><i>>10000 et une seule fois):</i></label>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-2">
+                <label for="lstiac">Last Idact:</label>
+            </div>
+            <div class="col-2">
+                <InputNumber id="lstiac" @bind-Value="_myOrga.LastIdact" class="form-control" />
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-2">
+                <label for="eta">Etat:</label>
+            </div>
+            <div class="col-2">
+                <InputSelect id="eta" @bind-Value="_myOrga.Eta" class="form-select">
+                    <option value=0>Choisir</option>
+                    <option value=1>Actif</option>
+                    <option value=2>Suspendu</option>
+                </InputSelect>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-2">
+                <label for="observ">Observations:</label>
+            </div>
+            <div class="col-3">
+                <InputText id="observ" @bind-Value="_myOrga.Obsv" class="form-control" />
+            </div>
+        </div>
+    </EditForm>
+</div>
+@code {
+    [Parameter]
+    public Gxdom _myOrga { get; set; }
+    [Parameter]
+    public bool inOgAding { get; set; } = false;
+    [Parameter]
+    public bool inOgEding { get; set; } = false; 
+    [Parameter]
+    public TableSet _myCatal { get; set; }
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+}

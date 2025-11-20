@@ -9,7 +9,28 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ClieModels\**" />
+    <Content Remove="ClieModels\**" />
+    <EmbeddedResource Remove="ClieModels\**" />
+    <None Remove="ClieModels\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Services\FillMyCatals.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Client\BackRegister.razor" />
+    <Content Remove="Client\BackSetup.razor" />
+    <Content Remove="Client\CustRegister.razor" />
+    <Content Remove="Client\OrgaForm.razor" />
+    <Content Remove="Client\OrgCreate.razor" />
+    <Content Remove="Client\OrgDelete.razor" />
+    <Content Remove="Client\OrgSetup.razor" />
+    <Content Remove="Client\ZZOrgCreate.razor" />
+    <Content Remove="Order\InvClie.razor" />
+    <Content Remove="Order\OrderFlow.razor" />
+    <Content Remove="Order\ZZZInvClie.razor" />
   </ItemGroup>
 
   <ItemGroup>

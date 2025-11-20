@@ -3,10 +3,11 @@
 @using System.Dynamic
 @using System.Text
 @using BlazorBootstrap
+@using CxClie.Services
 @using CxShared.Models
+@using CxShared.Others
 @using Microsoft.AspNetCore.WebUtilities
 @using Newtonsoft.Json
-@using CxClie.Services
 @using SQLitePCL
 
 @inject IHttpClientFactory _httpFactorer
@@ -235,7 +236,7 @@
 
     private HttpClient _apiClient;
     private TableSet _myCatal = new();
-    private InviteModel _invModel = new();
+    private UsrOgSetModel _invModel = new();
 
     private Customer _curCustomer = new();
     private Order _curOrder = new();
@@ -309,9 +310,9 @@
             var myregion = _myCatal.Regions.Where(uc => uc.Elea == _invModel.Iwurl).FirstOrDefault();
             if (myregion == null) return;
             _curCustomer.Weburl = myregion.Liba;
-            _curOrder.Doma = _invModel.Idoma;
-            _curOrder.Raison = _invModel.Raison;
-            _curOrder.Sigle = _invModel.Sigle;
+            //_curOrder.Doma = _invModel.Idoma;
+            //_curOrder.Raison = _invModel.Raison;
+            //_curOrder.Sigle = _invModel.Sigle;
             _curOrder.Olang = _invModel.Olang;
             _curOrder.Step = 1;
             // Await the async call to get the Order (or Customer depending on your endpoint)
