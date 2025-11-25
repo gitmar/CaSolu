@@ -16,6 +16,7 @@ namespace CxShared.Models
         public string GxSigle { get; set; } = string.Empty;
         public int LastIdorg { get; set; } = 10000;
         public int LastIdact { get; set; } = 0;
+        public string? HlpUsername { get; set; }
         public string? HlpEmail { get; set; }
         public string? HlpWurl { get; set; }
         public string? HlpPhone { get; set; }
@@ -26,7 +27,7 @@ namespace CxShared.Models
         public string Obsv { get; set; } = string.Empty;
 
         //// Navigation
-        //public List<Agent> Agents { get; set; } = new();
+        public List<Agent> Agents { get; set; } = new();
     }
     public class Agent
     {
@@ -35,10 +36,10 @@ namespace CxShared.Models
         public int Idgx { get; set; } = 0;
         [ForeignKey(nameof(Idgx))]
         public Gxdom? Gxdom { get; set; }
-        public string Username { get; set; } = string.Empty;
-        public string UsernameOrEmail { get; set; } = string.Empty;
-        public string Phone { get; set; } = string.Empty;
         public int UsrId { get; set; } = 0;
+        public string Username { get; set; } = string.Empty;
+        //public string UsernameOrEmail { get; set; } = string.Empty;
+        public string Phone { get; set; } = string.Empty;
         public string Nom { get; set; } = string.Empty;
         public string Pnom { get; set; } = string.Empty;
         public int Role { get; set; } = 0;

@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Helpers\Auth\**" />
+    <EmbeddedResource Remove="Helpers\Auth\**" />
+    <None Remove="Helpers\Auth\**" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Compile Remove="Helpers\LinkSerialDeserializer.cs" />
     <Compile Remove="Models\InvitModels.cs" />
   </ItemGroup>
 

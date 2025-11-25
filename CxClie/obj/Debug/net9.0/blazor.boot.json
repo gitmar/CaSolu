@@ -1,15 +1,17 @@
 {
   "mainAssemblyName": "CxClie",
   "resources": {
-    "hash": "sha256-4fF0zVTKDTzetl2BZkaPYKzbC/4+WEe4YR34dJGwzgo=",
+    "hash": "sha256-lWEZ590O6HJzDxVz1N9YW9oCiHl9xQv91/BER/9DZvo=",
     "fingerprinting": {
       "BlazorBootstrap.ym6tnrklwx.wasm": "BlazorBootstrap.wasm",
       "Blazored.LocalStorage.12n6dz54qr.wasm": "Blazored.LocalStorage.wasm",
       "Microsoft.AspNetCore.Authorization.50odlujk1g.wasm": "Microsoft.AspNetCore.Authorization.wasm",
       "Microsoft.AspNetCore.Components.nxuc56wpt2.wasm": "Microsoft.AspNetCore.Components.wasm",
+      "Microsoft.AspNetCore.Components.Authorization.9360opbhdf.wasm": "Microsoft.AspNetCore.Components.Authorization.wasm",
       "Microsoft.AspNetCore.Components.Forms.ebm2eah9ku.wasm": "Microsoft.AspNetCore.Components.Forms.wasm",
       "Microsoft.AspNetCore.Components.Web.yif7zx3lgg.wasm": "Microsoft.AspNetCore.Components.Web.wasm",
       "Microsoft.AspNetCore.Components.WebAssembly.mp1gprong8.wasm": "Microsoft.AspNetCore.Components.WebAssembly.wasm",
+      "Microsoft.AspNetCore.Components.WebAssembly.Authentication.wjsyz5x6ga.wasm": "Microsoft.AspNetCore.Components.WebAssembly.Authentication.wasm",
       "Microsoft.AspNetCore.Metadata.k31h5rbs8y.wasm": "Microsoft.AspNetCore.Metadata.wasm",
       "Microsoft.AspNetCore.WebUtilities.fjucemtv8z.wasm": "Microsoft.AspNetCore.WebUtilities.wasm",
       "Microsoft.Extensions.Configuration.zwhwg8n2jl.wasm": "Microsoft.Extensions.Configuration.wasm",
@@ -30,6 +32,10 @@
       "Microsoft.Extensions.Options.8smb4p45bs.wasm": "Microsoft.Extensions.Options.wasm",
       "Microsoft.Extensions.Options.ConfigurationExtensions.cy00pk0ov5.wasm": "Microsoft.Extensions.Options.ConfigurationExtensions.wasm",
       "Microsoft.Extensions.Primitives.xtp97am9lf.wasm": "Microsoft.Extensions.Primitives.wasm",
+      "Microsoft.IdentityModel.Abstractions.0urlofobre.wasm": "Microsoft.IdentityModel.Abstractions.wasm",
+      "Microsoft.IdentityModel.JsonWebTokens.nwv2x1v2j4.wasm": "Microsoft.IdentityModel.JsonWebTokens.wasm",
+      "Microsoft.IdentityModel.Logging.7cdn7bjvei.wasm": "Microsoft.IdentityModel.Logging.wasm",
+      "Microsoft.IdentityModel.Tokens.rwcag7bch4.wasm": "Microsoft.IdentityModel.Tokens.wasm",
       "Microsoft.JSInterop.80bvot621d.wasm": "Microsoft.JSInterop.wasm",
       "Microsoft.JSInterop.WebAssembly.rryvnj25xi.wasm": "Microsoft.JSInterop.WebAssembly.wasm",
       "Microsoft.Net.Http.Headers.h9m6k6psjf.wasm": "Microsoft.Net.Http.Headers.wasm",
@@ -37,6 +43,7 @@
       "SQLitePCLRaw.batteries_v2.sdspdo4vix.wasm": "SQLitePCLRaw.batteries_v2.wasm",
       "SQLitePCLRaw.core.uubjf3tta1.wasm": "SQLitePCLRaw.core.wasm",
       "SQLitePCLRaw.provider.e_sqlite3.fi94k82bq2.wasm": "SQLitePCLRaw.provider.e_sqlite3.wasm",
+      "System.IdentityModel.Tokens.Jwt.56vvh56j2v.wasm": "System.IdentityModel.Tokens.Jwt.wasm",
       "Microsoft.CSharp.42nruzkdkt.wasm": "Microsoft.CSharp.wasm",
       "Microsoft.VisualBasic.Core.4bggtv24el.wasm": "Microsoft.VisualBasic.Core.wasm",
       "Microsoft.VisualBasic.4vzo9ck06b.wasm": "Microsoft.VisualBasic.wasm",
@@ -211,12 +218,12 @@
       "icudt_CJK.tjcz0u77k5.dat": "icudt_CJK.dat",
       "icudt_EFIGS.tptq2av103.dat": "icudt_EFIGS.dat",
       "icudt_no_CJK.lfu7j35m59.dat": "icudt_no_CJK.dat",
-      "CxShared.0v4m585ax4.wasm": "CxShared.wasm",
-      "CxShared.5o5e9z1usc.pdb": "CxShared.pdb",
+      "CxShared.ijxr9btjsn.wasm": "CxShared.wasm",
+      "CxShared.5yw5tn14o2.pdb": "CxShared.pdb",
       "dotnet.native.l7yhqj1wu5.wasm": "dotnet.native.wasm",
       "dotnet.native.jlhbmc4ikp.js": "dotnet.native.js",
-      "CxClie.nywlpz9iib.wasm": "CxClie.wasm",
-      "CxClie.bmnrzxdh5l.pdb": "CxClie.pdb"
+      "CxClie.ipg018jo54.wasm": "CxClie.wasm",
+      "CxClie.k9pyxargos.pdb": "CxClie.pdb"
     },
     "jsModuleNative": {
       "dotnet.native.jlhbmc4ikp.js": "sha256-KYz/S9f3F3Sa4W7g9XY/c2yTXJBtJxJHaZ24eCp7UiA="
@@ -241,9 +248,11 @@
       "Blazored.LocalStorage.12n6dz54qr.wasm": "sha256-OaMAAd5n7ORfyur5e3QIyEVKJ76MKIvwbg7/icnnYcU=",
       "Microsoft.AspNetCore.Authorization.50odlujk1g.wasm": "sha256-O6gwBUzf9DWkYK5DXMp4fTEAstwNFIPsjlViL0BTB+s=",
       "Microsoft.AspNetCore.Components.nxuc56wpt2.wasm": "sha256-ZZvLHwoYG5nqfX54U4Zc/UtP1KLvnqNX8L1CnogLjKw=",
+      "Microsoft.AspNetCore.Components.Authorization.9360opbhdf.wasm": "sha256-K9VNGeCmwA3gBLU1Vsf8DhnIHnrl43Xg+3UIFZDpvUA=",
       "Microsoft.AspNetCore.Components.Forms.ebm2eah9ku.wasm": "sha256-hpzAJOwIDLTR1RUMGFHDRpM1n8rgh2jSCKdsLF4LlFQ=",
       "Microsoft.AspNetCore.Components.Web.yif7zx3lgg.wasm": "sha256-WuFtMGeujNUw2UQwfZ7khzIgZsZ1u+dTa0h1sNXNvjY=",
       "Microsoft.AspNetCore.Components.WebAssembly.mp1gprong8.wasm": "sha256-Vk7jahi/pQmJ7qpIMcVyiq3Rlf6m1TtOdEJtBekfqSM=",
+      "Microsoft.AspNetCore.Components.WebAssembly.Authentication.wjsyz5x6ga.wasm": "sha256-9HMyztguqTGPsk9ccxsPZXD/GZVSQND9rUeEJS3NH/g=",
       "Microsoft.AspNetCore.Metadata.k31h5rbs8y.wasm": "sha256-0EAgDacn8sdqZA7hfOZGMMYXVyMp6b1XK+j8DAkn8cg=",
       "Microsoft.AspNetCore.WebUtilities.fjucemtv8z.wasm": "sha256-m5ssSrqIBd0XEimQCeWF38FBY4lmUbK+X+l7don9O2M=",
       "Microsoft.Extensions.Configuration.zwhwg8n2jl.wasm": "sha256-s0I0xhbIW7JgSbfDqyRhwyj+s6Xc3k7lZyihdIT0GQI=",
@@ -264,6 +273,10 @@
       "Microsoft.Extensions.Options.8smb4p45bs.wasm": "sha256-6K+4B1GEf5Gt32XBHniGt3r3Fn28PPQFeNn1KYSOtn8=",
       "Microsoft.Extensions.Options.ConfigurationExtensions.cy00pk0ov5.wasm": "sha256-LHJxyJTXngS15YKxbxoWeE9c1ppPN5KbksH4t69pycs=",
       "Microsoft.Extensions.Primitives.xtp97am9lf.wasm": "sha256-+6WuKokS33+LxRRsQK8HjiOppzZD5+UCJuOWSPChjBc=",
+      "Microsoft.IdentityModel.Abstractions.0urlofobre.wasm": "sha256-KHQvHzDTRrdY7A4bKp7ofBhf3AHfM/K7/awo/3GoYkw=",
+      "Microsoft.IdentityModel.JsonWebTokens.nwv2x1v2j4.wasm": "sha256-B+M8ohLiqc0UoaBqSDFeQY2bc0YCH/KpMuBh4Mt7UxU=",
+      "Microsoft.IdentityModel.Logging.7cdn7bjvei.wasm": "sha256-RwbHvotorpw/YaHc8phN0dcOakrKUm2K/aZm8FQrks8=",
+      "Microsoft.IdentityModel.Tokens.rwcag7bch4.wasm": "sha256-25tdx0wnLQFA0Tz5OBCMFabyDGlSJe92veJNsMgBlZk=",
       "Microsoft.JSInterop.80bvot621d.wasm": "sha256-eNV9mOxJsHNqZurPBbICViNPvU13sa4n1AIuM/bI7z8=",
       "Microsoft.JSInterop.WebAssembly.rryvnj25xi.wasm": "sha256-x8QcpOdSP7ohM7trlFQwvVqR8ANX0xTln88p8ZwodD4=",
       "Microsoft.Net.Http.Headers.h9m6k6psjf.wasm": "sha256-y020mGNqGGrbP8Ur/4OYn85rgzKVpGwifFq1G29JbB0=",
@@ -271,6 +284,7 @@
       "SQLitePCLRaw.batteries_v2.sdspdo4vix.wasm": "sha256-EBdlJIx0oF67OlsbET7oQZWUEOVSwZFKzBCfZy3VsPE=",
       "SQLitePCLRaw.core.uubjf3tta1.wasm": "sha256-OtIBJUQ8LCbWmr5PBNEn+rCbFd5aHrPNXCv+0p3U2oA=",
       "SQLitePCLRaw.provider.e_sqlite3.fi94k82bq2.wasm": "sha256-J50F2aYj7NJ+t2wUb1GiYRhwVEBof97fmzrupKV+BEU=",
+      "System.IdentityModel.Tokens.Jwt.56vvh56j2v.wasm": "sha256-c0tJ99qOwM+boA4KhHTgekVS0+vaHgkKeKgW2pbkBLU=",
       "Microsoft.CSharp.42nruzkdkt.wasm": "sha256-fHdXMBuT8VQwuYPTLam5h48nseyD1A8h24mSMdjXZyA=",
       "Microsoft.VisualBasic.Core.4bggtv24el.wasm": "sha256-cBBKlOfrEV/1xfjZwNxoPGwo7K7q5v6X2LqgawuJ/Vk=",
       "Microsoft.VisualBasic.4vzo9ck06b.wasm": "sha256-kGQHJNyOxVUzH6Ci/S8DxZPUjWwI7HFdStMiLRfvWDw=",
@@ -438,12 +452,12 @@
       "WindowsBase.i7qip04bb5.wasm": "sha256-Lg5W8BM50Cpl1dgTrG9RQOrBRKOJq6H1t5sH3yf4KDU=",
       "mscorlib.ijjuvl21w4.wasm": "sha256-ku4DyQX7IfTdwPwDlrz9odvCs4mrgsJl0fNaqY56KOI=",
       "netstandard.jgp13znru0.wasm": "sha256-I7arRnyxWh5PItslQKjzLIG7EpohJACm7p/7K8eD0YA=",
-      "CxShared.0v4m585ax4.wasm": "sha256-HNePaTpkkbQT7oscDgZ7deYGyXYnkI6J4e3iX/PRWls=",
-      "CxClie.nywlpz9iib.wasm": "sha256-H8/6lxY54iEbLhLrtQUu+01JyVB7VVQqPoqxs0ST+a0="
+      "CxShared.ijxr9btjsn.wasm": "sha256-jidLznZvUCxYBzr1SqZgxSOK/zv7Gr7fS0Mw5d4+lPw=",
+      "CxClie.ipg018jo54.wasm": "sha256-lkWIYkKxXQBXaixXeIDkI0/xrMp5/stnMCGI1djp5dc="
     },
     "pdb": {
-      "CxShared.5o5e9z1usc.pdb": "sha256-y0ZEDTGvJ5LfWyTVF/gw8u/9Z0v2QKl6Ytyl2XMp/g0=",
-      "CxClie.bmnrzxdh5l.pdb": "sha256-rRi9oAiRdEbCXUMonEF0OsKD0vtAyHCaw8CaMERpJwU="
+      "CxShared.5yw5tn14o2.pdb": "sha256-88DHTA6dIlHmfGCssgoShyyGgFnNQSPBj0bCJUWR8cE=",
+      "CxClie.k9pyxargos.pdb": "sha256-aI3j5EePCnxVSGSaBJvHUQlC0ASgScI2HgWvRgdgydI="
     }
   },
   "cacheBootResources": true,

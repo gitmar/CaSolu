@@ -1,0 +1,234 @@
+﻿@page "/clieaccess"
+
+@using CxClie.Client
+@using CxShared.Models
+@using CxClie.Services
+@using CxShared.Others
+
+@inject IHttpClientFactory _httpFactorer
+@inject TblJsonRender _tableService
+@inject NavigationManager _navManager
+
+<PageTitle>ClientAccess</PageTitle>
+
+<div class="card p-4 shadow-sm" style="max-width: 400px;">
+@* <Tabs>
+    <Tab title="Base">
+        <Content>
+ *@            <div class="mb-3">
+                <label>Institution</label>
+                <InputSelect @bind-Value="accesModel.Idorg"
+                     class="form-select">
+                        @* <option value="0">client?</option> *@
+                    @foreach (var c in LsCustomers)
+                    {
+                        <option value="@c.Idorg" @onclick="() => GetCurCust(c)">@c.Nom @c.Pnom @c.Weburl</option>
+                    }
+                </InputSelect>
+            </div>
+            <div class="mb-3">
+                <InputSelect @bind-Value="accesModel.Idorg"
+                     class="form-select">
+                    @* <option value="0">client?</option> *@
+                    @foreach (var c in LsCustomers)
+                    {
+                        <option value="@c.Idorg" @onclick="() => GetCurCust(c)">@c.Idorg @c.Weburl</option>
+                    }
+                </InputSelect>
+            </div>
+            <div class="mb-3">
+                <label>Backend URL</label>
+                <InputText class="form-control" @bind-Value="accesModel.BackendUrl" />
+            </div>
+            <div class="mb-3">
+                <label>Agent</label>
+                <InputSelect id="sagt" @bind-Value="accesModel.Idagt">
+                    @foreach (var agt in curGxdom.Agents)
+                    {
+                        <option value="agt.Id">@agt.Nom @agt.Pnom</option>
+                    }
+                </InputSelect>
+            </div>
+        @* </Content>
+    </Tab> *@
+        @* <Tab Title="Login" Class="@(IsMainReady ? "" : "d-none")">
+                <Content>
+                    <Login @ref="myclog"
+                        _inCustomer="curCustomer"
+                        _inCatal="myCatal"
+                        _inIdagt="accesModel.Idagt"
+                        _inGxdom="curGxdom">
+                    </Login>
+                </Content>
+        </Tab>
+        <Tab Title="Register" Class="@(IsMainReady ? "" : "d-none")">
+                <Content>
+                    <Register @ref="mycreg"
+                    _inCustomer="curCustomer"
+                    _inCatal="myCatal"
+                    _inIdagt="accesModel.Idagt"
+                    _inGxdom="curGxdom">
+                    </Register>
+                </Content>
+            </Tab>
+
+        <Tab Title="Installer" Class="@(IsMainReady ? "" : "d-none")">
+                <Content>
+                    <OrgaCreate @ref="mycorg"
+                    _inCustomer="curCustomer"
+                    _inCatal="myCatal"
+                    _inIdagt="accesModel.Idagt"
+                    _inGxdom="curGxdom">
+                        <ChildContent>
+                            CREATION INSTITUTION
+                        </ChildContent>
+                    </OrgaCreate>
+                </Content>
+            </Tab>
+    </Tabs> *@
+    @if (orig == 1 && canLoadApage)
+    {
+        <LoginToClient @ref="myclog"
+               _inCustomer="curCustomer"
+               _inCatal="myCatal"
+               _inIdagt="accesModel.Idagt"
+               _inGxdom="curGxdom">
+        </LoginToClient>
+    }
+    @if (orig == 2 && canLoadApage)
+    {
+        <RegisterAtClient @ref="mycreg"
+                  _inCustomer="curCustomer"
+                  _inCatal="myCatal"
+                  _inIdagt="accesModel.Idagt"
+                  _inGxdom="curGxdom">
+        </RegisterAtClient>
+    }
+    @if (orig == 3 && canLoadApage)
+    { //_inOrder="curOrder"
+        <CustOrgaSetup @ref="mycorg"
+                       _inCustomer="curCustomer"
+                       _inCatal="myCatal"
+                       _inGxdom="curGxdom">
+            <ChildContent>
+                <h2>CREATION INSTITUTION</h2>
+            </ChildContent>
+        </CustOrgaSetup>
+    }
+</div>
+@code {
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public int orig { get; set; }
+
+    private AccesModel accesModel = new();
+    private HttpClient _apiClient;
+    //private HttpClient _locClient;
+
+    private CustOrgaSetup mycorg;
+    private RegisterAtClient mycreg;
+    private LoginToClient myclog;
+
+    private Customer curCustomer = new();
+    private Gxdom curGxdom = new();
+    private TableSet? myCatal = new();
+
+    private bool IsMainReady =>
+        accesModel.Idorg > 0 &&
+        !string.IsNullOrEmpty(accesModel.BackendUrl);
+
+    private string Imessage = "", straction = "";
+    private bool isLoading = false, canLoadApage = false;
+
+    private List<Customer> LsCustomers = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        isLoading = true;
+        _apiClient = _httpFactorer.CreateClient("ApiGxClient");
+        //_locClient = _httpFactorer.CreateClient("simpleApiClient");
+        await Task.Delay(1);
+        try
+        {
+            myCatal = await _tableService.rendTables();
+        }
+        catch (Exception ex)
+        {
+            Imessage = "probleme catalogue des options";
+        }
+    }
+    protected override async Task OnParametersSetAsync()
+    {
+        if (orig != 1 && orig != 2 && orig != 3)
+        {
+            _navManager.NavigateTo("/");
+        }
+        await GetCurGxdom();
+        if (orig == 1)
+        { //login
+            straction = "Login in Client";
+        }
+        if (orig == 2)
+        { //register
+            straction = "Register at Client";
+        }
+        if (orig == 3)
+        { //register
+            straction = "Create Client Institution";
+        }
+        isLoading = false;
+        StateHasChanged();
+    }
+    private async Task GetCurCust(Customer mycust)
+    {
+        if (mycust != null)
+        {
+            curCustomer = mycust;
+            accesModel.BackendUrl = mycust.Weburl;
+            canLoadApage = true;
+        }
+    }
+    private async Task GetCurGxdom()
+    {
+        int idog = 10001;
+        var respidogs = await _apiClient.GetFromJsonAsync<List<Gxdom>>("api/gxdoms/rendall");
+        curGxdom = new();
+        if (respidogs != null && respidogs.Any())
+        {
+            curGxdom = respidogs.FirstOrDefault();
+        }
+        else
+        {
+            //Imessage = "Organisation absente ou compromise";
+            return;
+        }
+        //init Customer
+        LsCustomers = await _apiClient.GetFromJsonAsync<List<Customer>>("api/customers/rendall");
+        if (!LsCustomers.Any())
+        {
+            Imessage = "pas de client";
+            return;
+        }
+        curCustomer = LsCustomers.FirstOrDefault();
+        accesModel.BackendUrl = curCustomer.Weburl;
+        accesModel.Idorg = curCustomer.Idorg;
+        Console.WriteLine($"AVANT");
+    }
+    private async Task goActionPage()
+    {
+        if (orig == 1)
+        { //login
+
+        }
+        if (orig == 2)
+        { //register
+            
+        }
+    }
+    public class AccesModel
+    {
+        public string BackendUrl { get; set; } = "";
+        public int Idorg { get; set; }
+        public int Idagt { get; set; }
+    }
+}

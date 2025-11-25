@@ -1,0 +1,164 @@
+﻿@page "/orgadelete"
+
+@using System
+@using System.ComponentModel.DataAnnotations
+@using System.Reflection
+@using System.Text
+@using System.Text.Json
+@using CxClie.Services
+@using CxShared.Models
+@using CxShared.Helpers
+@using CxShared.Others
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.WebUtilities
+@using SQLitePCL
+
+@inject IHttpClientFactory _httpFactorer
+@inject NavigationManager _navmanager
+@inject TblJsonRender _tableService
+@inject IDynamicApiClientService DynamicApi
+@inject IJSRuntime _jsRun
+
+<PageTitle>OrgaDelete</PageTitle>
+
+@if (yaerrors)
+{
+    foreach (var error in errorList)
+    {
+        <div class="alert alert-danger">@error</div>
+    }
+}
+
+@if (isLoading)
+{
+    <Progress class="progress mb-3">
+        <ProgressBar Width="30" Label="Creation Institution Loading..." Type="ProgressType.StripedAndAnimated" Color="ProgressColor.Primary" />
+    </Progress>
+}
+@* <div class="d-flex flex-column">
+        <div class="my-container">
+            @ChildContent
+        </div>
+</div> *@
+@* <EditForm Context="regform" Model="_invModel">
+    <DataAnnotationsValidator />
+    <ValidationSummary /> *@
+    <div class="container container-fluid">
+        <div class="row mb-2">
+            message :
+            <label style="font-weight: bold; color: red; background-color: yellow;">@Imessage</label>
+        </div>
+        <div class="row mb-2">
+            <div class="col-8">
+                <label class="fw-bold">IDENTITY SUPPORT :</label>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-4">
+                <label for="idog">Orga Id:</label>
+            </div>
+            <div class="col-5">
+                <InputNumber id="idog" required @bind-Value="_inIdorg" class="form-control" />
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-4">
+                <label for="ouname">Pseudo/Email:</label>
+            </div>
+            <div class="col-7">
+                (6 to 15 characters)
+                <InputText id="ouname" required @bind-Value="_inUsernameOrEmail" class="form-control" />
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-4">
+                <label for="password">Password:</label>
+            </div>
+            <div class="col-7">
+                <InputText id="password" required @bind-Value="_inPassword" type="password" class="form-control" />
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-8">
+                <button class="btn btn-danger btn-sm" @onclick="() => DeleteOrga()">
+                    🗑️🗑️🗑️🗑️🗑️ Supprimer exceptionnellement INSTITUTION
+                </button>
+            </div>
+        </div>
+    </div>
+@* </EditForm> *@
+
+@code {
+    //[Parameter]
+    //public RenderFragment ChildContent { get; set; }
+    // [Parameter]
+    // public Customer _inCustomer { get; set; }
+    // [Parameter]
+    // public Order _inOrder { get; set; }
+    // [Parameter]
+    // public Gxdom _inGxdom { get; set; }
+    // [Parameter]
+    // public TableSet _inCatal { get; set; }
+
+    private bool isLoading = false, yaerrors = false;
+    private string successmsg = "", errmess = "", Imessage = "";
+    private List<string> errorList = new();
+    //TEST
+    private int _inIdorg = 10005;
+    private string _inUsernameOrEmail = "lenavire@yahoo.fr";
+    private string _inPassword = "Jesuis@99";
+    private string _inWeburl = "https://localhost:7095";
+
+    //private HttpClient _apiClient;
+    private HttpClient _locClient;
+    //private TableSet _myCatal = new();
+    //private BackModel _retModel = new();
+    //private UsrOgSetModel _invModel = new();
+    //private string _generatedLink = "";
+
+    //private bool isInstallable => _inCustomer.Email != null && _inCustomer.Idoma != 0 && _inCustomer.Jdoma != 0;
+
+    //private List<Customer> LsCustomers = new();
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        isLoading = true;
+        yaerrors = false; errorList.Clear(); successmsg = "";
+        
+        //_apiClient = _httpFactorer.CreateClient("ApiGxClient");
+        _locClient = _httpFactorer.CreateClient("simpleApiClient");
+        _inIdorg = 10005;
+        _inUsernameOrEmail = "lenavire@yahoo.fr";
+        _inPassword = "Jesuis@99";
+        _inWeburl = "https://localhost:7095";
+        yaerrors = false; isLoading = false;
+        StateHasChanged();
+    }
+    private async Task DeleteOrga()
+    {
+        Imessage = "Suppression en cours...";
+        // Set dynamic backend URL
+        DynamicApi.SetBaseUrl(_inWeburl);
+        // Get preconfigured HttpClient (BaseAddress + JWT)
+        var http = DynamicApi.GetClient();
+        UsrOgSetModel requestModel = new()
+        {
+            UsernameOrEmail = _inUsernameOrEmail,
+            Password = _inPassword,
+            Idorg = _inIdorg,
+            FbackUrl = _locClient.BaseAddress + "sitesflow",
+        };
+        // ❗ IMPORTANT: Use ONLY the relative API path
+        var response = await http.PostAsJsonAsync("api/usercontext/delxorga", requestModel);
+        if (response.IsSuccessStatusCode)
+        {
+            Imessage = $"Orga : {_inIdorg} deleted successfully";
+        }
+        else
+        {
+            var error = await response.Content.ReadAsStringAsync();
+            Imessage = $"Orga : {_inIdorg} failed to be deleted. ERROR: {error}";
+        }
+    }
+}

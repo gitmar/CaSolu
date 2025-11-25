@@ -1,0 +1,187 @@
+﻿@page "/login"
+
+@using CxClie.Services
+@using CxShared.Models
+@using CxShared.Others
+@using CxShared.Auth
+
+@inject IFrontendLoginService LoginService
+@inject IHttpClientFactory _httpFactorer
+@inject NavigationManager Nav
+
+<PageTitle>Login</PageTitle>
+<h3>Support Login</h3>
+
+<div class="card p-4 shadow-sm" style="max-width: 400px;">
+    <EditForm Model="loginModel" OnValidSubmit="HandleLogin">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <!-- STATUS MESSAGE -->
+        @if (!string.IsNullOrEmpty(Imessage))
+        {
+            <div class="alert alert-warning fw-bold text-danger">
+                @Imessage
+            </div>
+        }
+        <!-- ORGA INFO CARD -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Organisation</h5>
+            </div>
+            <div class="card-body">
+                <div class="row mb-1">
+                    <label class="fw-bold">
+                        @loginModel.Idorg
+                        - @loginModel.BackendUrl
+                        - @strAgent
+                    </label>
+                </div>
+                <div class="row mb-1">
+                    <label class="fw-bold">
+                        @loginModel.Raison
+                    </label>
+                </div>
+                <div class="row mb-1">
+                    <label class="fw-bold">
+                        @loginModel.Nom
+                        - @loginModel.Pnom
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label>Username or Email</label>
+            <InputText class="form-control" @bind-Value="loginModel.UsernameOrEmail" />
+        </div>
+
+        <div class="mb-3">
+            <label>Password</label>
+            <InputText type="password" class="form-control" @bind-Value="loginModel.Password" />
+        </div>
+
+        <button class="btn btn-primary w-100" disabled="@isBusy">
+            @if (isBusy)
+            {
+                <span>Connecting...</span>
+            }
+            else
+            {
+                <span>Login</span>
+            }
+        </button>
+
+        @if (!string.IsNullOrEmpty(Error))
+        {
+            <div class="alert alert-danger mt-3">@Error</div>
+        }
+    </EditForm>
+</div>
+
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+    [Parameter]
+    public Customer _inCustomer { get; set; }
+    [Parameter]
+    public Gxdom _inGxdom { get; set; }
+    [Parameter]
+    public TableSet _inCatal { get; set; }
+    [Parameter]
+    public int _inIdagt { get; set; }
+
+    private LoginModel loginModel = new();
+    private bool isBusy = false;
+    private string? Error;
+
+    private string Imessage = "", strAgent = "";
+
+    private Gxdom _curGxdom = new();
+    private HttpClient _custClient;
+    private HttpClient _locxClient;
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        _custClient = _httpFactorer.CreateClient("ApiGxClient");
+        //_locxClient = _httpFactorer.CreateClient("LocalClient");
+    }
+    protected override async Task OnParametersSetAsync()
+    {
+        loginModel.Idorg = _inCustomer.Idorg;
+        loginModel.BackendUrl = _inCustomer.Weburl;
+        loginModel.Idagt = _inIdagt;
+        loginModel.Sigle = _inCustomer.Sigle;
+        loginModel.Raison = _inCustomer.Raison;
+        loginModel.UsernameOrEmail = _inGxdom.HlpUsername;
+        //loginModel.Nom = _inCustomer.Nom;
+        //loginModel.Pnom = _inCustomer.Pnom;
+        strAgent = _inIdagt.ToString();
+        //login UsernameOrEmail and Password get from the UI
+    }
+    private async Task HandleLogin()
+    {
+        Error = null;
+        isBusy = true;
+        var result = await LoginService.LoginAsync("GxApi", loginModel);
+        isBusy = false;
+        if (result == null)
+        {
+            Error = "Login failed. Check credentials.";
+            return;
+        }
+        // success
+        Nav.NavigateTo("/");
+    }
+
+    // public class LoginPageModel
+    // {
+    //     public string BackendUrl { get; set; } = ""; //set by the client
+    //     public string FbackUrl { get; set; } = ""; //set for the return to blazor with messages
+    //     public string Username { get; set; } = "";
+    //     public string Password { get; set; } = "";
+    //     public int Idorg { get; set; }
+    //     public int Agtid { get; set; }
+    //     public string Sigle { get; set; } = "";
+    //     public string Raison { get; set; } = "";
+    //     public string Nom { get; set; } = "";
+    //     public string Pnom { get; set; } = "";
+    //     public bool SiSupport { get; set; } = false;
+    //     public string Weburl { get; set; } = "";
+    // }
+
+    // private async Task JoinUserWebsite()
+    // {
+    //     //COMMUNICATION CLIENT/VENDEUR
+    //     // Example: user typed https://www.a24soft.com
+    //     //CLIENT : Backend /user website
+    //     var inpUrl = loginModel.BackendUrl;
+    //     if (!inpUrl.StartsWith("http", StringComparison.OrdinalIgnoreCase))
+    //         inpUrl = "https://" + inpUrl;
+    //     inpUrl = inpUrl.TrimEnd('/');
+    //     inpUrl = inpUrl + "/api/lgauth"; //controller
+    //     //SALER : Return Blazor Frontend
+    //     string backUrl = _locxClient.BaseAddress?.ToString().TrimEnd('/');
+    //     backUrl = backUrl + "/";
+    //     loginModel.FbackUrl = backUrl + "sitesflow"; //for webApi re-direct
+    //     loginModel.SiSupport = true;
+    //     //loginModel.Username = _invModel.HlpUname; //forcing
+
+    //     // Set dynamic client base URL
+    //     DynClient.SetBaseUrl(inpUrl);
+
+    //     // Get the HttpClient
+    //     var client = DynClient.GetClient();
+
+    //     // Call the register endpoint
+    //     var response = await client.GetAsync("login");
+    //     if (response.IsSuccessStatusCode)
+    //     {
+    //         var content = await response.Content.ReadAsStringAsync();
+    //         Console.WriteLine(content);
+    //     }
+    //     //_navmanager.NavigateTo($"{inpUrl}/login", forceLoad: true);
+    // }
+}
+

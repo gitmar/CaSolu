@@ -1,4 +1,10 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
+﻿@using CxClie.Services
+
+@inject AppState _appState
+@inject NavigationManager _navManager
+@inject IFrontendLoginService _loginService
+
+<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="">CxClie</a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
@@ -15,38 +21,48 @@
         </div>
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="homesetup">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Nous...
+                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Gx-Home
             </NavLink>
         </div>
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="ordercreate">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Commande
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" @onclick="ToggleSubManag">
-                <Icon Name="IconName.PlusSquareFill" Size="IconSize.x5" Color="IconColor.White" /> &nbsp; --> Tests
-            </NavLink>
-            @if (isSubManagVisible)
+            <NavLink class="nav-link" @onclick="ToggleSubClient">
+            <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Clients
+            @* <Icon Name="IconName.PlusSquareFill" Size="IconSize.x5" Color="IconColor.White" /> &nbsp; Clients *@
+        </NavLink>
+            @if (isSubClientVisible)
             {
-                <nav class="nav flex-column">
-                    <div class="nav-item px-3 py-0">
-                        <NavLink class="nav-link" href="custregister">
-                            <Icon Name="IconName.CaretRightSquare" /> &nbsp; Clie_Register
+            <nav class="nav flex-column">
+                @* @if (_appState.IsAuthenticated("GxApi"))
+                { *@
+                        <NavLink class="nav-link nav-sub" href="ordermanage">
+                            <Icon Name="IconName.CaretRightSquare" /> &nbsp; Commandes
                         </NavLink>
-                    </div>
-                    <div class="nav-item px-3 py-0">
-                        <NavLink class="nav-link" href="orgsetup">
-                            <Icon Name="IconName.CaretRightSquare" /> &nbsp; Clie_Creorga
-                        </NavLink>
-                    </div>
-                    <div class="nav-item px-3 py-0">
-                        <NavLink class="nav-link" href="orderflow">
-                            <Icon Name="IconName.CaretRightSquare" /> &nbsp; Clie_OrdFlow
-                        </NavLink>
-                    </div>
-                 </nav>
-            }
+                        @if (_appState.IsAuthenticated("CustApi"))
+                        {
+                            <NavLink class="nav-link nav-sub" href="clieaccess?orig=3">
+                                <Icon Name="IconName.CaretRightSquare" /> &nbsp; Install
+                            </NavLink>
+                            <NavLink class="nav-link nav-sub" @onclick="()=> CustLogout()">
+                                <Icon Name="IconName.CaretRightSquare" /> &nbsp; Logout
+                            </NavLink>
+                        }
+                        @* } else
+                        { *@
+                            <NavLink class="nav-link nav-sub" href="clieaccess?orig=1">
+                                <Icon Name="IconName.CaretRightSquare" /> &nbsp; Login
+                            </NavLink>
+                            <NavLink class="nav-link nav-sub" href="clieaccess?orig=2">
+                                <Icon Name="IconName.CaretRightSquare" /> &nbsp; Register
+                            </NavLink>
+                        @* } *@
+               @*  } *@
+            </nav>
+        }
+        </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="orgadelete">
+                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Suppression
+            </NavLink>
         </div>
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="????">
@@ -63,15 +79,35 @@
                 <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Weather
             </NavLink>
         </div>
+        <div class="nav-item px-3 fw-bold text-bg-light">
+            <span>VerifValue : @authValue</span>
+        </div>
     </nav>
+    <button type="button" @onclick="GetAuthen">VerifAuthentication</button>
+     
 </div>
 
 @code {
     private bool collapseNavMenu = true;
     private bool isSubManagVisible = false;
+    private bool isSubClientVisible = false;
 
     private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
+    private string authValue="";
+    protected override void OnParametersSet()
+    {
+        bool siauth = _appState.IsAuthenticated("CustApi");
+        Console.WriteLine($"NavMenu OnParametersSet - CustApi Authenticated: {siauth}");
+        authValue = "vide";
+        if (siauth) authValue = "estbon";
+    }
+    private void GetAuthen()
+    {
+        bool siauth = _appState.IsAuthenticated("CustApi");
+        authValue = "vide";
+        if (siauth) authValue = "estbon";
+    }
     private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
@@ -79,5 +115,14 @@
     private void ToggleSubManag()
     {
         isSubManagVisible = !isSubManagVisible;
+    }
+    private void ToggleSubClient()
+    {
+        isSubClientVisible = !isSubClientVisible;
+    }
+    private void CustLogout()
+    {
+        _loginService.CustLogout();
+        _navManager.NavigateTo("/");
     }
 }

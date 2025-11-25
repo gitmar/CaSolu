@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CxClie")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4474fc3913d644009daa132c5f99a3d15e4e3f9e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+437729efd984edb0ab81957989a8e2a38da3e9c2")]
 [assembly: System.Reflection.AssemblyProductAttribute("CxClie")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CxClie")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

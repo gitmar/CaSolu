@@ -1,4 +1,4 @@
-﻿@page "/orgacreate"
+﻿@page "/custorgasetup"
 
 @using System
 @using System.ComponentModel.DataAnnotations
@@ -13,13 +13,16 @@
 @using Microsoft.AspNetCore.WebUtilities
 @using SQLitePCL
 
+
 @inject IHttpClientFactory _httpFactorer
 @inject NavigationManager _navmanager
 @inject TblJsonRender _tableService
+@inject LinkSerialiser _linkSerialiser
+@inject IDynamicApiClientService _dynClient
 @inject IJSRuntime _jsRun
 
 <PageTitle>OrgCreate</PageTitle>
-
+<h3>Institution Creation</h3>
 @if (yaerrors)
 {
     foreach (var error in errorList)
@@ -35,7 +38,7 @@
     </Progress>
 }
 <div class="d-flex flex-column">
-    @if (_inOrder != null)
+    @if (curOrder != null)
     {
         <div class="my-container">
             @ChildContent
@@ -46,44 +49,59 @@
     <DataAnnotationsValidator />
     <ValidationSummary />
     <div class="container container-fluid">
-        <div class="row mb-2">
-            message :
-            <label style="font-weight: bold; color: red; background-color: yellow;">@Imessage</label>
+        <!-- STATUS MESSAGE -->
+        @if (!string.IsNullOrEmpty(Imessage))
+        {
+            <div class="alert alert-warning fw-bold text-danger">
+                @Imessage
+            </div>
+        }
+        <!-- ORGA INFO CARD -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Organisation</h5>
+            </div>
+            <div class="card-body">
+                <div class="row mb-1">
+                    <label class="fw-bold">
+                        @_invModel.Idorg
+                        - @_invModel.Weburl
+                        - @strAgent
+                    </label>
+                </div>
+                <div class="row mb-1">
+                    <label class="fw-bold">
+                        @_invModel.Raison
+                    </label>
+                </div>
+                <div class="row mb-1">
+                    <label class="fw-bold">
+                        @_invModel.Nom
+                        - @_invModel.Pnom
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label>Order</label>
+            <InputSelect @bind-Value="_invModel.Ordid"
+                         class="form-select">
+                @foreach (var o in LscOrders)
+                {
+                    <option value="@o.Id" @onclick="() => GetCurOrder(o)">@o.OIdstr @_inCustomer.Weburl</option>
+                }
+            </InputSelect>
         </div>
         <div class="row mb-2">
-            <div class="col-2">
-                <label><h3><b>@_invModel.Idorg</b></h3></label>
-            </div>
-            <div class="col-8">
-                <label class="fw-bold">@_invModel.Raison</label>
-            </div>
-        </div>
-        <div class="row mb-2">
-            <div class="col-2">
-                <label for="sigle">Sigle:</label>
-            </div>
-            <div class="col-4">
-                <label class="fw-bold">@_invModel.Sigle</label>
-            </div>
-        </div>
-        <div class="row mb-2">
-            <div class="col-2">
-                <label for="toweb">website:</label>
-            </div>
-            <div class="col-8">
-                <label class="fw-bold">@_invModel.Weburl</label>
-            </div>
-        </div>
-        <div class="row mb-2">
-            <div class="col-2">
+            <div class="col-3">
                 <label for="toweb">domaine:</label>
             </div>
             <div class="col-3">
-                <label class="fw-bold">@stDoma</label>
+                <label class="fw-bold">@siDoma</label>
             </div>
         </div>
         <div class="row mb-2">
-            <div class="col-2">
+            <div class="col-3">
                 <label for="phone">Phone:</label>
             </div>
             <div class="col-4">
@@ -91,7 +109,7 @@
             </div>
         </div>
         <div class="row mb-2">
-            <div class="col-2">
+            <div class="col-3">
                 <label for="email">Email:</label>
             </div>
             <div class="col-7">
@@ -99,7 +117,7 @@
             </div>
         </div>
         <div class="row mb-2">
-            <div class="col-2">
+            <div class="col-3">
                 <label for="onom">Nom:</label>
             </div>
             <div class="col-7">
@@ -107,7 +125,7 @@
             </div>
         </div>
         <div class="row mb-2">
-            <div class="col-2">
+            <div class="col-3">
                 <label for="opnoms">Prenom(s):</label>
             </div>
             <div class="col-7">
@@ -118,7 +136,7 @@
         {
             <div class="row mb-2">
                 <div class="col-8">
-                    <label class="fw-bold">IDENTITY SUPPORT :</label>
+                    <label class="fw-bold">LOGIN SUPPORT (sinon):</label>
                 </div>
             </div>
             <div class="row mb-2">
@@ -159,69 +177,100 @@
     public RenderFragment ChildContent { get; set; }
     [Parameter]
     public Customer _inCustomer { get; set; }
-    [Parameter]
-    public Order _inOrder { get; set; }
+    //[Parameter]
+    //public Order curOrder { get; set; }
     [Parameter]
     public Gxdom _inGxdom { get; set; }
     [Parameter]
     public TableSet _inCatal { get; set; }
+    [Parameter]
+    public int _inIdagt { get; set; }
 
     private bool isLoading = false, yaerrors = false;
     private string successmsg = "";
     private List<string> errorList = new();
-    private string stDoma = "", UsernameOrEmail = "", Password = "";
+    private string siDoma = "", sjDoma = "", UsernameOrEmail = "", Password = "";
     //recu de Qry
     private int iorig = 0, noerror = 0;
-    private string errmess = "";
-
+    private string errmess = "", strOrga = "", strAgent = "";
     private string Imessage = "";
+
     private HttpClient _apiClient;
-    private HttpClient _locClient;
+    //private HttpClient _locClient;
     //private TableSet _myCatal = new();
     //private BackModel _retModel = new();
     private UsrOgSetModel _invModel = new();
     //private string _generatedLink = "";
 
-    private bool isInstallable => _inCustomer.Email != null && _inCustomer.Doma != 0;
+    private bool isInstallable => _inCustomer.Email != null && _inCustomer.Idoma != 0 && _inCustomer.Jdoma != 0;
 
     private List<Customer> LsCustomers = new();
-
+    private List<Order> LscOrders = new();
+    private Order curOrder = new();
 
     protected override async Task OnInitializedAsync()
     {
         isLoading = true;
         yaerrors = false; errorList.Clear(); successmsg = "";
-        _apiClient = _httpFactorer.CreateClient("wApiClient");
-        _locClient = _httpFactorer.CreateClient("simpleApiClient");
+        _apiClient = _httpFactorer.CreateClient("ApiGxClient");
     }
     protected override async Task OnParametersSetAsync()
     {
         _invModel = new();
+        //pre-filled
+        ModelHelper.CopyMatchingProperties(_inCustomer, _invModel);
+        //ModelHelper.CopyMatchingProperties(curOrder, _invModel);
         _invModel.HlpEmail = _inGxdom.HlpEmail;
         _invModel.HlpWurl = _inGxdom.HlpWurl;
         _invModel.HlpPhone = _inGxdom.HlpPhone;
         _invModel.HlpPhon2 = _inGxdom.HlpPhon2;
         _invModel.HlpSrole = "Support";
-        //pre-filled
-        ModelHelper.CopyMatchingProperties(_inCustomer, _invModel);
-        ModelHelper.CopyMatchingProperties(_inOrder, _invModel);
+        _invModel.Idorg = _inCustomer.Idorg;
+        _invModel.FbackUrl = _inCustomer.Weburl;
+        _invModel.Agtid = _inIdagt;
+        strAgent = _inIdagt.ToString();
         Console.WriteLine($"test : {_inCustomer.Nom} et {_invModel.Nom}");
-        int Idoma = _inCustomer.Doma;
+        int Idoma = _inCustomer.Idoma;
         var odDoma = _inCatal.Domas.Where(ud => ud.Elea == Idoma).FirstOrDefault();
         if (odDoma != null)
         {
-            stDoma = odDoma.Liba;
+            siDoma = odDoma.Liba;
         }
-        //Console.WriteLine($"nb Orders : {LsOrders.Count}");
-        //Console.WriteLine(jsdata);
-        //Console.Write("Zone table");
+        int Jdoma = _inCustomer.Jdoma;
+        var odjDoma = _inCatal.Domas.Where(ud => ud.Elea == Jdoma).FirstOrDefault();
+        if (odjDoma != null)
+        {
+            sjDoma = odjDoma.Liba;
+        }
+
+        var jsOrders = await _apiClient.GetFromJsonAsync<List<Order>>("api/orders/rendall");
+        if (!jsOrders.Any())
+        {
+            Imessage = "pas de client";
+            return;
+        }
+        LscOrders = jsOrders.Where(uo => uo.Idclie == _inCustomer.Id).ToList();
+        if (LscOrders.Any())
+        {
+            _invModel.Ordid = LscOrders.FirstOrDefault().Id;
+            curOrder = LscOrders.FirstOrDefault();
+            if (curOrder !=  null)
+            {
+                _invModel.Ordid = LscOrders.FirstOrDefault().Id;
+            }
+        }
+        Console.WriteLine($"nb Orders : {LscOrders.Count}");
         yaerrors = false; isLoading = false;
         Console.WriteLine($"DANS ORGA / {_inCustomer.Nom} et {_inCustomer.Pnom}");
-        Console.WriteLine($"DANS ORGA / {_inCustomer.Weburl} et {_inCustomer.HlpWurl}");
-        Console.WriteLine($"DANS ORGA / {_inGxdom.HlpEmail} et {_inGxdom.HlpPhone} et {_inGxdom.HlpWurl}");
         StateHasChanged();
     }
-    private void CreateCustOrga()
+    private void GetCurOrder(Order myord)
+    {
+        curOrder = myord;
+        strOrga = curOrder.Customer.Raison;
+        Console.WriteLine($"Current Order link : {curOrder.OCdinvit}");
+    }
+    private async Task CreateCustOrga()
     {
         if (string.IsNullOrEmpty(UsernameOrEmail))
         {
@@ -236,24 +285,40 @@
 
         Imessage = "Installation en cours...";
         Console.WriteLine($"combined Model : {Password}");        
-        
+
+        //inpUrl <-- curOrder.OCdinvit
+
         //backUrl
-        string backUrl = _locClient.BaseAddress?.ToString().TrimEnd('/') + "/sitesflow";
-        
+        string backUrl = _apiClient.BaseAddress + "sitesflow";
+        Console.WriteLine($"Return address : {backUrl}");
         var credsDto = new UsrCredsModel
         {
-            Idorg = _inOrder.Oidorg,
-            Ordid = _inOrder.Id,
+            Idorg = curOrder.Oidorg,
+            Ordid = curOrder.Id,
             UsernameOrEmail = UsernameOrEmail,
             Password = Password,
             FbackUrl = backUrl
         };
-        var _linkSerialiser = new LinkSerialiser(_jsRun);
         var ogqryplusEncoded = _linkSerialiser.EncodeAndSerialize<UsrCredsModel>(credsDto);
         // Append with '&' since cdlink is already present
-        var finalLink = $"{_inOrder.OCdinvit}&ogqryplus={ogqryplusEncoded}";
-        _navmanager.NavigateTo(finalLink);
+        var client = _dynClient.GetClient(); // or your named HttpClient with token handler
+        Console.WriteLine($"Client BaseAddress : {client.BaseAddress.ToString()}");
+        var finalLink = $"{curOrder.OCdinvit}&ogqryplus={ogqryplusEncoded}";
+        Console.WriteLine($"Final Link : {finalLink}");
+        var response = await client.GetAsync(finalLink);
+        if (response.IsSuccessStatusCode)
+        {
+            var result = await response.Content.ReadAsStringAsync();
+            Imessage = "Orga creation started!";
+        }
+        else
+        {
+            Imessage = $"Failed: {response.StatusCode}";
+        }
+        
+        
+        // var finalLink = $"{curOrder.OCdinvit}&ogqryplus={ogqryplusEncoded}";
+        // Console.WriteLine($"Site client to install : {finalLink}");
+        // _navmanager.NavigateTo(finalLink);
     }
 }
-
-

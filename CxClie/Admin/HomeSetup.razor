@@ -31,7 +31,10 @@
 <Tabs Id="tab-contenu">
     <Tab Title="Vue">
         <Content>
-            <HomForm @ref="mygform"
+            @if (_myOrga != null)
+            {
+                <HomForm @ref="mygform"
+                _Orig=3
                      _myOrga="@_myOrga"
                      _myCatal="@_myCatal"
                      inOgAding="@inOgAding"
@@ -40,14 +43,18 @@
                     <h2>Vue de GX-SOLUTIONS</h2>
                 </ChildContent>
             </HomForm>
+            }
         </Content>
     </Tab>
     <Tab Title="Modification">
         <Content>
             <button class="btn btn-sm btn-secondary" @onclick="() => EdtMyOrga()">
-                ✏️ Edit
+                    ✏️ Edit
             </button>
-            <HomForm @ref="mygform"
+            @if (inOgEding && _myOrga != null)
+            {
+                <HomForm @ref="mygform"
+                _Orig=2
                      _myOrga="@_myOrga"
                      _myCatal="@_myCatal"
                      inOgAding="@inOgAding"
@@ -56,17 +63,18 @@
                     <h2>Modification Gx-Solutions</h2>
                 </ChildContent>
             </HomForm>
+            }
         </Content>
     </Tab>
     <Tab Title="Initialisation">
         <Content>
-            @if (!OrgaPresent)
+            <button class="btn btn-primary btn-sm" @onclick="() => AddMyOrga()">
+                ➕ Add <span> (normalement une seule fois)</span>
+            </button>
+            @if (inOgAding)
             {
-                <button class="btn btn-primary btn-sm" @onclick="() => AddMyOrga()">
-                    ➕ Add <span> (normalement une seule fois)</span>
-                </button>
-            }
-            <HomForm @ref="mygform"
+                <HomForm @ref="mygform"
+                    _Orig=1
                      _myOrga="@_myOrga"
                      _myCatal="@_myCatal"
                      inOgAding="@inOgAding"
@@ -75,6 +83,7 @@
                     <h2>Initialization Gx-Solutions</h2>
                 </ChildContent>
             </HomForm>
+            }
         </Content>
     </Tab>
 </Tabs>
@@ -101,7 +110,7 @@
     private bool isLoading = false;
     public Gxdom _myOrga = new();
     private HttpClient _apiClient;
-    private HttpClient _locClient;
+    //private HttpClient _locClient;
 
     private HomForm mygform;
     private List<CatgpDto> _LscatalGpes = new();
@@ -119,9 +128,9 @@
     {
         isLoading = true;
         //Batteries.Init();
-        _apiClient = _httpFactorer.CreateClient("wApiClient");
-        _locClient = _httpFactorer.CreateClient("simpleApiClient");
-        Console.WriteLine($"Api address : {_locClient.BaseAddress}");
+        _apiClient = _httpFactorer.CreateClient("ApiGxClient");
+        //_locClient = _httpFactorer.CreateClient("simpleApiClient");
+        Console.WriteLine($"Api address : {_apiClient.BaseAddress}");
         try
         {
             _myCatal = await _tableService.rendTables();
@@ -132,7 +141,7 @@
         }
         Console.WriteLine($"nb pays : {_myCatal.Countries.Count()}");
         // to talk to your web API.
-        var lsOrgas = await _apiClient.GetFromJsonAsync<List<Gxdom>>("gxdoms/rendall");
+        var lsOrgas = await _apiClient.GetFromJsonAsync<List<Gxdom>>("api/gxdoms/rendall");
         if (lsOrgas != null && lsOrgas.Any())
         {
             // Records were returned, indicating the organization is present.
@@ -144,16 +153,19 @@
             OrgaPresent = false;
             // No records were returned. This means the organization was not found.
             // The database and table are assumed to be correctly initialized.
-            Imessage = "Societe Gx-Solution absente";
+            Imessage = "Societe Gx-Solution absente/compromise";
             _myOrga = new Gxdom(); // Or whatever default is appropriate.
         }
     }
     private async Task AddMyOrga()
     {
-        if (OrgaPresent)
+        if (_myOrga != null)
         {
-            Imessage = "Demandez le Haut Support de Gx-Solutions";
-            return;
+            if (_myOrga.Eta > 0)
+            {
+                Imessage = "Demandez le Haut Support de Gx-Solutions";
+                return;
+            }
         }
         _myOrga = new();
         if (string.IsNullOrEmpty(_myOrga.GxRaison))
@@ -172,6 +184,8 @@
         _myOrga.HlpPhone = "+22658978826";
         _myOrga.HlpWurl = "gxhelp.a24soft.com";
         _myOrga.HlpPhon2 = "+2266468382";
+        _myOrga.HlpUsername = "ilestbeau";
+        _myOrga.Ipays = 12;
         _myOrga.LastIdact = 0;
         _myOrga.Eta = 1;
         inOgAding = true; //report confirm
@@ -185,7 +199,7 @@
     {
         if (inOgAding)
         {
-            var respgxsol = await _apiClient.PostAsJsonAsync("gxdoms/cregxdom", _myOrga);
+            var respgxsol = await _apiClient.PostAsJsonAsync("api/gxdoms/cregxdom", _myOrga);
             var savedGxsol = await respgxsol.Content.ReadFromJsonAsync<Gxdom>();
             _myOrga = savedGxsol;
             Imessage = "societe GX-SOLUTIONS creee";
@@ -194,7 +208,7 @@
         }
         else if (inOgEding)
         {
-            var respgxsol = await _apiClient.PutAsJsonAsync($"gxdoms/{_myOrga.Id}", _myOrga);
+            var respgxsol = await _apiClient.PutAsJsonAsync($"api/gxdoms/{_myOrga.Id}", _myOrga);
             if (respgxsol.IsSuccessStatusCode)
             {
                 //var savedGxsol = await respgxsol.Content.ReadFromJsonAsync<Gxdom>();

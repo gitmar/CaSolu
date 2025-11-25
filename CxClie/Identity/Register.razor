@@ -1,0 +1,420 @@
+﻿@page "/register"
+
+@using System
+@using System.ComponentModel.DataAnnotations
+@using System.Reflection
+@using System.Text
+@using System.Text.Json
+@using CxClie.Services
+@using CxShared.Models
+@using CxShared.Helpers
+@using CxShared.Others
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.WebUtilities
+@using SQLitePCL
+
+@inject IHttpClientFactory _httpFactorer
+@inject NavigationManager _navmanager
+@inject TblJsonRender _tableService
+@inject LinkSerialiser _linkSerialiser
+@inject IJSRuntime _jsRun
+
+<PageTitle>Register</PageTitle>
+<h3>Support Register</h3>
+
+<EditForm Model="_invModel" OnValidSubmit="DoSupportRegister">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="container mt-4">
+        <!-- STATUS MESSAGE -->
+        @if (!string.IsNullOrEmpty(Imessage))
+        {
+            <div class="alert alert-warning fw-bold text-danger">
+                @Imessage
+            </div>
+        }
+
+        <!-- ORGA INFO CARD -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Organisation</h5>
+            </div>
+            <div class="card-body">
+                <div class="row mb-1">
+                    <label class="fw-bold">
+                        @_invModel.Idorg
+                        - @_invModel.Weburl
+                        - @strAgent
+                    </label>
+                </div>
+                <div class="row mb-1">
+                    <label class="fw-bold">
+                        @_invModel.Raison
+                    </label>
+                </div>
+                <div class="row mb-1">
+                    <label class="fw-bold">
+                        @_inCustomer.Nom 
+                        - @_inCustomer.Pnom
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        @if (isRegistrable)
+        {
+            <!-- SUPPORT REGISTRATION CARD -->
+            <div class="card shadow-sm">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">Support Identity Registration</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold">Role</label>
+                            <div class="form-control-plaintext badge bg-danger bg-opacity-25">
+                                @_invModel.HlpSrole
+                            </div>
+                        </div>
+
+                        <div class="col-md-8">
+                            <label class="form-label fw-bold">Pays</label>
+                            <InputSelect @bind-Value="_invModel.Ipays" class="form-select" disabled>
+                                @foreach (var utp in _inCatal.Countries)
+                                {
+                                    <option value="@utp.Elea">@utp.Liba</option>
+                                }
+                            </InputSelect>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold">Website</label>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-control-plaintext badge bg-danger bg-opacity-25">
+                                @_invModel.HlpWurl
+                            </div>
+                        </div>
+
+
+                        <!-- CONTACT -->
+                        <div class="col-md-6">
+                            <label for="vuname" class="form-label fw-bold">Pseudo</label>
+                            <InputText id="vuname" @bind-Value="_invModel.HlpUname" class="form-control" />
+                            <ValidationMessage For="@(() => _invModel.HlpUname)" />
+                        </div>
+                        <div class="col-md-6">
+                            <label for="vmail" class="form-label fw-bold">Email</label>
+                            <InputText id="vmail" @bind-Value="_invModel.HlpEmail" class="form-control" />
+                            <ValidationMessage For="@(() => _invModel.HlpEmail)" />
+                        </div>
+
+                        <!-- USER PERSONAL INFO -->
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Nom</label>
+                            <InputText @bind-Value="_invModel.Nom" class="form-control" />
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Prénom(s)</label>
+                            <InputText @bind-Value="_invModel.Pnom" class="form-control" />
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Phone 1</label>
+                            <InputText @bind-Value="_invModel.HlpPhone" class="form-control" />
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Phone 2</label>
+                            <InputText @bind-Value="_invModel.HlpPhon2" class="form-control" />
+                        </div>
+                        <!-- PASSWORD -->
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Password</label>
+                            <InputText @bind-Value="_invModel.Password" type="password" class="form-control" />
+                        </div>
+                        <!-- CONFIRM PASSWORD -->
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Conf.Password</label>
+                            <InputText @bind-Value="_invModel.ConfirmPassword" type="password" class="form-control" />
+                        </div>
+                        <div class="col-md-12 mt-3">
+                            <button type="submit" class="btn btn-success w-100 py-2">
+                                ➕ Enregistrer SUPPORT
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-danger mt-4 fw-bold">
+                Données insuffisantes pour installer votre Organisation.
+            </div>
+        }
+
+    </div>
+</EditForm>
+
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+    [Parameter]
+    public Customer _inCustomer { get; set; }
+    [Parameter]
+    public Gxdom _inGxdom { get; set; }
+    [Parameter]
+    public TableSet _inCatal { get; set; }
+    [Parameter]
+    public int _inIdagt { get; set; }
+
+    private EditContext invEdContext;
+
+    //public Gxdom _inGxdom = new();
+    //[Parameter]
+    //public TableSet _inCatal = new();
+
+    //private List<Customer> LsCustomers = new();
+    //private Customer _curCustomer = new();
+
+    private bool isLoading = false, yaerrors = false;
+    private string successmsg = "";
+    private List<string> errorList = new();
+    private string siDoma = "", sjDoma = "", strAgent = "";
+    //recu de Qry
+    private int iorig = 0, noerror = 0;
+    private string errmess = "";
+
+    private string Imessage = "";
+    private bool isFormValid = false;
+    private bool IsInvEditing = false;
+
+    private string _generatedLink = "";
+    private HttpClient _apiClient;
+    private HttpClient _locxClient;
+    //private TableSet _myCatal = new();
+    //private BackModel _retModel = new();
+    private UsrOgSetModel _invModel = new();
+    //private string _generatedLink = "";
+
+    private bool isRegistrable => _inCustomer.Email != null && _inCustomer.Idoma != 0 && _inCustomer.Jdoma != 0;
+
+    protected override async Task OnInitializedAsync()
+    {
+        isLoading = true;
+        yaerrors = false; errorList.Clear(); successmsg = "";
+        _apiClient = _httpFactorer.CreateClient("ApiGxClient");
+        _locxClient = _httpFactorer.CreateClient("LocalClient");
+    }
+    protected override async Task OnParametersSetAsync()
+    {
+        //enregistrement support sur site customer
+        _invModel.Idorg = _inCustomer.Idorg;
+        _invModel.Weburl = _inCustomer.Weburl;
+        _invModel.Agtid = _inIdagt;
+        //await GetCurGxdom();
+        strAgent = _inIdagt.ToString();
+        invEdContext = new EditContext(_invModel);
+        invEdContext.OnFieldChanged += HandleFieldChanged;
+
+        Console.WriteLine($"RECU {_inGxdom.HlpWurl} et {_invModel.HlpWurl}");
+        Console.WriteLine($"RECU {_inGxdom.HlpEmail} et {_invModel.HlpEmail}");
+        yaerrors = false; isLoading = false;
+        //invEdContext = new EditContext(_invModel);
+        //invEdContext.OnFieldChanged += HandleFieldChanged;
+        //LsCustomers = await _apiClient.GetFromJsonAsync<List<Customer>>("api/customers/rendall");
+        Console.WriteLine("EST PASSE");
+        //ModelHelper.CopyMatchingProperties(_curCustomer, _invModel);
+        //_invModel.Idorg = _inCustomer.Idorg;
+        _invModel.Sigle = _inCustomer.Sigle;
+        _invModel.Raison = _inCustomer.Raison;
+        _invModel.Weburl = _inCustomer.Weburl; //customer webUrl
+        _invModel.FbackUrl = _inGxdom.HlpWurl;
+        //_invModel.Agtid = _inIdagt;
+        _invModel.Email = _inGxdom.HlpEmail;
+        _invModel.HlpEmail = _inGxdom.HlpEmail;
+        _invModel.HlpWurl = _inGxdom.HlpWurl;
+        _invModel.HlpPhone = _inGxdom.HlpPhone;
+        _invModel.HlpPhon2 = _inGxdom.HlpPhon2;
+        _invModel.ConfirmPassword = "Jesuis@99";
+        _invModel.HlpUname = "ilestbeau";
+        _invModel.HlpSrole = "Support";
+        _invModel.Ipays = _inGxdom.Ipays;
+        //ModelHelper.CopyMatchingProperties(_inOrder, _invModel);
+        Console.WriteLine($"test : {_inCustomer.Nom} et {_invModel.Nom}");
+        int Idoma = _inCustomer.Idoma;
+        var odDoma = _inCatal.Domas.Where(ud => ud.Elea == Idoma).FirstOrDefault();
+        if (odDoma != null)
+        {
+            siDoma = odDoma.Liba;
+        }
+        int Jdoma = _inCustomer.Jdoma;
+        var odjDoma = _inCatal.Gdoms.Where(ud => ud.Elea == Jdoma).FirstOrDefault();
+        if (odjDoma != null)
+        {
+            sjDoma = odjDoma.Liba;
+        }
+        yaerrors = false; isLoading = false;
+        StateHasChanged();
+    }
+    // //selected customer
+    // private void SelDomCusta(Customer mycust)
+    // {
+    //     //_curCustomer = mycust;
+
+    // }
+    //call Api register
+    private async Task DoSupportRegister()
+    {
+        Imessage = "";
+        yaerrors = false; isLoading = true;
+        bool IsVerified = false;
+        IsVerified = await VerifInputs(); //reverification
+        if (!IsVerified)
+        {
+            Imessage = Imessage + "Echec Generation : des issues persistent..." + Imessage;
+            Console.WriteLine($"message : {Imessage}");
+            StateHasChanged();
+            return;
+        }
+        // var usite = _inCatal.Sites.FirstOrDefault(wi => wi.Elea == _invModel.Iwurl);
+        // if (usite == null)
+        // {
+        //     yaerrors = true;
+        //     errorList.Add("Region est obligatoire.");
+        // }
+        if (yaerrors)
+        {
+            isLoading = false;
+            return;
+        }
+        //COMMUNICATION CLIENT/VENDEUR
+        //CLIENT : Backend /user website
+        var inpUrl = _invModel.Weburl;
+        if (!inpUrl.StartsWith("http", StringComparison.OrdinalIgnoreCase))
+            inpUrl = "https://" + inpUrl;
+        inpUrl = inpUrl.TrimEnd('/');
+        inpUrl = inpUrl + "/api/regis"; //controller
+        Console.WriteLine($"Backend Link : {inpUrl}");
+        //VENDEUR : Return Blazor Frontend
+        string backUrl = _locxClient.BaseAddress?.ToString().TrimEnd('/');
+        backUrl = backUrl + "/";
+        _invModel.FbackUrl = backUrl + "sitesflow";
+        _invModel.SiSupport = true;
+        _invModel.Username = _invModel.HlpUname; //forcing
+        Console.WriteLine($"Frontend Link : {backUrl}");
+      
+        _generatedLink = _linkSerialiser.GenerateLink(_invModel, inpUrl, "helpregis"); //endpoint
+        _navmanager.NavigateTo(_generatedLink);
+        isLoading = false;
+    }
+    private async Task<bool> VerifInputs()
+    {
+        isFormValid = false;
+        yaerrors = false;
+        errorList.Clear();
+        //if (_invModel.Agtid == 0)
+        //{
+        //    yaerrors = true;
+        //    errorList.Add("Agent is required.");
+        //}
+        if (string.IsNullOrWhiteSpace(_invModel.HlpEmail))
+        {
+            yaerrors = true;
+            errorList.Add("Support Email is required.");
+        }
+        else
+        {
+            var normalizedEmail = _invModel.HlpEmail.ToUpperInvariant();
+            if (normalizedEmail == null)
+            {
+                yaerrors = true;
+                errorList.Add("Email contains inacceptable characters.");
+            }
+        }
+        if (string.IsNullOrWhiteSpace(_invModel.HlpUname))
+        {
+            yaerrors = true;
+            errorList.Add("Username is required.");
+        }
+        //si par email ou phonenumber
+        if (string.IsNullOrWhiteSpace(_invModel.Password))
+        {
+            yaerrors = true;
+            errorList.Add("Password is required.");
+        }
+        if (string.IsNullOrWhiteSpace(_invModel.Nom))
+        {
+            yaerrors = true;
+            errorList.Add("Nom is required.");
+        }
+        if (string.IsNullOrWhiteSpace(_invModel.Pnom))
+        {
+            yaerrors = true;
+            errorList.Add("Pnom is required.");
+        }
+        if (string.IsNullOrWhiteSpace(_invModel.ConfirmPassword))
+        {
+            yaerrors = true;
+            errorList.Add("Please confirm your password.");
+        }
+        if (_invModel.Password != _invModel.ConfirmPassword)
+        {
+            yaerrors = true;
+            errorList.Add("Passwords don't match.");
+        }
+        if (string.IsNullOrWhiteSpace(_invModel.Raison))
+        {
+            yaerrors = true;
+            errorList.Add("Raison est obligatoire.");
+        }
+        if (!yaerrors) 
+        {
+            //passage saisie a model _invModel
+            _invModel.Email = _invModel.HlpEmail;
+            _invModel.Username = _invModel.HlpUname;
+            _invModel.Phonenumber = _invModel.HlpPhone;
+            _invModel.Phon2 = _invModel.HlpPhon2;
+            //customer Weburl in _invModel.Weburl
+            isFormValid = true;
+        } else 
+        {
+            isFormValid = false;
+            foreach (var era in errorList)
+            {
+                Imessage = Imessage + era;
+            }
+        }
+        return isFormValid;
+    }
+    // private async Task GetCurGxdom()
+    // {
+    //     int idog = 10001;
+    //     var respidogs = await _apiClient.GetFromJsonAsync<List<Gxdom>>("api/gxdoms/rendall");
+    //     _inGxdom = new();
+    //     //var respidog = await _apiClient.GetAsync("api/gxdoms/cregxdom");
+    //     if (respidogs != null && respidogs.Any())
+    //     {
+    //         _inGxdom = respidogs.FirstOrDefault();
+    //         //NextOrgId = _curGxdom.LastIdorg;
+    //         //     .OrderBy(c => c.Idorg)
+    //         //     .LastOrDefault();
+    //         // idog = lastCustomer.Idorg + 1;
+    //     }
+    //     else
+    //     {
+    //         //Imessage = "Organisation absente ou compromise";
+    //         return;
+    //     }
+    //     Console.WriteLine($"AVANT");
+    // }
+    private void HandleFieldChanged(object sender, FieldChangedEventArgs e)
+    {
+        if (!IsInvEditing) IsInvEditing = true;
+        Console.WriteLine($"Field edited: {e.FieldIdentifier.FieldName}");
+        // Place your logic here when a field is edited
+    }
+}

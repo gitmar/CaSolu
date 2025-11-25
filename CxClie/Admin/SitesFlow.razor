@@ -15,6 +15,7 @@
 @inject IHttpClientFactory _httpFactorer
 @inject NavigationManager _navmanager
 @inject TblJsonRender _tableService
+@inject LinkSerialiser _linkSerialiser
 @inject IJSRuntime _jsRun
 
 <PageTitle>Client Commande</PageTitle>
@@ -109,13 +110,12 @@
     {
         isLoading = true; yaerrors = false;
         successmsg = "";
-        if (!string.IsNullOrEmpty(cdlink))
+        if (string.IsNullOrEmpty(cdlink))
         {
             successmsg = "parametres vides";
             return;
         }
-        var _LinkSerialiser = new LinkSerialiser(_jsRun);
-        _invModel = _LinkSerialiser.DecodeAndDeserialize<UsrOgSetModel>(cdlink);
+        _invModel = _linkSerialiser.DecodeAndDeserialize<UsrOgSetModel>(cdlink);
         if (!string.IsNullOrEmpty(_invModel.Oidstr))
         {
             _invModel.Password = "";
@@ -126,7 +126,7 @@
         Console.WriteLine($"Oidstr  : {_invModel.Oidstr}");
         if (_invModel.Orig == 1)
         { //ordert flow
-            LsOrders = await _apiClient.GetFromJsonAsync<List<Order>>("orders/rendall");
+            LsOrders = await _apiClient.GetFromJsonAsync<List<Order>>("api/orders/rendall");
             if (LsOrders.Any())
             {
                 Console.WriteLine($"nb Orders : {LsOrders.Count}");
@@ -134,7 +134,7 @@
                 if (_curOrder != null)
                 { //0Draft2register3set5notif9arcv
                     _curOrder.Step = _invModel.Ostep;
-                    var response = await _apiClient.PutAsJsonAsync($"orders/{_curOrder.Id}", _curOrder);
+                    var response = await _apiClient.PutAsJsonAsync($"api/orders/{_curOrder.Id}", _curOrder);
                     switch (_curOrder.Step)
                     {
                         case 0:
@@ -161,7 +161,7 @@
         }
         if (_invModel.Orig == 2)
         { //orga setup
-            LsOrders = await _apiClient.GetFromJsonAsync<List<Order>>("orders/rendall");
+            LsOrders = await _apiClient.GetFromJsonAsync<List<Order>>("api/orders/rendall");
             if (LsOrders.Any())
             {
                 Console.WriteLine($"nb Orders : {LsOrders.Count}");
@@ -169,7 +169,7 @@
                 if (_curOrder != null)
                 { //0Draft2register3set5notif9arcv
                     _curOrder.Step = _invModel.Ostep;
-                    var response = await _apiClient.PutAsJsonAsync($"orders/{_curOrder.Id}", _curOrder);
+                    var response = await _apiClient.PutAsJsonAsync($"api/orders/{_curOrder.Id}", _curOrder);
                     switch (_curOrder.Step)
                     {
                         case 0:

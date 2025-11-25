@@ -25,6 +25,7 @@ namespace CxShared.Auth
         public string Username { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public string Phonenumber { get; set; } = string.Empty;
+        public string Whatsapp { get; set; } = string.Empty;
         public string Nompnom { get; set; } = string.Empty;
         public string OgRaison { get; set; } = string.Empty;
         public string OgSigle { get; set; } = string.Empty;
@@ -38,7 +39,7 @@ namespace CxShared.Auth
         //public bool SiCoordo { get; set; } = false;
         public List<string>? Roles { get; set; } = new List<string>();
         //public ICollection<Gtoken> Tokens { get; set;} = new List<Gtoken>();
-        public string Message { get; set; } = string.Empty;
+        public string ErrorMessage { get; set; } = string.Empty;
         public ICollection<AdmOrga> AllOrgas { get; set; } = new List<AdmOrga>();
         //public ICollection<Glxorg> Usrdoms { get; set; } = new List<Glxorg>();
         public ICollection<string>? ErrNumb { get; set; } = new List<string>();

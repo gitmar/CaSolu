@@ -24,7 +24,6 @@ namespace CxShared.Models
         public string Idstr { get; set; } = string.Empty;
         public int Iqmax { get; set; } = 0;
         public int Idorg { get; set; } = 0;
-        public int Gdom { get; set; } = 0;
         public string Nom { get; set; } = string.Empty;
         public string Pnom { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
@@ -38,8 +37,10 @@ namespace CxShared.Models
         public int Iwurl { get; set; } = 0;
         public string? Weburl { get; set; }
         public int Ishare { get; set; } = 0;
-        public int Doma { get; set; } = 0;
-        public int Country { get; set; } = 0;
+        public int Idoma { get; set; } = 0;
+        public int Jdoma { get; set; } = 0;
+        public string? Sidom { get; set; }
+        public string? Sjdom { get; set; }
         public int Pack { get; set; } = 0;
         public int Pmeth { get; set; } = 0;
         public string? Raison { get; set; }

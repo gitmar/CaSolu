@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
@@ -8,40 +8,53 @@
     <WasmNativeStrip>false</WasmNativeStrip>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="ClieModels\**" />
-    <Content Remove="ClieModels\**" />
-    <EmbeddedResource Remove="ClieModels\**" />
-    <None Remove="ClieModels\**" />
-  </ItemGroup>
+  <!-- your removes here -->
+    <ItemGroup>
+      <Compile Remove="ClieModels\**" />
+      <Content Remove="ClieModels\**" />
+      <EmbeddedResource Remove="ClieModels\**" />
+      <None Remove="ClieModels\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Services\AuthMessageHandler.cs" />
+      <Compile Remove="Services\FillMyCatals.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Remove="Client\BackRegister.razor" />
+      <Content Remove="Client\BackSetup.razor" />
+      <Content Remove="Client\CustRegister.razor" />
+      <Content Remove="Client\OrgaForm.razor" />
+      <Content Remove="Client\OrgCreate.razor" />
+      <Content Remove="Client\OrgDelete.razor" />
+      <Content Remove="Client\OrgSetup.razor" />
+      <Content Remove="Client\RegFallBack.razor" />
+      <Content Remove="Client\ZZOrgCreate.razor" />
+      <Content Remove="Identity\Login.razor" />
+      <Content Remove="Identity\Register.razor" />
+      <Content Remove="Order\InvClie.razor" />
+      <Content Remove="Order\OrderFlow.razor" />
+      <Content Remove="Order\ZZZInvClie.razor" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Admin\SendMail.ts" />
+    </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Services\FillMyCatals.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Remove="Client\BackRegister.razor" />
-    <Content Remove="Client\BackSetup.razor" />
-    <Content Remove="Client\CustRegister.razor" />
-    <Content Remove="Client\OrgaForm.razor" />
-    <Content Remove="Client\OrgCreate.razor" />
-    <Content Remove="Client\OrgDelete.razor" />
-    <Content Remove="Client\OrgSetup.razor" />
-    <Content Remove="Client\ZZOrgCreate.razor" />
-    <Content Remove="Order\InvClie.razor" />
-    <Content Remove="Order\OrderFlow.razor" />
-    <Content Remove="Order\ZZZInvClie.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <!-- ✅ Client-side packages only -->
+    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="9.0.10" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="9.0.10" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="9.0.10" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="9.0.10" />
     <PackageReference Include="Blazor.Bootstrap" Version="3.4.0" />
     <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="9.0.0" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.0" />
     <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="3.0.2" />
     <PackageReference Include="Blazored.LocalStorage" Version="4.5.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.15.0" />
     <PackageReference Include="System.Text.Json" Version="9.0.0" />
   </ItemGroup>
 
@@ -52,10 +65,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CxShared\CxShared.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <TypeScriptCompile Include="Admin\SendMail.ts" />
   </ItemGroup>
 
 </Project>

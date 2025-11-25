@@ -13,13 +13,13 @@ namespace CxClie.Services
 
         public TblJsonRender(IHttpClientFactory htClieFactory)
         {
-            _httpClie = htClieFactory.CreateClient("wApiClient"); // ✅ Use the named client
+            _httpClie = htClieFactory.CreateClient("ApiGxClient"); // ✅ Use the named client
         }
         public async Task<TableSet?> rendTables()
         {
             try
             {
-                var tables = await _httpClie.GetFromJsonAsync<TableSet>("tables");
+                var tables = await _httpClie.GetFromJsonAsync<TableSet>("api/tables");
                 foreach (var lang in tables?.Langues ?? Enumerable.Empty<TableItem>())
                 {
                     Console.WriteLine($"{lang.Elea}: {lang.Liba} ({lang.Abg})");
