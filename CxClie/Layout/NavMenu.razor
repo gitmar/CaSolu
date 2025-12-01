@@ -6,7 +6,7 @@
 
 <div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="">CxClie</a>
+        <a class="navbar-brand" href="">Gx-Ventes</a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -14,79 +14,107 @@
 </div>
 <div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
     <nav class="flex-column">
+
+        <!-- HOME -->
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
+                <i class="bi bi-house-door-fill me-2"></i> Home
             </NavLink>
         </div>
+
+        <!-- GX HOME -->
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="homesetup">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Gx-Home
+                <i class="bi bi-houses-fill me-2"></i> Gx-Home
             </NavLink>
         </div>
+
+        <!-- CLIENTS -->
         <div class="nav-item px-3">
             <NavLink class="nav-link" @onclick="ToggleSubClient">
-            <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Clients
-            @* <Icon Name="IconName.PlusSquareFill" Size="IconSize.x5" Color="IconColor.White" /> &nbsp; Clients *@
-        </NavLink>
+                <i class="bi bi-people-fill me-2"></i> Clients
+            </NavLink>
+
             @if (isSubClientVisible)
             {
-            <nav class="nav flex-column">
-                @* @if (_appState.IsAuthenticated("GxApi"))
-                { *@
-                        <NavLink class="nav-link nav-sub" href="ordermanage">
-                            <Icon Name="IconName.CaretRightSquare" /> &nbsp; Commandes
+                <nav class="nav flex-column ms-3">
+
+                    <NavLink class="nav-link nav-sub" href="ordermanage">
+                        <i class="bi bi-bag-check-fill me-2"></i> Commandes
+                    </NavLink>
+
+                    @if (_appState.IsAuthenticated("CustApi"))
+                    {
+                        <NavLink class="nav-link nav-sub" href="clieaccess?orig=3">
+                            <i class="bi bi-box-arrow-in-down me-2"></i> Install
                         </NavLink>
-                        @if (_appState.IsAuthenticated("CustApi"))
-                        {
-                            <NavLink class="nav-link nav-sub" href="clieaccess?orig=3">
-                                <Icon Name="IconName.CaretRightSquare" /> &nbsp; Install
-                            </NavLink>
-                            <NavLink class="nav-link nav-sub" @onclick="()=> CustLogout()">
-                                <Icon Name="IconName.CaretRightSquare" /> &nbsp; Logout
-                            </NavLink>
-                        }
-                        @* } else
-                        { *@
-                            <NavLink class="nav-link nav-sub" href="clieaccess?orig=1">
-                                <Icon Name="IconName.CaretRightSquare" /> &nbsp; Login
-                            </NavLink>
-                            <NavLink class="nav-link nav-sub" href="clieaccess?orig=2">
-                                <Icon Name="IconName.CaretRightSquare" /> &nbsp; Register
-                            </NavLink>
-                        @* } *@
-               @*  } *@
-            </nav>
-        }
+
+                        <NavLink class="nav-link nav-sub" @onclick="() => CustLogout()">
+                            <i class="bi bi-box-arrow-right me-2"></i> Logout
+                        </NavLink>
+                    }
+
+                    <NavLink class="nav-link nav-sub" href="clieaccess?orig=1">
+                        <i class="bi bi-box-arrow-in-left me-2"></i> Login
+                    </NavLink>
+
+                    <NavLink class="nav-link nav-sub" href="clieaccess?orig=2">
+                        <i class="bi bi-person-plus-fill me-2"></i> Register
+                    </NavLink>
+
+                </nav>
+            }
         </div>
+
+        <!-- SUPPRESSION -->
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="orgadelete">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Suppression
+                <i class="bi bi-trash-fill me-2"></i> Suppression
             </NavLink>
         </div>
+
+        <!-- SUPPORT -->
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="????">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Support
+            <NavLink class="nav-link" href="support">
+                <i class="bi bi-headset me-2"></i> Support
             </NavLink>
         </div>
+
+        <!-- COUNTER -->
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="counter">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Counter
+                <i class="bi bi-plus-square-fill me-2"></i> Counter
             </NavLink>
         </div>
+
+        <!-- WEATHER -->
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="weather">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Weather
+                <i class="bi bi-cloud-sun-fill me-2"></i> Weather
             </NavLink>
         </div>
+
+        <!-- AUTH VALUE -->
         <div class="nav-item px-3 fw-bold text-bg-light">
             <span>VerifValue : @authValue</span>
         </div>
     </nav>
+
     <button type="button" @onclick="GetAuthen">VerifAuthentication</button>
-     
 </div>
 
+<style>
+    .nav-link.active {
+        background-color: #0d6efd !important; /* Bootstrap primary blue */
+        color: white !important;
+        border-radius: 4px;
+    }
+
+    .nav-sub.nav-link.active {
+        background-color: #0b5ed7 !important; /* darker blue for sub-items */
+    }
+
+</style>
 @code {
     private bool collapseNavMenu = true;
     private bool isSubManagVisible = false;

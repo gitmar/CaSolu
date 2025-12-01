@@ -155,7 +155,6 @@
                 Données insuffisantes pour installer votre Organisation.
             </div>
         }
-
     </div>
 </EditForm>
 
@@ -280,12 +279,12 @@
             StateHasChanged();
             return;
         }
-        // var usite = _inCatal.Sites.FirstOrDefault(wi => wi.Elea == _invModel.Iwurl);
-        // if (usite == null)
-        // {
-        //     yaerrors = true;
-        //     errorList.Add("Region est obligatoire.");
-        // }
+        var usite = _inCatal.Sites.FirstOrDefault(wi => wi.Elea == _invModel.Iwurl);
+        if (usite == null)
+        {
+            yaerrors = true;
+            errorList.Add("Region est obligatoire.");
+        }
         if (yaerrors)
         {
             isLoading = false;
@@ -293,6 +292,7 @@
         }
         //COMMUNICATION CLIENT/VENDEUR
         //CLIENT : Backend /user website
+
         var inpUrl = _invModel.Weburl;
         if (!inpUrl.StartsWith("http", StringComparison.OrdinalIgnoreCase))
             inpUrl = "https://" + inpUrl;
@@ -419,4 +419,3 @@
         // Place your logic here when a field is edited
     }
 }
-

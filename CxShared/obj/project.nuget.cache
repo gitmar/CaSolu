@@ -1,10 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "cXG1apbv51c=",
+  "dgSpecHash": "GvVMG2A7cUw=",
   "success": true,
   "projectFilePath": "C:\\AACurDEV\\CaSolu\\CxShared\\CxShared.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\Lenovo USER\\.nuget\\packages\\microsoft.net.illink.tasks\\9.0.11\\microsoft.net.illink.tasks.9.0.11.nupkg.sha512"
-  ],
+  "expectedPackageFiles": [],
   "logs": []
 }
